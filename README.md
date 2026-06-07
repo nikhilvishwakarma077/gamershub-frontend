@@ -54,11 +54,7 @@ npm run build
 
 ## Live Demo
 
-https://your-vercel-url.vercel.app
-
-## Screenshots
-
-Add project screenshots here.
+https://gamershub-frontend-two.vercel.app/
 
 ## Author
 
