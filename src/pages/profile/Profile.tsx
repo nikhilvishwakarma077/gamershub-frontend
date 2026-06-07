@@ -1,0 +1,504 @@
+import { useEffect, useState } from "react"
+import { getProfileById } from "../../services/profileService"
+import { useParams } from "react-router-dom";
+import {
+  Trophy,
+  Globe,
+  Languages,
+  Gamepad2,
+  Shield,
+  Users,
+  Video,
+  Clock3,
+} from "lucide-react";
+import MyProfileSkeleton from "../../components/profile/skeletons/MyProfileSkeleton";
+import type { ProfileType } from "../../types/profile.types";
+// import banner1 from "../../assets/banners/banner1.png"
+// import avatar1 from "../../assets/avatars/avatar1.png"
+import NoProfile from "../../components/profile/notFound/NoProfile";
+
+
+const Profile = () => {
+
+  const { id } = useParams()
+
+  const [userProfile, setUserProfile] = useState<ProfileType | null>(null);
+  const [loading, setLoading] = useState(false)
+
+
+  const fetchProfile = async (profileId: string) => {
+    try {
+      setLoading(true)
+      const res = await getProfileById(profileId)
+      setUserProfile(res.profile)
+      console.log(res.profile)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  useEffect(() => {
+    if (!id) return;
+    console.log(id)
+
+    fetchProfile(id)
+
+  }, [id])
+
+  if (loading) return <MyProfileSkeleton />
+  if (!userProfile) return <NoProfile />;
+
+
+  return (
+    <div className="min-h-screen bg-[#050816] text-white">
+
+      {/* BANNER */}
+      <div
+        className="
+    relative
+    w-full
+    overflow-hidden
+    rounded-b-2xl
+    aspect-[4/1]
+    max-h-[320px]
+    min-h-[140px]
+  "
+      >
+        <img
+          src={`/banners/${userProfile.banner}`}
+          alt="banner"
+          className="
+      absolute inset-0
+      h-full w-full
+      object-cover
+      object-center
+    "
+        />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 pb-10">
+
+        {/* PROFILE CARD */}
+        <div className="mt-6 flex flex-col gap-6 rounded-xl border border-zinc-800 bg-[#0b1120] p-5 md:flex-row md:items-center md:justify-between">
+
+          {/* LEFT */}
+          <div className="flex flex-col gap-4 md:flex-row md:items-center">
+
+            <img
+              // src={userProfile?.avatar}
+              src={`/avatars/${userProfile.avatar}`}
+              // src={avatar1}
+              alt="avatar"
+              onError={(e) => {
+                e.currentTarget.src =
+                  "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+              }}
+              className="
+        h-38 w-38 rounded-[50%]
+        border border-zinc-700
+        object-cover
+    "
+            />
+
+            <div>
+              <h1 className="text-3xl font-bold">
+                {userProfile?.username}
+              </h1>
+
+              <p className="mt-1 text-zinc-400">
+                UID #{userProfile?.uid}
+              </p>
+
+              <p className="mt-4 max-w-2xl text-zinc-300">
+                {userProfile?.bio}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-3 ">
+
+                <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-[#0b1120] px-4 py-2">
+                  <Gamepad2 size={18} />
+                  <span>{userProfile?.role}</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-[#0b1120] px-4 py-2">
+                  <Languages size={18} />
+
+                  <span>
+                    {userProfile?.languages?.join(", ")}
+                  </span>
+                </div>
+
+
+                <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-[#0b1120] px-4 py-2">
+                  <Globe size={18} />
+                  <span>{userProfile?.country}</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-[#0b1120] px-4 py-2">
+                  <Shield size={18} />
+                  <span>Age - {userProfile?.age}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT BUTTON */}
+          <div>
+            <button className="rounded-lg border border-cyan-400 px-5 mb-5 py-3 text-cyan-300">
+              Looking for a team
+            </button>
+
+            <div className="mt-3 flex items-center gap-3">
+
+              {/* INSTAGRAM */}
+              {userProfile?.socialLinks.instagram && (
+                <a
+                  href={`https://instagram.com/${userProfile?.socialLinks.instagram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                flex h-12 w-12 items-center justify-center
+                rounded-xl border border-zinc-700
+                bg-[#111827]
+                transition hover:scale-105
+            "
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+                    alt="instagram"
+                    className="h-7 w-7 object-cover"
+                  />
+                </a>
+              )}
+
+              {/* DISCORD */}
+              {userProfile?.socialLinks.discord && (
+                <a
+                  href={`https://discord.com/${userProfile?.socialLinks.discord}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                flex h-12 w-12 items-center justify-center
+                rounded-xl border border-zinc-700
+                bg-[#111827]
+                transition hover:scale-105
+            "
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"
+                    alt="discord"
+                    className="h-7 w-7 object-cover"
+                  />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* 3 CARDS GRID */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-3">
+
+          {/* STATS */}
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-5">
+
+            <div className="mb-4 flex items-center gap-2">
+              <Shield
+                className="text-cyan-400"
+                size={18}
+              />
+
+              <h2 className="text-xl font-semibold">
+                Player Stats
+              </h2>
+            </div>
+
+            {userProfile?.stats?.currentRank ||
+              userProfile?.stats?.kdRatio ||
+              userProfile?.stats?.headshotPercentage ? (
+
+              <div className="space-y-3">
+
+                <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                  <p className="text-sm text-zinc-400">
+                    BR Rank
+                  </p>
+
+                  <h3 className="mt-1 text-2xl font-semibold text-cyan-400">
+                    {userProfile?.stats?.currentRank || "N/A"}
+                  </h3>
+                </div>
+
+                <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                  <p className="text-sm text-zinc-400">
+                    KD Ratio
+                  </p>
+
+                  <h3 className="mt-1 text-xl font-semibold">
+                    {userProfile?.stats?.kdRatio || "N/A"}
+                  </h3>
+                </div>
+
+                <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                  <p className="text-sm text-zinc-400">
+                    Headshot %
+                  </p>
+
+                  <h3 className="mt-1 text-xl font-semibold">
+                    {userProfile?.stats?.headshotPercentage
+                      ? `${userProfile.stats.headshotPercentage}%`
+                      : "N/A"}
+                  </h3>
+                </div>
+              </div>
+
+            ) : (
+
+              <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
+
+                <Shield
+                  size={40}
+                  className="mb-3 text-zinc-600"
+                />
+
+                <h3 className="text-lg font-semibold text-zinc-300">
+                  No Stats Available
+                </h3>
+
+                <p className="mt-1 text-sm text-zinc-500">
+                  Player has not added stats yet.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* EXPERIENCE */}
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-5">
+
+            <div className="mb-4 flex items-center gap-2">
+              <Shield className="text-cyan-400" size={18} />
+
+              <h2 className="text-xl font-semibold">
+                Experience
+              </h2>
+            </div>
+
+            <div className="space-y-3">
+
+              <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                <p className="text-sm text-zinc-400">
+                  ID Level
+                </p>
+
+                <h3 className="mt-1 text-2xl font-semibold text-cyan-400">
+                  Lv. {userProfile?.experience?.level}
+                </h3>
+              </div>
+
+              <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                <p className="text-sm text-zinc-400">
+                  Years Playing
+                </p>
+
+                <h3 className="mt-1 text-xl font-semibold">
+                  {userProfile?.experience?.yearsPlaying} Years
+                </h3>
+              </div>
+
+              <div className="rounded-lg border border-zinc-800 bg-[#09111f] p-4">
+                <p className="text-sm text-zinc-400">
+                  Esports Experience
+                </p>
+
+                <h3 className="mt-1 text-xl font-semibold">
+                  {userProfile?.experience?.esportsExperience} Years
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          {/*PREVIOUS TEAM */}
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-5">
+
+            <div className="mb-4 flex items-center gap-2">
+              <Users
+                className="text-cyan-400"
+                size={18}
+              />
+
+              <h2 className="text-xl font-semibold">
+                Previous Teams
+              </h2>
+            </div>
+
+            {userProfile?.teamHistory[0].teamName == "" || userProfile?.teamHistory[0].teamName == undefined ? (
+
+
+              <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
+
+                <Users
+                  size={40}
+                  className="mb-3 text-zinc-600"
+                />
+
+                <h3 className="text-lg font-semibold text-zinc-300">
+                  No Team History
+                </h3>
+
+                <p className="mt-1 text-sm text-zinc-500">
+                  Player has not added any previous teams.
+                </p>
+              </div>
+
+            ) : (
+              <div className="space-y-3 max-h-105 overflow-y-auto pr-1">
+
+                {userProfile.teamHistory.map((team, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col gap-2 rounded-lg border border-zinc-800 bg-[#09111f] p-4"
+                  >
+                    <div>
+                      <h3 className="wrap-break-word text-base font-semibold">
+                        {team.teamName}
+                      </h3>
+
+                      <p className="text-sm text-zinc-400">
+                        {team.role}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-xs text-zinc-400">
+                      <Clock3 size={14} />
+
+                      <span>
+                        {team.duration}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* CLIPS */}
+        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+
+          <div className="mb-4 flex items-center gap-2">
+            <Video className="text-cyan-400" />
+
+            <h2 className="text-xl font-semibold">
+              Featured Clips
+            </h2>
+          </div>
+
+          {userProfile?.clips[0].title == "" || userProfile?.clips[0].title == undefined ? (
+
+
+            <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
+
+              <Video
+                size={40}
+                className="mb-3 text-zinc-600"
+              />
+
+              <h3 className="text-lg font-semibold text-zinc-300">
+                No Clips Added
+              </h3>
+
+              <p className="mt-1 text-sm text-zinc-500">
+                Player has not uploaded any clips yet.
+              </p>
+            </div>
+
+          ) : (
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+              {userProfile.clips.map((clip, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                >
+                  <a href={clip.clipUrl} target="_blank"
+                  >
+                    <img
+                      src={clip.thumbnailUrl}
+                      alt={clip.title}
+                      className="h-48 w-full object-cover"
+                    />
+                  </a>
+
+                  <div className="p-3">
+                    <h3 className="text-sm font-medium">
+                      {clip.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* ACHIEVEMENTS */}
+        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+
+          <div className="mb-4 flex items-center gap-2">
+            <Trophy className="text-cyan-400" />
+
+            <h2 className="text-xl font-semibold">
+              Achievements
+            </h2>
+          </div>
+
+          {userProfile?.achievements[0].title == "" || userProfile?.achievements[0].title == undefined ? (
+            <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
+
+              <Trophy
+                size={40}
+                className="mb-3 text-zinc-600"
+              />
+
+              <h3 className="text-lg font-semibold text-zinc-300">
+                No Achievements Yet
+              </h3>
+
+              <p className="mt-1 text-sm text-zinc-500">
+                Player has not added any achievements.
+              </p>
+            </div>
+
+
+          ) : (
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+              {userProfile?.achievements.map((ach, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                >
+                  <img
+                    src={ach.image}
+                    alt={ach.title}
+                    className="h-48 w-full object-cover"
+                  />
+
+                  <div className="p-3">
+                    <h3 className="text-sm font-medium">
+                      {ach.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          )}
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+export default Profile
