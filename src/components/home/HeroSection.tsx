@@ -2,11 +2,9 @@
 import {
     Trophy,
     Users,
-    // ShieldCheck,
-    // Crosshair,
     Plus,
 } from "lucide-react";
-import bgImage from "../../assets/ffws-bg.png"
+import bgImage from "../../assets/ffws-bg.webp"
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {

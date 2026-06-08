@@ -9,7 +9,7 @@ import {
     Clock3,
 } from "lucide-react";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { myProfile } from "../../services/profileService";
@@ -17,45 +17,58 @@ import { useProfileStore } from "../../store/profileStore";
 import NoProfile from "../../components/profile/notFound/NoProfile";
 import MyProfileSkeleton from "../../components/profile/skeletons/MyProfileSkeleton";
 import type { MyProfileType } from "../../types/profile.types";
+import { toast } from "react-toastify";
 // import avatar1 from "..//../assets/avatars/avatar5.png"
+
 
 
 
 const MyProfile = () => {
     const navigate = useNavigate();
 
-    const [myProfileData, setMyProfileData] = useState<MyProfileType | null>(null);
+    const [myProfileData, setMyProfileData] =
+        useState<MyProfileType | null>(null);
+
     const [loading, setLoading] = useState(false);
 
-    const setProfile = useProfileStore((state) => state.setProfile);
+    const setProfile = useProfileStore(
+        (state) => state.setProfile
+    );
 
-    const fetchProfile = async () => {
+    const fetchProfile = useCallback(async () => {
         try {
-            setLoading(true)
+            setLoading(true);
+
             const res = await myProfile();
+
             setProfile(res.profile);
             setMyProfileData(res.profile);
-            setLoading(false)
+            
+        } catch (error: any) {
+            console.error(error);
 
-        } catch (error) {
-            console.log(error);
             setMyProfileData(null);
+
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to load profile"
+            );
         } finally {
             setLoading(false);
         }
-    };
+    }, [setProfile]);
+
     useEffect(() => {
-
         fetchProfile();
-
-    }, []);
+    }, [fetchProfile]);
 
     if (loading) {
         return <MyProfileSkeleton />;
     }
 
-    if (!myProfileData) return <NoProfile />;
-
+    if (!myProfileData) {
+        return <NoProfile />;
+    }
     return (
         <div className="min-h-screen bg-[#050816] text-white">
 

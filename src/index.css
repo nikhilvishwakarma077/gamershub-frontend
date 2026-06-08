@@ -18,3 +18,18 @@ body::-webkit-scrollbar {
     -moz-appearance: textfield;
   }
 }
+
+.custom-toast {
+  background: #18181b !important;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  color: white;
+  box-shadow:
+    0 0 12px rgba(168, 85, 247, 0.25),
+    0 0 24px rgba(6, 182, 212, 0.15);
+}
+
+.custom-toast-body {
+  font-size: 14px;
+  font-weight: 500;
+}

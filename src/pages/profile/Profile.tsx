@@ -13,43 +13,57 @@ import {
 } from "lucide-react";
 import MyProfileSkeleton from "../../components/profile/skeletons/MyProfileSkeleton";
 import type { ProfileType } from "../../types/profile.types";
-// import banner1 from "../../assets/banners/banner1.png"
-// import avatar1 from "../../assets/avatars/avatar1.png"
 import NoProfile from "../../components/profile/notFound/NoProfile";
+import { toast } from "react-toastify";
 
 
 const Profile = () => {
 
-  const { id } = useParams()
+  const { id } = useParams();
 
-  const [userProfile, setUserProfile] = useState<ProfileType | null>(null);
-  const [loading, setLoading] = useState(false)
+  const [userProfile, setUserProfile] =
+    useState<ProfileType | null>(null);
 
+  const [loading, setLoading] =
+    useState(true);
 
-  const fetchProfile = async (profileId: string) => {
+  const fetchProfile = async (
+    profileId: string
+  ) => {
     try {
-      setLoading(true)
-      const res = await getProfileById(profileId)
-      setUserProfile(res.profile)
-      console.log(res.profile)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+      setLoading(true);
 
+      const res =
+        await getProfileById(profileId);
+
+      setUserProfile(res.profile);
+    } catch (error: any) {
+      console.error(error);
+
+      setUserProfile(null);
+
+      toast.error(
+        error?.response?.data?.message ||
+        "Failed to load profile"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     if (!id) return;
-    console.log(id)
 
-    fetchProfile(id)
+    fetchProfile(id);
+  }, [id]);
 
-  }, [id])
+  if (loading) {
+    return <MyProfileSkeleton />;
+  }
 
-  if (loading) return <MyProfileSkeleton />
-  if (!userProfile) return <NoProfile />;
-
+  if (!userProfile) {
+    return <NoProfile />;
+  }
 
   return (
     <div className="min-h-screen bg-[#050816] text-white">
@@ -61,9 +75,9 @@ const Profile = () => {
     w-full
     overflow-hidden
     rounded-b-2xl
-    aspect-[4/1]
-    max-h-[320px]
-    min-h-[140px]
+    aspect-4/1
+    max-h-80
+    min-h-35
   "
       >
         <img

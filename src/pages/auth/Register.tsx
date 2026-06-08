@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/authService";
+import { toast } from "react-toastify";
 
 const Register = () => {
 
@@ -14,14 +15,17 @@ const Register = () => {
     });
 
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
 
         if (error) {
             setError("");
@@ -31,62 +35,86 @@ const Register = () => {
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ) => {
-
         e.preventDefault();
+
+        if (isLoading) return;
 
         setError("");
 
+        const username = formData.username.trim();
+        const email = formData.email.trim();
+        const password = formData.password;
+        const confirmPassword =
+            formData.confirmPassword;
+
         // Username validation
-        if (!formData.username.trim()) {
+        if (!username) {
             return setError("Username is required");
         }
 
+        if (username.length < 3) {
+            return setError(
+                "Username must be at least 3 characters"
+            );
+        }
+
         // Email validation
-        if (!formData.email.trim()) {
+        if (!email) {
             return setError("Email is required");
         }
 
+        const emailRegex =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            return setError(
+                "Please enter a valid email address"
+            );
+        }
+
         // Password validation
-        if (!formData.password.trim()) {
+        if (!password) {
             return setError("Password is required");
         }
 
-        if (formData.password.length < 6) {
+        if (password.length < 6) {
             return setError(
                 "Password must be at least 6 characters"
             );
         }
 
-        // Confirm password validation
-        if (
-            formData.password !==
-            formData.confirmPassword
-        ) {
+        // Confirm Password validation
+        if (!confirmPassword) {
+            return setError(
+                "Confirm Password is required"
+            );
+        }
+
+        if (password !== confirmPassword) {
             return setError(
                 "Password and Confirm Password do not match"
             );
         }
 
         try {
+            setIsLoading(true);
 
-            const payload = {
-                username: formData.username,
-                email: formData.email,
-                password: formData.password,
-            };
+            const payload = {username,email,password};
 
-            const res = await registerUser(payload);
+            const res = await registerUser( payload );
 
-            console.log(res);
+            toast.success(res?.message || "Account created successfully");
 
             navigate("/login");
 
         } catch (err: any) {
 
-            setError(
-                err?.response?.data?.message ||
-                "Registration failed"
-            );
+            const message = err?.response?.data?.message || "Registration failed";
+            setError(message);
+            toast.error(message);
+
+        } finally {
+            setIsLoading(false);
         }
     };
 

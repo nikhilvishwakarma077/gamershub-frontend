@@ -5,6 +5,7 @@ import { getMe, loginUser } from "../../services/authService";
 import { useAuthStore } from "../../store/authStore";
 import { myProfile } from "../../services/profileService";
 import { useProfileStore } from "../../store/profileStore";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
 
@@ -32,19 +33,36 @@ const LoginPage = () => {
     ) => {
         e.preventDefault();
 
-        const loginRes = await loginUser(formData)
-        setUser(loginRes.data);
+        try {
+            const loginRes = await loginUser(formData);
 
-        const authRes = await getMe()
-        setUser(authRes.data);
+            setUser(loginRes.data);
 
+            toast.success(
+                loginRes.message || "Login successful"
+            );
+            navigate("/");
 
-        if (loginRes) {
-            navigate("/")
+            try {
+                const authRes = await getMe();
+                setUser(authRes.data);
+            } catch (error) {
+                console.error("getMe failed:", error);
+            }
+
+            try {
+                const profileRes = await myProfile();
+                setProfile(profileRes.profile);
+            } catch (error) {
+                console.error("Profile fetch failed:", error);
+            }
+
+        } catch (error: any) {
+            toast.error(
+                error?.response?.data?.message ||
+                "Login failed"
+            );
         }
-        const profileRes = await myProfile();
-        setProfile(profileRes.profile);
-
     };
 
     return (

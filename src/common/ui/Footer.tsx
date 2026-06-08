@@ -18,7 +18,7 @@ const Footer = () => {
 
                             <div>
                                 <h2 className="text-xl font-black tracking-wide text-cyan-300">
-                                    GamerHub
+                                    GamersHub
                                 </h2>
 
                              
@@ -52,7 +52,7 @@ const Footer = () => {
 
                 {/* Bottom Line */}
                 <div className="mt-8 border-t border-cyan-400/10 pt-5 text-center text-xs tracking-wide text-zinc-500">
-                    © 2026 GamerHub. All rights reserved.
+                    © 2026 GamersHub. All rights reserved.
                 </div>
             </div>
         </footer>

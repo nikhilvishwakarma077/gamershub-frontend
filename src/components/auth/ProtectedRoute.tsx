@@ -15,8 +15,8 @@ const ProtectedRoute = () => {
   // auth check pending
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#050816] text-white">
-        Loading...
+      <div className="flex min-h-screen items-center justify-center bg-[#050816]">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-zinc-700 border-t-cyan-400" />
       </div>
     );
   }

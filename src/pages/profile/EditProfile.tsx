@@ -6,6 +6,7 @@ import {
   avatarOptions,
   bannerOptions,
 } from "../../common/utils/profileImages";
+import { toast } from "react-toastify";
 
 
 const EditProfile = () => {
@@ -19,6 +20,9 @@ const EditProfile = () => {
 
   const [showAvatars, setShowAvatars] = useState(false);
   const [showBanners, setShowBanners] = useState(false);
+
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
 
   const [formData, setFormData] = useState<UpdateProfileData>({
     banner: "",
@@ -186,6 +190,7 @@ const EditProfile = () => {
         const res = await getProfileById(profileId);
 
         const data = res.profile;
+        console.log(data)
 
 
         setFormData({
@@ -269,8 +274,12 @@ const EditProfile = () => {
 
 
   // SUBMIT
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (
+    e: React.FormEvent
+  ) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
 
     const finalData: UpdateProfilePayload = {
       ...formData,
@@ -281,8 +290,10 @@ const EditProfile = () => {
       languages: formData.languages,
 
       socialLinks: {
-        instagram: formData.socialLinks.instagram,
-        discord: formData.socialLinks.discord,
+        instagram:
+          formData.socialLinks.instagram,
+        discord:
+          formData.socialLinks.discord,
       },
 
       stats: {
@@ -300,27 +311,48 @@ const EditProfile = () => {
       },
 
       experience: {
-        level: Number(formData.experience.level),
+        level: Number(
+          formData.experience.level
+        ),
 
-        yearsPlaying:
-          Number(formData.experience.yearsPlaying),
+        yearsPlaying: Number(
+          formData.experience
+            .yearsPlaying
+        ),
 
-        esportsExperience:
-          Number(formData.experience.esportsExperience),
+        esportsExperience: Number(
+          formData.experience
+            .esportsExperience
+        ),
       },
     };
 
     try {
+      setIsSubmitting(true);
 
-      const res = await updateProfile(finalData)
-      console.log(res)
-      // console.log(finalData)
+      const res =
+        await updateProfile(finalData);
 
+      toast.success(
+        res.message ||
+        "Profile updated successfully"
+      );
 
-    } catch (error) {
-      console.log(error)
+      console.log(res);
+
+      // Optional:
+      navigate("/my-profile");
+
+    } catch (error: any) {
+      console.error(error);
+
+      toast.error(
+        error?.response?.data?.message ||
+        "Failed to update profile"
+      );
+    } finally {
+      setIsSubmitting(false);
     }
-
   };
 
   return (
@@ -1219,7 +1251,6 @@ const EditProfile = () => {
           {/* SUBMIT */}
           <button
             type="submit"
-            onClick={() => { navigate("/my-profile") }}
             className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-semibold text-black"
           >
             Save Profile

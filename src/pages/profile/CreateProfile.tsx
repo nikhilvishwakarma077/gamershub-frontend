@@ -7,6 +7,7 @@ import {
     avatarOptions,
     bannerOptions,
 } from "../../common/utils/profileImages";
+import { toast } from "react-toastify";
 
 const languagesList = [
     "English",
@@ -33,9 +34,9 @@ const CreateProfile = () => {
 
             age: "",
 
-            avatar: "avatar1.png",
+            avatar: "avatar1.webp",
 
-            banner: "banner1.png",
+            banner: "banner1.webp",
 
             bio: "",
 
@@ -101,6 +102,7 @@ const CreateProfile = () => {
 
     const [showAvatars, setShowAvatars] = useState(false);
     const [showBanners, setShowBanners] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
 
 
@@ -164,58 +166,68 @@ const CreateProfile = () => {
         }));
     };
 
-    const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
+   const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+) => {
+    e.preventDefault();
 
-        e.preventDefault();
+    if (isSubmitting) return;
 
-        try {
+    setIsSubmitting(true);
 
-            const finalData: CreateProfilePayload = {
-                ...formData,
+    try {
+        const finalData: CreateProfilePayload = {
+            ...formData,
 
-                uid: Number(formData.uid),
+            uid: Number(formData.uid),
 
-                age: Number(formData.age),
+            age: Number(formData.age),
 
-                stats: {
-                    ...formData.stats,
+            stats: {
+                ...formData.stats,
 
-                    kdRatio: Number(formData.stats.kdRatio),
+                kdRatio: Number(formData.stats.kdRatio),
 
-                    headshotPercentage: Number(
-                        formData.stats.headshotPercentage
-                    ),
-                },
+                headshotPercentage: Number(
+                    formData.stats.headshotPercentage
+                ),
+            },
 
-                experience: {
-                    ...formData.experience,
+            experience: {
+                ...formData.experience,
 
-                    level: Number(formData.experience.level),
+                level: Number(formData.experience.level),
 
-                    yearsPlaying: Number(
-                        formData.experience.yearsPlaying
-                    ),
+                yearsPlaying: Number(
+                    formData.experience.yearsPlaying
+                ),
 
-                    esportsExperience: Number(
-                        formData.experience.esportsExperience
-                    ),
-                },
-            };
+                esportsExperience: Number(
+                    formData.experience.esportsExperience
+                ),
+            },
+        };
 
-            // console.log(finalData);
+        const res = await createProfile(finalData);
 
-            const res = await createProfile(finalData);
+        toast.success(
+            res?.message || "Profile created successfully"
+        );
 
-            console.log(res);
-            // console.log(finalData);
+        // Agar profile page pe bhejna hai:
+        navigate("/my-profile");
 
-        } catch (error) {
+    } catch (error: any) {
+        toast.error(
+            error?.response?.data?.message ||
+            "Failed to create profile"
+        );
 
-            console.log(error);
-        }
-    };
+        console.error(error);
+    } finally {
+        setIsSubmitting(false);
+    }
+};
 
     return (
         <section className="min-h-screen bg-[#050816] px-4 py-10 text-white">

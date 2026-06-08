@@ -1,44 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProfileCard from "../../components/profile/ProfileCard";
 import { getAllProfiles } from "../../services/profileService";
 import ProfileCardSkeleton from "../../components/profile/skeletons/ProfileCardSkeleton";
 import PageHeader from "../../components/shared/PageHeader";
 import type { ProfileCards } from "../../types/profile.types";
+import { toast } from "react-toastify";
 
 
 const Profiles = () => {
 
-    const [profiles, setProfiles] = useState<ProfileCards[]>([]);
-    const [loading, setLoading] = useState(false)
-
+   const [profiles, setProfiles] = useState<ProfileCards[]>([]);
+    const [loading, setLoading] = useState(true);
     const [selectedRole, setSelectedRole] = useState("");
 
-    const filteredProfiles = profiles.filter((request) => {
-
-        const roleMatch =
-            !selectedRole ||
-            request.role === selectedRole;
-
-        return roleMatch;
-    });
-
-    const fetchAllProfile = async () => {
+    const fetchAllProfiles = async () => {
         try {
-            setLoading(true)
-            const res = await getAllProfiles()
-            setProfiles(res.profiles)
+            const res = await getAllProfiles();
 
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
+            setProfiles(res.profiles || []);
+        } catch (error: any) {
+            console.error(error);
+
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to load profiles"
+            );
+        } finally {
+            setLoading(false);
         }
-    }
+    };
+
     useEffect(() => {
+        fetchAllProfiles();
+    }, []);
 
-        fetchAllProfile()
-    }, [])
-
-    if (!profiles) return <h1 className="my-20 text-2xl">No Profile Found</h1>
+    const filteredProfiles = useMemo(() => {
+        return profiles.filter((profile) => {
+            return (
+                !selectedRole ||
+                profile.role === selectedRole
+            );
+        });
+    }, [profiles, selectedRole]);
+ 
 
     return (
         <div className="min-h-screen bg-zinc-950 px-4 py-10">

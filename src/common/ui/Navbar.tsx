@@ -4,6 +4,7 @@ import { Menu, X, UserCircle2 } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
 import { useProfileStore } from "../../store/profileStore";
 import { logoutUser } from "../../services/authService";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
 
@@ -19,14 +20,19 @@ const Navbar = () => {
 
     const logoutHandler = async () => {
         try {
-            await logoutUser();
+            const response = await logoutUser();
+            toast.success(response.message || "Logged out successfully");
+
+        } catch (error: any) {
+            toast.error(error?.response?.data?.message || "Failed to logout");
+            console.error(error);
+
+        } finally {
             logout();
             clearProfile();
-            navigate("/login")
-        } catch (error) {
-            console.log(error)
+            navigate("/login");
         }
-    }
+    };
 
 
     const navLinkClass = ({ isActive }: { isActive: boolean }) =>
