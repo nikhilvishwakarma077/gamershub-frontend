@@ -17,7 +17,7 @@ const FindPlayerCard = ({
     getTimeAgo,
     getTimeLeft,
 }: FindPlayerCardProps) => {
-
+ 
     return (
         <div
             className="
@@ -79,6 +79,7 @@ const FindPlayerCard = ({
                                 {requests.instagram}
                             </p>
                         </div>
+                        
                     </div>
 
                     <p className="text-[11px] text-zinc-500 sm:text-xs">
@@ -264,7 +265,7 @@ const FindPlayerCard = ({
                         </p>
                     </div>
 
-                    <a
+                    {/* <a
                         href={requests.profileLink} target="_blank"
                         className="
                             rounded-lg
@@ -274,7 +275,7 @@ const FindPlayerCard = ({
                             cursor-pointer"
                     >
                         Contact Player
-                    </a>
+                    </a> */}
                 </div>
             </div>
         </div>

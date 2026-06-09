@@ -1,12 +1,13 @@
 import API from "./api";
+import type { LoginPayload, RegisterPayload } from "../types/auth.types";
 
-export const registerUser = async (data: any) => {
+export const registerUser = async (data: RegisterPayload) => {
   const res = await API.post("/auth/register", data);
 
   return res.data;
 };
 
-export const loginUser = async (data: any) => {
+export const loginUser = async (data: LoginPayload) => {
   const res = await API.post("/auth/login", data, 
     {
         withCredentials: true,

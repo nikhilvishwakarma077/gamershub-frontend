@@ -190,7 +190,7 @@ const EditProfile = () => {
         const res = await getProfileById(profileId);
 
         const data = res.profile;
-        console.log(data)
+        console.log(data.role)
 
 
         setFormData({
@@ -619,7 +619,7 @@ const EditProfile = () => {
                     Secondary Rusher
                   </option>
 
-                  <option value="Nader/Supporter">
+                  <option value="Nader">
                     Nader
                   </option>
 
@@ -634,7 +634,7 @@ const EditProfile = () => {
                     Secondary Rusher + IGL
                   </option>
 
-                  <option value="Nader/Supporter + IGL">
+                  <option value="Nader + IGL">
                     Nader + IGL
                   </option>
 

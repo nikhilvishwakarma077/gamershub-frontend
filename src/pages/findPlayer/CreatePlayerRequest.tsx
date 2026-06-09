@@ -1,14 +1,9 @@
 import { useState } from "react";
 
-import {
-
-    Clock3,
-    Languages,
-    TimerReset,
-    Crosshair,
-} from "lucide-react";
+import {Clock3,Languages,TimerReset,Crosshair,} from "lucide-react";
 import { createPlayerRequest } from "../../services/playerRequestService";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import type { CreatePlayerRequestPayload, PlayerRequestFormData } from "../../types/findPlayer.types";
 
 
@@ -16,6 +11,8 @@ import type { CreatePlayerRequestPayload, PlayerRequestFormData } from "../../ty
 const CreatePlayerRequest = () => {
 
     const navigate = useNavigate()
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [formData, setFormData] = useState<PlayerRequestFormData>({
         role: "",
@@ -55,30 +52,52 @@ const CreatePlayerRequest = () => {
         });
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>
+    ) => {
         e.preventDefault();
+
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
 
         try {
             const finalFormData: CreatePlayerRequestPayload = {
-
                 ...formData,
+
                 expiresAt: new Date(
                     Date.now() +
-                    Number(formData.expiresAt) * 60 * 60 * 1000
-                )
+                    Number(formData.expiresAt) *
+                    60 *
+                    60 *
+                    1000
+                ),
             };
 
-            const res = await createPlayerRequest(finalFormData)
-            console.log(res);
+            const res = await createPlayerRequest(finalFormData);
 
+            toast.success(
+                res?.message ||
+                "Player request created successfully"
+            );
 
-            navigate("/my-requests")
+            navigate("/my-requests");
 
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to create player request"
+            );
+
+            console.error(error);
+
+        } finally {
+            setIsSubmitting(false);
         }
     };
+
+
     return (
         <section className="min-h-screen bg-[#050816] px-4 py-10 text-white">
 
@@ -342,7 +361,7 @@ const CreatePlayerRequest = () => {
                             />
                         </div>
 
-                  
+
 
                     </div>
 
@@ -399,7 +418,10 @@ const CreatePlayerRequest = () => {
                     {/* SUBMIT */}
                     <button
                         type="submit"
+                        disabled={isSubmitting}
                         className="
+                            disabled:opacity-60
+                            disabled:cursor-not-allowed
                             w-full rounded-md
                             bg-cyan-400
                             px-6 py-4
@@ -408,7 +430,7 @@ const CreatePlayerRequest = () => {
                             transition-all hover:bg-cyan-300
                         "
                     >
-                        Create
+                        {isSubmitting? "Creating..." : "Create Request"}
                     </button>
                 </form>
             </div>

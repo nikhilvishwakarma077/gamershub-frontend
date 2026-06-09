@@ -1,5 +1,5 @@
-import type { CreateProfileData, UpdateProfileData } from "../types/profile.types"
 import API from "./api"
+import type { CreateProfileData, UpdateProfileData } from "../types/profile.types"
 
 
 export const myProfile =async ()=>{

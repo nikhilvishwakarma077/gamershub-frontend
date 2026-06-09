@@ -6,6 +6,7 @@ import PlayerRequestCardSkeleton from "../../components/findPlayer/skeletons/Pla
 import NoPlayerRequest from "../../components/findPlayer/notFound/NoPlayerRequest";
 import MyPlayerRequestCard from "../../components/findPlayer/MyPlayerRequestCard";
 import type { MyPlayerRequestData } from "../../types/findPlayer.types";
+import { toast } from "react-toastify";
 
 const MyPlayerRequests = () => {
 
@@ -82,21 +83,24 @@ const MyPlayerRequests = () => {
 
     const fetchMyPlayerRequests = async () => {
         try {
-            setLoading(true)
-            const res = await getMyPlayerRequests()
-            setMyPlayerRequests(res.playerRequests)
-       
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
+            setLoading(true);
+
+            const res = await getMyPlayerRequests();
+
+            setMyPlayerRequests(res.playerRequests);
+        } catch (error: any) {
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to load player requests"
+            );
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
-
-        fetchMyPlayerRequests()
-
-    }, [])
+        fetchMyPlayerRequests();
+    }, []);
 
     const handleDelete = async (requestId: string) => {
 
@@ -106,9 +110,17 @@ const MyPlayerRequests = () => {
 
             fetchMyPlayerRequests()
 
+            toast.success(
+                res?.message ||
+                "Request deleted successfully"
+            );
 
-        } catch (error) {
-            console.log(error)
+
+        } catch (error: any) {
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to delete request"
+            );
         }
     }
 

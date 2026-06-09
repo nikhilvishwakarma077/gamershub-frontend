@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { getAllPlayerRequests } from "../../services/playerRequestService";
 import PlayerRequestCardSkeleton from "../../components/findPlayer/skeletons/PlayerRequestCardSkeleton";
 import PageHeader from "../../components/shared/PageHeader";
 import FindPlayerCard from "../../components/findPlayer/FindPlayerCard";
 import NoPlayerRequest from "../../components/findPlayer/notFound/NoPlayerRequest";
 import type { PlayerRequestData } from "../../types/findPlayer.types";
+import { toast } from "react-toastify";
 
 
 const FindPlayer = () => {
@@ -15,18 +16,23 @@ const FindPlayer = () => {
     const [selectedRole, setSelectedRole] = useState("");
     const [selectedJoiningType, setSelectedJoiningType] = useState("");
 
-    const filteredRequests = playerRequests.filter((request) => {
+    const filteredRequests = useMemo(() => {
+        return playerRequests.filter((request) => {
+            const roleMatch =
+                !selectedRole ||
+                request.role === selectedRole;
 
-        const roleMatch =
-            !selectedRole ||
-            request.role === selectedRole;
+            const joiningTypeMatch =
+                !selectedJoiningType ||
+                request.joiningType === selectedJoiningType;
 
-        const joiningTypeMatch =
-            !selectedJoiningType ||
-            request.joiningType === selectedJoiningType;
-
-        return roleMatch && joiningTypeMatch;
-    });
+            return roleMatch && joiningTypeMatch;
+        });
+    }, [
+        playerRequests,
+        selectedRole,
+        selectedJoiningType,
+    ]);
 
 
     const getTimeLeft = (expiresAt: string | Date) => {
@@ -95,23 +101,38 @@ const FindPlayer = () => {
         return `${seconds} sec ago`;
     }
 
-    const fetchAllPlayerRequests = async () => {
-        try {
-            setLoading(true)
-            const res = await getAllPlayerRequests()
-            setPlayerRequests(res.playerRequests)
+    const fetchAllPlayerRequests =
+        useCallback(async () => {
 
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-        }
+            try {
+                setLoading(true);
 
-    }
+                const res =
+                    await getAllPlayerRequests();
+
+                setPlayerRequests(
+                    res.playerRequests || []
+                );
+
+            } catch (error: any) {
+
+                toast.error(
+                    error?.response?.data?.message ||
+                    "Failed to fetch player requests"
+                );
+
+                console.error(error);
+
+            } finally {
+
+                setLoading(false);
+            }
+
+        }, []);
+
     useEffect(() => {
-
-        fetchAllPlayerRequests()
-
-    }, [])
+        fetchAllPlayerRequests();
+    }, [fetchAllPlayerRequests]);
 
 
     return (
@@ -129,9 +150,9 @@ const FindPlayer = () => {
                                 highlight="Players"
                                 subtitle="Recruit teammates for ranked, scrims, and esports."
                             />
-                      
+
                             <div className="mb-8 py-10 flex flex-col gap-4 lg:flex-row">
-               
+
 
                                 {/* ROLE FILTER */}
                                 <select
