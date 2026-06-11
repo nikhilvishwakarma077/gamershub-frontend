@@ -24,7 +24,7 @@ const ProfileContent = () => {
 
             <div className="relative pl-8">
                 {/* Vertical Line */}
-                <div className="absolute left-[11px] top-0 h-full w-px bg-gradient-to-b from-cyan-400 via-cyan-500/50 to-transparent" />
+                <div className="absolute left-2.75 top-0 h-full w-px bg-linear-to-b from-cyan-400 via-cyan-500/50 to-transparent" />
 
                 {[
                     "Avatar & Banner Customization",

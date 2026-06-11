@@ -5,8 +5,8 @@ const WhatIsGamersHub = () => {
         <section className="relative overflow-hidden bg-black py-20 sm:py-24">
             {/* Decorative Background */}
             <div className="absolute inset-0">
-                <div className="absolute left-[-120px] top-20 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-                <div className="absolute bottom-10 right-[-100px] h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
+                <div className="absolute -left-30 top-20 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
+                <div className="absolute bottom-10 -right-25 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
 
                 <div className="absolute left-10 top-20 h-24 w-24 rotate-12 border border-cyan-500/20" />
                 <div className="absolute bottom-20 right-16 h-32 w-32 rotate-45 border border-cyan-500/20" />
@@ -141,7 +141,7 @@ const WhatIsGamersHub = () => {
 
                         {/* Decorative Rings */}
                         <div className="absolute h-105 w-105 rounded-full border border-cyan-500/10" />
-                        <div className="absolute h-[500px] w-[500px] rounded-full border border-cyan-500/5" />
+                        <div className="absolute h-125 w-125 rounded-full border border-cyan-500/5" />
                        
 
                          {/* Decorative Shape 1 */}
@@ -163,9 +163,9 @@ const WhatIsGamersHub = () => {
     relative
     z-10
     h-auto
-    max-h-[700px]
+    max-h-175
     w-full
-    max-w-[500px]
+    max-w-125
     object-contain
     drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]
     animate-character-float

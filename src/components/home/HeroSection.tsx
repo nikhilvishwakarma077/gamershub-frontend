@@ -3,12 +3,44 @@ import {
     Users,
     Plus,
 } from "lucide-react";
-import trophy from "../../assets/trophy.webp"
+import image1 from "../../assets/trophy.webp"
+import image2 from "../../assets/image2.webp"
+import image3 from "../../assets/image3.webp"
+import image4 from "../../assets/image4.webp"
+import image5 from "../../assets/image5.webp"
+import image6 from "../../assets/image6.webp"
+import image7 from "../../assets/achieve.webp"
+import image8 from "../../assets/image8.webp"
+
+
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const HeroSection = () => {
 
+
+    const heroImages = [
+        image1,
+        image5,
+        image2,
+        image3,
+        image4,
+        image6,
+        image7,
+        image8,
+
+    ];
     const navigate = useNavigate()
+
+    const [currentImage, setCurrentImage] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prev) => (prev + 1) % heroImages.length);
+        }, 2500);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <section className="relative min-h-screen overflow-hidden  bg-[#050816] text-white">
@@ -67,7 +99,7 @@ const HeroSection = () => {
                             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
 
                                 <button
-                                    className="group flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-400 to-cyan-500 px-7 py-4 font-semibold text-black transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(0,255,255,0.4)]"
+                                    className="group flex items-center justify-center gap-3 bg-linear-to-r from-cyan-400 to-cyan-500 px-7 py-4 font-semibold text-black transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(0,255,255,0.4)]"
                                     onClick={() => navigate("/find-player")}
                                 >
                                     <Users className="h-5 w-5" />
@@ -95,7 +127,7 @@ const HeroSection = () => {
 
                             {/* Decorative Rings */}
                             <div className="absolute h-115 w-115 rounded-full border  border-cyan-500/10" />
-                            <div className="absolute h-[500px] w-[500px] rounded-full border border-cyan-500/5" />
+                            <div className="absolute h-125 w-125 rounded-full border border-cyan-500/5" />
 
                             {/* Floating Squares */}
                             <div className="absolute left-8 top-16 h-15 w-15 rotate-12 border border-cyan-500/20 animate-character-float" />
@@ -105,30 +137,60 @@ const HeroSection = () => {
                             <div className="absolute bottom-16 left-16 h-10 w-10 rotate-12 border border-cyan-500/20 animate-character-float" />
                             <div className="absolute left-0 top-10 h-20 w-20 rotate-12 border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-md animate-character-float" />
 
-                        {/* Decorative Shape 2 */}
-                        <div className="absolute bottom-16 right-0 h-14 w-14 rotate-45 border border-cyan-500/20 bg-cyan-500/10 backdrop-blur-md animate-character-float" />
+                            {/* Decorative Shape 2 */}
+                            <div className="absolute bottom-16 right-0 h-14 w-14 rotate-45 border border-cyan-500/20 bg-cyan-500/10 backdrop-blur-md animate-character-float" />
 
-                       
+
 
                             {/* Character */}
-                            <img
-                                src={trophy}
-                                alt="Gaming Character"
+
+                            <div
                                 className="
+                                relative
+                                h-125
+                                max-h-150
+                                border
+                              border-cyan-500
+                                w-full
+                                max-w-100
+                                overflow-hidden
                                 rounded-2xl
-                                border border-cyan-500
-    relative
-    z-10
-    h-auto
-    max-h-[600px]
-    w-full
-    max-w-[400px]
-    object-contain
-    drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]
-    select-none
-    pointer-events-none
-  "
-                            />
+                                ">
+                                <div
+                                    className="flex h-full transition-transform duration-700 ease-in-out"
+                                    style={{
+                                        transform: `translateX(-${currentImage * 100}%)`,
+                                    }}
+                                >
+                                    {heroImages.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={image}
+                                            alt={`hero-${index}`}
+                                            className="
+                                                h-full
+                                                w-full
+                                                shrink-0
+                                                rounded-2xl
+                                                border border-cyan-500/40
+                                                object-cover
+                                                "/>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Indicators */}
+                            <div className="absolute -bottom-10 flex gap-2">
+                                {heroImages.map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className={`h-2 rounded-full transition-all duration-500 ${index === currentImage
+                                            ? "w-8 bg-cyan-400"
+                                            : "w-2 bg-cyan-400/40"
+                                            }`}
+                                    />
+                                ))}
+                            </div>
                         </div>
 
                     </div>

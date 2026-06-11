@@ -47,7 +47,7 @@ const CreateProfilesSection = () => {
                         {/* Timeline */}
                         <div className="relative pl-8">
                             {/* Vertical Line */}
-                            <div className="absolute left-[11px] top-0 h-full w-px bg-gradient-to-b from-cyan-400 via-cyan-500/50 to-transparent" />
+                            <div className="absolute left-2.75 top-0 h-full w-px bg-linear-to-b from-cyan-400 via-cyan-500/50 to-transparent" />
 
                             {features.map((item, index) => (
                                 <div
@@ -102,12 +102,12 @@ const CreateProfilesSection = () => {
                     </div>
 
                     {/* CHARACTER - SECOND ON MOBILE */}
-                    <div className="order-2 relative flex items-center justify-center lg:order-none">
+                    <div className="order-2 relative flex items-center justify-center lg:order-0">
                         {/* Glow */}
-                        <div className="absolute h-[250px] w-[250px] rounded-full bg-cyan-500/20 blur-[80px] sm:h-[350px] sm:w-[350px] sm:blur-[100px] lg:h-[450px] lg:w-[450px] lg:blur-[120px]" />
+                        <div className="absolute h-62.5 w-62.5 rounded-full bg-cyan-500/20 blur-[80px] sm:h-87.5 sm:w-87.5 sm:blur-[100px] lg:h-112.5 lg:w-112.5 lg:blur-[120px]" />
 
                         {/* Ring */}
-                        <div className="absolute h-[250px] w-[250px] rounded-full border border-cyan-500/10 sm:h-[350px] sm:w-[350px] lg:h-[420px] lg:w-[420px]" />
+                        <div className="absolute h-62.5 w-62.5 rounded-full border border-cyan-500/10 sm:h-87.5 sm:w-87.5 lg:h-105 lg:w-105" />
 
                          {/* Decorative Shape 1 */}
                         <div className="absolute left-0 top-10 h-20 w-20 rotate-12 border border-cyan-500/20 bg-cyan-500/15 backdrop-blur-md animate-rotate-slow" />
@@ -128,12 +128,12 @@ const CreateProfilesSection = () => {
                                 z-10
                                 h-auto
                                 w-full
-                                max-w-[260px]
+                                max-w-65
                                 object-contain
                                 drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]
-                                sm:max-w-[340px]
-                                md:max-w-[420px]
-                                lg:max-w-[500px]
+                                sm:max-w-85
+                                md:max-w-105
+                                lg:max-w-125
                             "
                         />
                     </div>

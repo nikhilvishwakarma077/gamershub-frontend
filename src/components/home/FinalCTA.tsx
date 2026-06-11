@@ -3,7 +3,7 @@ const FinalCTA = () => {
     <section className="relative overflow-hidden bg-black py-20 sm:py-24 lg:py-32">
       {/* Background Glow */}
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/15 blur-[140px]" />
+        <div className="absolute left-1/2 top-1/2 h-125 w-125 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/15 blur-[140px]" />
         <div className="absolute right-0 top-0 h-64 w-64 bg-cyan-500/10 blur-[120px]" />
         <div className="absolute bottom-0 left-0 h-64 w-64 bg-cyan-400/10 blur-[120px]" />
       </div>
