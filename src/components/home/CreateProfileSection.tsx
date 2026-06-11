@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import gamerCharacter from "../../assets/gamerCharacter2.webp";
 
 const CreateProfilesSection = () => {
@@ -9,6 +10,8 @@ const CreateProfilesSection = () => {
         "Showcase Esports Achievements ",
         "Upload Clips via YouTube & Instagram",
     ];
+
+    const navigate = useNavigate()
 
     return (
         <section className="relative overflow-hidden bg-black py-16 sm:py-20 lg:py-24">
@@ -67,6 +70,8 @@ const CreateProfilesSection = () => {
 
                         {/* CTA */}
                         <button
+                        onClick={()=>{navigate("/profiles")}}
+
                             className="
                                 group
                                 mt-10

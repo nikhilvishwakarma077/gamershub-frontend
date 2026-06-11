@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import trophy from "../../assets/achieve.webp"
 
 const ConnectWithGamers = () => {
@@ -7,6 +8,8 @@ const ConnectWithGamers = () => {
         "Achieve Success",
         "Player discovery",
     ];
+
+    const navigate = useNavigate()
 
     return (
         <section className="relative overflow-hidden bg-black py-20">
@@ -57,7 +60,9 @@ const ConnectWithGamers = () => {
                         </div>
 
                         {/* CTA */}
-                        <button className="mt-10 inline-flex items-center gap-3 bg-cyan-500 px-8 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:bg-cyan-400">
+                        <button
+                         onClick={()=>{navigate("/profiles")}}
+                        className="mt-10 inline-flex items-center gap-3 bg-cyan-500 px-8 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:bg-cyan-400">
                             Find Players
 
                             <span className="flex h-5 w-5 items-center justify-center">
