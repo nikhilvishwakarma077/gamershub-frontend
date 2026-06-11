@@ -230,7 +230,7 @@ const CreateProfile = () => {
 };
 
     return (
-        <section className="min-h-screen bg-[#050816] px-4 py-10 text-white">
+        <section className="min-h-screen bg-[#050816] px-4 py-20 text-white">
             <div className="mx-auto max-w-6xl rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
                 <div className="mb-8 flex items-center justify-between">
                     <div>

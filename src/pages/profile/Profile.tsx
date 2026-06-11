@@ -66,7 +66,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#050816] text-white">
+    <div className="min-h-screen bg-[#050816] py-20 text-white">
 
       {/* BANNER */}
       <div

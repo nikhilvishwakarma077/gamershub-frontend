@@ -42,7 +42,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="sticky top-0 z-50 border-b border-zinc-800 bg-linear-to-r from-[#050816] via-[#050816]/95 to-[#050816] backdrop-blur">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-black/10 backdrop-blur-md">
 
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
 
@@ -87,7 +87,7 @@ const Navbar = () => {
                         <NavLink
                             to="/login"
                             className={({ isActive }) =>
-                                `rounded-xl border px-5 py-2 font-semibold transition
+                                ` border px-10 py-2 font-semibold transition
                              ${isActive ? "border-cyan-400 bg-cyan-400 text-black"
                                     : "border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black"
                                 }`} >
@@ -184,7 +184,7 @@ const Navbar = () => {
                         <NavLink
                             to="/login"
                             className={({ isActive }) =>
-                                `rounded-lg border px-4 py-2 text-sm font-semibold
+                                ` border px-4 py-2 text-sm font-semibold
                             ${isActive ? "border-cyan-400 bg-cyan-400 text-black"
                                     : "border-cyan-400 text-cyan-400"}`}>
                             Login

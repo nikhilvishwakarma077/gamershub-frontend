@@ -1,62 +1,121 @@
-import { Mail, Gamepad2 } from "lucide-react";
-
 const Footer = () => {
-    return (
-        <footer className="relative overflow-hidden border-t border-cyan-400/10 bg-[#050816] text-white">
-            {/* Glow Effects */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,255,255,0.08),transparent_55%)]" />
+  return (
+    <footer className="border-t border-cyan-500/20 bg-black">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          {/* LOGO + COPYRIGHT */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold tracking-wide text-cyan-400">
+              GamersHub
+            </h2>
 
-            <div className="relative z-10 mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-10">
-                <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-                    
-                    {/* Left */}
-                    <div className="text-center md:text-left">
-                        <div className="flex items-center justify-center gap-3 md:justify-start">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-500/10">
-                                <Gamepad2 className="h-5 w-5 text-cyan-400" />
-                            </div>
+            <p className="max-w-sm text-sm text-zinc-400">
+              Build your gaming identity, discover players, and compete in
+              tournaments.
+            </p>
 
-                            <div>
-                                <h2 className="text-xl font-black tracking-wide text-cyan-300">
-                                    GamersHub
-                                </h2>
+            <p className="text-xs text-zinc-500">
+               Designed for gamers. Built for competition.
+            </p>
+          </div>
 
-                             
-                            </div>
-                        </div>
-                    </div>
+          {/* QUICK LINKS */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-cyan-400">
+              Quick Links
+            </h3>
 
-                    {/* Right */}
-                    <div
-                        className="
-                            flex items-center gap-3
-                            border border-cyan-400/20
-                            bg-white/5
-                            px-5 py-3
-                            backdrop-blur-xl
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href="/"
+                  className="text-sm text-zinc-400 transition-colors duration-300 hover:text-cyan-400"
+                >
+                  Home
+                </a>
+              </li>
 
-                            [clip-path:polygon(0_0,95%_0,100%_50%,95%_100%,0_100%,0%_50%)]
-                        "
-                    >
-                        <Mail className="h-5 w-5 text-cyan-400" />
+              <li>
+                <a
+                  href="/find-players"
+                  className="text-sm text-zinc-400 transition-colors duration-300 hover:text-cyan-400"
+                >
+                  Find Players
+                </a>
+              </li>
 
-                        <a
-                            href="https://mail.google.com"
-                            target="_blank"
-                            className="text-sm text-zinc-300 transition hover:text-cyan-300"
-                        >
-                            nikhilvishwakarma7707@gmail.com
-                        </a>
-                    </div>
-                </div>
+              <li>
+                <a
+                  href="/profiles"
+                  className="text-sm text-zinc-400 transition-colors duration-300 hover:text-cyan-400"
+                >
+                  Gamer Profiles
+                </a>
+              </li>
+            </ul>
+          </div>
 
-                {/* Bottom Line */}
-                <div className="mt-8 border-t border-cyan-400/10 pt-5 text-center text-xs tracking-wide text-zinc-500">
-                    © 2026 GamersHub. All rights reserved.
-                </div>
-            </div>
-        </footer>
-    );
+          {/* CONTACT */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-cyan-400">
+              Contact
+            </h3>
+
+            <a
+              href="mailto:contact@gamershub.com"
+              className="text-sm text-zinc-400 transition-colors duration-300 hover:text-cyan-400"
+            >
+              nikhilvishwakarma7707@gmail.com
+            </a>
+          </div>
+
+          {/* INSTAGRAM */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-cyan-400">
+              Social
+            </h3>
+
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="group inline-flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/5 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-500/10 hover:shadow-[0_0_25px_rgba(34,211,238,0.35)]"
+            >
+              {/* Instagram SVG */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-5 w-5 text-cyan-400 transition-transform duration-300 group-hover:scale-110"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="5"
+                  ry="5"
+                />
+                <path d="M16 11.37a4 4 0 1 1-7.75 1.26 4 4 0 0 1 7.75-1.26z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* BOTTOM LINE */}
+        <div className="mt-10 border-t border-cyan-500/10 pt-6">
+          <p className="text-center text-xs text-zinc-500">
+            © {new Date().getFullYear()} GamersHub. All rights reserved.
+           
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

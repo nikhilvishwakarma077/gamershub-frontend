@@ -66,7 +66,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-zinc-950 px-4">
+        <div className="flex min-h-screen items-center justify-center bg-zinc-950 py-20 px-4">
 
             <div className="w-full max-w-md rounded-3xl border border-zinc-800 bg-zinc-900/70 p-8 shadow-[0_0_40px_rgba(34,211,238,0.08)] backdrop-blur">
 

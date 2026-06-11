@@ -136,7 +136,7 @@ const FindPlayer = () => {
 
 
     return (
-        <section className="min-h-screen bg-[#050816] px-4 py-10 text-white">
+        <section className="min-h-screen bg-[#050816] px-4 py-20 text-white">
 
             <div className="mx-auto max-w-7xl">
 

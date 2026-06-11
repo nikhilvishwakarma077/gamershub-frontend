@@ -70,7 +70,7 @@ const MyProfile = () => {
         return <NoProfile />;
     }
     return (
-        <div className="min-h-screen bg-[#050816] text-white">
+        <div className="min-h-screen py-20 bg-[#050816] text-white">
 
             {/* BANNER */}
             <div

@@ -45,10 +45,12 @@ const Profiles = () => {
  
 
     return (
-        <div className="min-h-screen bg-zinc-950 px-4 py-10">
+        <div className="min-h-screen relative  bg-zinc-950 px-4 py-20">
+              
 
             {/* BACKGROUND */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-size-[28px_28px] opacity-30" />
+            
 
             <div className="relative z-10 mx-auto max-w-7xl">
 
