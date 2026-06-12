@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import {Clock3,Languages,TimerReset,Crosshair,} from "lucide-react";
+import { Clock3, Languages, TimerReset, Crosshair, } from "lucide-react";
 import { createPlayerRequest } from "../../services/playerRequestService";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -430,7 +430,7 @@ const CreatePlayerRequest = () => {
                             transition-all hover:bg-cyan-300
                         "
                     >
-                        {isSubmitting? "Creating..." : "Create Request"}
+                        {isSubmitting ? "Creating..." : "Create Request"}
                     </button>
                 </form>
             </div>

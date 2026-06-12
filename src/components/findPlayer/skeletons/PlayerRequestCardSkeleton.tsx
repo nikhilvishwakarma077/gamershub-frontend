@@ -2,117 +2,115 @@ const PlayerRequestCardSkeleton = () => {
     return (
         <div
             className="
-                overflow-hidden rounded-2xl
-                border border-cyan-950
-                bg-zinc-900
+                overflow-hidden
+                border
+                border-zinc-800
+                bg-[#0b1120]
                 animate-pulse
             "
         >
+            {/* TOP ACCENT */}
+            <div className="h-1 bg-cyan-500/30" />
 
-            {/* TOP SECTION */}
-            <div className="border-b border-cyan-950 p-5">
+            {/* HEADER */}
+            <div className="border-b border-zinc-800 p-4">
 
                 <div className="flex items-start justify-between">
 
-                    {/* USER */}
                     <div className="flex items-center gap-3">
 
-                        <div
-                            className="
-                                h-12 w-12 rounded-full
-                                bg-zinc-800"
-                                />
+                        <div className="h-11 w-11 bg-zinc-800" />
 
                         <div>
 
-                            <div className="h-5 w-32 rounded bg-zinc-700" />
+                            <div className="h-5 w-28 bg-zinc-700" />
 
-                            <div className="mt-2 h-4 w-24 rounded bg-zinc-800" />
+                            <div className="mt-2 h-3 w-20 bg-zinc-800" />
+
                         </div>
+
                     </div>
 
-                    <div className="h-3 w-16 rounded bg-zinc-800" />
+                    <div className="h-3 w-16 bg-zinc-800" />
+
                 </div>
 
-                {/* ROLE + JOIN TYPE */}
-                <div className="mt-5 flex items-center justify-between">
+                {/* ROLE + TYPE */}
+                <div className="mt-5 flex items-start justify-between">
 
                     <div>
 
-                        <div className="h-3 w-20 rounded bg-zinc-800" />
+                        <div className="h-3 w-20 bg-zinc-800" />
 
-                        <div className="mt-2 h-6 w-28 rounded bg-zinc-700" />
+                        <div className="mt-2 h-7 w-36 bg-zinc-700" />
+
                     </div>
 
                     <div>
 
-                        <div className="h-3 w-24 rounded bg-zinc-800" />
+                        <div className="ml-auto h-3 w-14 bg-zinc-800" />
 
-                        <div className="mt-2 h-6 w-24 rounded bg-zinc-700" />
+                        <div className="mt-2 h-7 w-24 bg-zinc-700" />
+
                     </div>
+
                 </div>
+
             </div>
 
-            {/* CONTENT */}
-            <div className="space-y-4 p-5">
+            {/* BODY */}
+            <div className="space-y-3 p-4">
 
                 {/* ACTIVE TIME */}
-                <div
-                    className="
-                        rounded-xl border border-zinc-800
-                        bg-zinc-950 p-4"
-                >
+                <div className="border border-zinc-800 bg-[#09111f] p-3">
 
-                    <div className="h-3 w-20 rounded bg-zinc-800" />
+                    <div className="h-3 w-20 bg-zinc-800" />
 
-                    <div className="mt-3 h-5 w-40 rounded bg-zinc-700" />
+                    <div className="mt-3 h-4 w-40 bg-zinc-700" />
+
                 </div>
 
                 {/* LANGUAGES */}
-                <div
-                    className="
-                        rounded-xl border border-zinc-800
-                        bg-zinc-950 p-4"
-                >
+                <div className="border border-zinc-800 bg-[#09111f] p-3">
 
-                    <div className="h-3 w-32 rounded bg-zinc-800" />
+                    <div className="h-3 w-24 bg-zinc-800" />
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-2">
 
-                        <div className="h-7 w-16 rounded-md bg-zinc-700" />
+                        <div className="h-6 w-14 bg-zinc-700" />
 
-                        <div className="h-7 w-20 rounded-md bg-zinc-700" />
+                        <div className="h-6 w-20 bg-zinc-700" />
 
-                        <div className="h-7 w-14 rounded-md bg-zinc-700" />
+                        <div className="h-6 w-16 bg-zinc-700" />
+
                     </div>
+
                 </div>
 
-                {/* BUTTONS */}
-                <div
-                    className="
-                        flex items-center justify-between gap-4
-                        border-t border-zinc-800
-                        pt-4"
-                >
+                {/* EXPIRY */}
+                <div className="border border-zinc-800 bg-zinc-900/40 p-3">
 
-                    <div className="h-10 w-full rounded-lg bg-zinc-700" />
+                    <div className="h-4 w-32 bg-zinc-700" />
 
-                    <div className="h-10 w-full rounded-lg bg-zinc-800" />
                 </div>
 
-                {/* FOOTER */}
-                <div
-                    className="
-                        flex items-center justify-between
-                        border-t border-zinc-800
-                        pt-4"
-                >
-
-                    <div className="h-5 w-28 rounded bg-zinc-700" />
-
-                    <div className="h-10 w-32 rounded-lg bg-zinc-700" />
-                </div>
             </div>
+
+            {/* ACTIONS */}
+            <div className="border-t border-zinc-800 p-4">
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+
+                    <div className="h-11 bg-zinc-700" />
+
+                    <div className="h-11 bg-zinc-800" />
+
+                    <div className="h-11 bg-zinc-700" />
+
+                </div>
+
+            </div>
+
         </div>
     );
 };

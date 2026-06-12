@@ -1,16 +1,7 @@
 import { useEffect, useState } from "react"
 import { getProfileById } from "../../services/profileService"
 import { useParams } from "react-router-dom";
-import {
-  Trophy,
-  Globe,
-  Languages,
-  Gamepad2,
-  Shield,
-  Users,
-  Video,
-  Clock3,
-} from "lucide-react";
+import {Trophy,Globe,Languages,Gamepad2,Shield, Users,Video,Clock3} from "lucide-react";
 import MyProfileSkeleton from "../../components/profile/skeletons/MyProfileSkeleton";
 import type { ProfileType } from "../../types/profile.types";
 import NoProfile from "../../components/profile/notFound/NoProfile";
@@ -529,7 +520,7 @@ const Profile = () => {
                 {userProfile?.achievements.map((ach, index) => (
                   <div
                     key={index}
-                    className="min-w-[280px] max-w-[280px] shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                    className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
                   >
                     <img
                       src={ach.image}

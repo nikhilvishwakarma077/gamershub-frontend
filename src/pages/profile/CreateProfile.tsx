@@ -214,7 +214,6 @@ const CreateProfile = () => {
                 res?.message || "Profile created successfully"
             );
 
-            // Agar profile page pe bhejna hai:
             navigate("/my-profile");
 
         } catch (error: any) {

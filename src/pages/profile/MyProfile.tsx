@@ -43,7 +43,7 @@ const MyProfile = () => {
 
             setProfile(res.profile);
             setMyProfileData(res.profile);
-            
+
         } catch (error: any) {
             console.error(error);
 
@@ -377,20 +377,20 @@ const MyProfile = () => {
                 </div>
 
                 {/* CLIPS */}
-                <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+                <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
                     <div className="mb-4 flex items-center gap-2">
                         <Video className="text-cyan-400" />
 
-                        <h2 className="text-xl font-semibold">
+                        <h2 className="text-lg font-semibold sm:text-xl">
                             Featured Clips
                         </h2>
                     </div>
 
-                    {myProfileData?.clips[0].title == "" || myProfileData?.clips[0].title == undefined ? (
+                    {myProfileData?.clips[0].title == "" ||
+                        myProfileData?.clips[0].title == undefined ? (
 
-
-                        <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
+                        <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] px-4 text-center">
 
                             <Video
                                 size={40}
@@ -407,41 +407,81 @@ const MyProfile = () => {
                         </div>
 
                     ) : (
-                        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                        <>
+                            {/* Mobile Horizontal Scroll */}
+                            <div className="flex gap-4 overflow-x-auto pb-2 md:hidden">
 
-                            {myProfileData.clips.map((clip, index) => (
-                                <div
-                                    key={index}
-                                    className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
-                                >
-                                    <a href={clip.clipUrl} target="_blank">
+                                {myProfileData.clips.map((clip, index) => (
+                                    <div
+                                        key={index}
+                                        className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                                    >
+                                        <a
+                                            href={clip.clipUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src={clip.thumbnailUrl}
+                                                alt={clip.title}
+                                                className="h-44 w-full object-cover"
+                                            />
+                                        </a>
 
-                                        <img
-                                            src={clip.thumbnailUrl}
-                                            alt={clip.title}
-                                            className="h-48 w-full object-cover"
-                                        />
-                                    </a>
-                                    <div className="p-3">
-                                        <h3 className="text-sm font-medium">
-                                            {clip.title}
-                                        </h3>
+                                        <div className="p-3">
+                                            <h3 className="line-clamp-2 text-sm font-medium">
+                                                {clip.title}
+                                            </h3>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+
+                            {/* Tablet/Desktop Grid */}
+                            <div className="hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+
+                                {myProfileData.clips.map((clip, index) => (
+                                    <div
+                                        key={index}
+                                        className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                                    >
+                                        <a
+                                            href={clip.clipUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <img
+                                                src={clip.thumbnailUrl}
+                                                alt={clip.title}
+                                                className="h-48 w-full object-cover"
+                                            />
+                                        </a>
+
+                                        <div className="p-3">
+                                            <h3 className="line-clamp-2 text-sm font-medium">
+                                                {clip.title}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
                     )}
                 </div>
 
                 {/* ACHIEVEMENTS */}
-                <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+                <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
+
                     <div className="mb-4 flex items-center gap-2">
                         <Trophy className="text-cyan-400" />
-                        <h2 className="text-xl font-semibold">Achievements</h2>
+                        <h2 className="text-lg font-semibold sm:text-xl">
+                            Achievements
+                        </h2>
                     </div>
 
+                    {myProfileData?.achievements[0].title == "" ||
+                        myProfileData?.achievements[0].title == undefined ? (
 
-                    {myProfileData?.achievements[0].title == "" || myProfileData?.achievements[0].title == undefined ? (
                         <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
 
                             <Trophy
@@ -458,29 +498,55 @@ const MyProfile = () => {
                             </p>
                         </div>
 
-
                     ) : (
-                        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
-                            {myProfileData?.achievements.map((ach, index) => (
-                                <div
-                                    key={index}
-                                    className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
-                                >
-                                    <img
-                                        src={ach.image}
-                                        alt={ach.title}
-                                        className="h-48 w-full object-cover"
-                                    />
+                        <>
+                            {/* Mobile Horizontal Scroll */}
+                            <div className="flex gap-4 overflow-x-auto pb-2 md:hidden scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
 
-                                    <div className="p-3">
-                                        <h3 className="text-sm font-medium">
-                                            {ach.title}
-                                        </h3>
+                                {myProfileData?.achievements.map((ach, index) => (
+                                    <div
+                                        key={index}
+                                        className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                                    >
+                                        <img
+                                            src={ach.image}
+                                            alt={ach.title}
+                                            className="h-44 w-full object-cover"
+                                        />
+
+                                        <div className="p-3">
+                                            <h3 className="line-clamp-2 text-sm font-medium">
+                                                {ach.title}
+                                            </h3>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+
+                            {/* Tablet/Desktop Grid */}
+                            <div className="hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+
+                                {myProfileData?.achievements.map((ach, index) => (
+                                    <div
+                                        key={index}
+                                        className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                                    >
+                                        <img
+                                            src={ach.image}
+                                            alt={ach.title}
+                                            className="h-48 w-full object-cover"
+                                        />
+
+                                        <div className="p-3">
+                                            <h3 className="line-clamp-2 text-sm font-medium">
+                                                {ach.title}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
 
                     )}
                 </div>

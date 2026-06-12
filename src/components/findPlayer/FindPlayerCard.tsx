@@ -1,8 +1,4 @@
-import {
-    CalendarDays,
-    Clock3,
-    Languages,
-    TimerReset,
+import {Clock3,Languages,TimerReset,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -17,266 +13,237 @@ const FindPlayerCard = ({
     getTimeAgo,
     getTimeLeft,
 }: FindPlayerCardProps) => {
- 
+
     return (
         <div
             className="
-        overflow-hidden
-        rounded-2xl
-        border border-cyan-950
-        bg-zinc-900
-      "
+            group
+            overflow-hidden
+            border
+            border-zinc-800
+            bg-[#0b1120]
+            transition-all
+            duration-300
+            hover:border-cyan-500/40
+            hover:shadow-[0_0_25px_rgba(6,182,212,0.08)]
+        "
         >
+            {/* TOP BAR */}
+            <div className="h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
 
-            {/* TOP */}
-            <div className="border-b border-cyan-950 p-4 sm:p-5">
+            {/* HEADER */}
+            <div className="border-b border-zinc-800 p-4">
 
-                {/* USER + TIME */}
-                <div
-                    className="
-            flex flex-col gap-4
-            xs:flex-row
-            xs:items-start
-            xs:justify-between
-          "
-                >
+                <div className="flex items-start justify-between gap-3">
 
-                    {/* USER */}
                     <div className="flex min-w-0 items-center gap-3">
 
                         <div
                             className="
-                flex h-11 w-11 shrink-0
-                items-center justify-center
-                rounded-full
-                bg-cyan-950
-                text-sm font-semibold text-cyan-300
-                sm:h-12 sm:w-12
-              "
+                            flex
+                            h-11
+                            w-11
+                            shrink-0
+                            items-center
+                            justify-center
+                            border
+                            border-cyan-500/30
+                            bg-cyan-500/10
+                            text-sm
+                            font-bold
+                            text-cyan-300
+                        "
                         >
                             {requests.userId.username.slice(0, 2)}
                         </div>
 
                         <div className="min-w-0">
 
-                            <h2
-                                className="
-                  truncate
-                  text-base font-semibold text-white
-                  sm:text-lg
-                "
-                            >
+                            <h2 className="truncate text-base font-bold text-white">
                                 {requests.userId.username}
                             </h2>
 
-                            <p
-                                className="
-                  truncate
-                  text-xs text-zinc-400
-                  sm:text-sm
-                "
-                            >
-                                {requests.instagram}
+                            <p className="truncate text-xs text-zinc-500">
+                                @{requests.instagram}
                             </p>
+
                         </div>
-                        
+
                     </div>
 
-                    <p className="text-[11px] text-zinc-500 sm:text-xs">
+                    <p className="shrink-0 text-[11px] text-zinc-500">
                         {getTimeAgo(requests.createdAt)}
                     </p>
+
                 </div>
 
-                {/* ROLE + JOIN TYPE */}
-                <div className="mt-5 flex items-center justify-between">
-
-                    <div>
-
-                        <p className="text-[11px] uppercase tracking-wider text-zinc-500">
-                            Slot open For
-                        </p>
-
-                        <h3 className="mt-1 text-xl font-semibold capitalize text-cyan-300">
-                            {requests.role}
-                        </h3>
-                    </div>
-
-                    <div
-                        className=""
-                    >
-
-                        <div className="flex items-center gap-2 text-zinc-500">
-
-                            <CalendarDays size={14} />
-
-                            <p className="text-[10px] uppercase tracking-wider">
-                                Joining Type
-                            </p>
-                        </div>
-
-                        <h3
-                            className={`mt-2 rounded p-1 text-xl font-medium capitalize text-white ${requests.joiningType === "permanent"
-                                ? "bg-green-600"
-                                : requests.joiningType === "temporary"
-                                    ? "bg-yellow-600"
-                                    : "bg-cyan-600"
-                                }`}
-                        >
-                            {requests.joiningType}
-                        </h3>
-                    </div>
-                </div>
             </div>
 
-            {/* CONTENT */}
-            <div className="space-y-4 p-4 sm:p-5">
+            {/* BODY */}
+            <div className="p-4">
+
+                {/* ROLE */}
+                <div className="mb-4">
+
+                    <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                        Looking For
+                    </p>
+
+                    <h3 className="text-xl font-black uppercase text-cyan-300">
+                        {requests.role}
+                    </h3>
+
+                </div>
+
+                {/* JOINING TYPE */}
+                <div className="mb-4">
+
+                    <span
+                        className={`
+                        inline-flex
+                        items-center
+                        border
+                        px-3
+                        py-2
+                        text-xs
+                        font-semibold
+                        uppercase
+                        tracking-wider
+                        ${requests.joiningType === "permanent"
+                                ? "border-green-500/30 bg-green-500/10 text-green-300"
+                                : requests.joiningType === "temporary"
+                                    ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-300"
+                                    : "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
+                            }
+                    `}
+                    >
+                        {requests.joiningType}
+                    </span>
+
+                </div>
 
                 {/* ACTIVE TIME */}
-                <div
-                    className="
-            rounded-xl
-            border border-zinc-800
-            bg-zinc-950
-            p-4
-          "
-                >
+                <div className="mb-3 border border-zinc-800 bg-[#09111f] p-3">
 
-                    <div className="flex items-center gap-2 text-zinc-500">
+                    <div className="mb-2 flex items-center gap-2 text-zinc-500">
 
                         <Clock3 size={14} />
 
-                        <p className="text-[10px] uppercase tracking-wider">
+                        <span className="text-[10px] uppercase tracking-wider">
                             Active Time
-                        </p>
+                        </span>
+
                     </div>
 
-                    <h3
-                        className="
-              mt-2
-              wrap-break-word
-              text-sm font-medium text-white
-            "
-                    >
+                    <p className="text-sm text-white">
                         {requests.activeTime}
-                    </h3>
+                    </p>
+
                 </div>
 
                 {/* LANGUAGES */}
-                <div
-                    className="
-            rounded-xl
-            border border-zinc-800
-            bg-zinc-950
-            p-4
-          "
-                >
+                <div className="border border-zinc-800 bg-[#09111f] p-3">
 
-                    <div className="flex items-center gap-2 text-zinc-500">
+                    <div className="mb-3 flex items-center gap-2 text-zinc-500">
 
                         <Languages size={14} />
 
-                        <p className="text-[10px] uppercase tracking-wider">
-                            Preferred Languages
-                        </p>
+                        <span className="text-[10px] uppercase tracking-wider">
+                            Languages
+                        </span>
+
                     </div>
 
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2">
 
                         {requests.languagesComfortable.map(
                             (lang: string, index: number) => (
                                 <span
                                     key={index}
                                     className="
-                    rounded-md
-                    bg-cyan-950
-                    px-2.5 py-1.5
-                    text-[11px]
-                    text-cyan-300
-                    sm:px-3
-                    sm:text-xs
-                  "
+                                    border
+                                    border-cyan-500/20
+                                    bg-cyan-500/10
+                                    px-2
+                                    py-1
+                                    text-[11px]
+                                    text-cyan-300
+                                "
                                 >
                                     {lang}
                                 </span>
                             )
                         )}
+
                     </div>
+
                 </div>
 
-                {/* ACTION BUTTONS */}
-                <div
-                    className="
-            flex flex-col gap-3
-            border-t border-zinc-800
-            pt-4
-            sm:flex-row
-          "
-                >
+            </div>
+
+            {/* FOOTER */}
+            <div className="border-t border-zinc-800 p-4">
+
+                <div className="mb-4 flex items-center gap-2 text-red-300">
+
+                    <TimerReset size={15} />
+
+                    <span className="text-sm font-medium">
+                        {getTimeLeft(requests.expiresAt)}
+                    </span>
+
+                </div>
+
+                <div className="flex flex-col gap-3 md:flex-row  items-center justify-center">
 
                     <a
                         href={`https://www.instagram.com/${requests.instagram}`}
                         target="_blank"
                         rel="noreferrer"
                         className="
-              w-full
-              rounded-lg
-              bg-cyan-500
-              px-4 py-3
-              text-center
-              text-sm font-medium text-white
-            "
+                        flex
+                        w-full
+                        items-center
+                        justify-center
+                        border
+                        border-cyan-500
+                        text-black
+                        px-4
+                        py-3
+                        text-sm
+                        font-semibold
+                        transition-all
+                        bg-cyan-500
+                        hover:text-black
+                    "
                     >
-                        DM To Player
+                        DM Player
                     </a>
 
                     <Link
-
                         to={`/profile/${requests.profileId}`}
                         className="
-              w-full
-              rounded-lg
-              border border-zinc-700
-              bg-zinc-800
-              px-4 py-3
-              text-center
-              text-sm font-medium text-white
-            "
-
+                        flex
+                        w-full
+                        items-center
+                        justify-center
+                        border
+                        border-zinc-700
+                        bg-[#09111f]
+                        px-4
+                        py-3
+                        text-sm
+                        font-semibold
+                        text-white
+                        transition-all
+                        hover:border-cyan-500/40
+                    "
                     >
                         View Profile
                     </Link>
+
                 </div>
 
-                {/* FOOTER */}
-                <div
-                    className="
-                        flex items-center justify-between
-                        border-t border-zinc-800
-                        pt-4
-                    "
-                >
-
-                    <div className="flex items-center gap-2 text-red-300">
-
-                        <TimerReset size={15} />
-
-                        <p className="text-sm font-medium">
-                            {getTimeLeft(requests.expiresAt)}
-                        </p>
-                    </div>
-
-                    {/* <a
-                        href={requests.profileLink} target="_blank"
-                        className="
-                            rounded-lg
-                            bg-green-500
-                            px-4 py-2
-                            text-sm font-medium text-white
-                            cursor-pointer"
-                    >
-                        Contact Player
-                    </a> */}
-                </div>
             </div>
         </div>
     );
