@@ -10,7 +10,6 @@ const NoPlayerRequest = () => {
                 className="
           mx-auto flex min-h-[80vh] max-w-2xl
           flex-col items-center justify-center
-          rounded-3xl
           border border-cyan-400/10
           bg-[#0b1120]
           p-8 text-center"
@@ -54,7 +53,6 @@ const NoPlayerRequest = () => {
                         to="/create-request"
                         className="
                         flex items-center gap-2
-                        rounded-xl
                         bg-cyan-400
                         px-6 py-3
                         text-sm font-semibold
@@ -71,7 +69,6 @@ const NoPlayerRequest = () => {
                         to="/profiles"
                         className="
                         flex items-center gap-2
-                        rounded-xl
                         border border-zinc-700
                         bg-[#09111f] 
                         px-6 py-3 text-sm font-semibold

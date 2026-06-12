@@ -101,9 +101,7 @@ const Profile = () => {
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
 
             <img
-              // src={userProfile?.avatar}
               src={`/avatars/${userProfile.avatar}`}
-              // src={avatar1}
               alt="avatar"
               onError={(e) => {
                 e.currentTarget.src =
@@ -398,18 +396,18 @@ const Profile = () => {
         </div>
 
         {/* CLIPS */}
-        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
           <div className="mb-4 flex items-center gap-2">
             <Video className="text-cyan-400" />
 
-            <h2 className="text-xl font-semibold">
+            <h2 className="text-lg font-semibold sm:text-xl">
               Featured Clips
             </h2>
           </div>
 
-          {userProfile?.clips[0].title == "" || userProfile?.clips[0].title == undefined ? (
-
+          {userProfile?.clips[0].title == "" ||
+            userProfile?.clips[0].title == undefined ? (
 
             <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
 
@@ -428,45 +426,84 @@ const Profile = () => {
             </div>
 
           ) : (
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
-              {userProfile.clips.map((clip, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
-                >
-                  <a href={clip.clipUrl} target="_blank"
+            <>
+              {/* Mobile Horizontal Scroll */}
+              <div className="flex gap-4 overflow-x-auto pb-2 md:hidden scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+
+                {userProfile.clips.map((clip, index) => (
+                  <div
+                    key={index}
+                    className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
                   >
-                    <img
-                      src={clip.thumbnailUrl}
-                      alt={clip.title}
-                      className="h-48 w-full object-cover"
-                    />
-                  </a>
+                    <a
+                      href={clip.clipUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={clip.thumbnailUrl}
+                        alt={clip.title}
+                        className="h-44 w-full object-cover"
+                      />
+                    </a>
 
-                  <div className="p-3">
-                    <h3 className="text-sm font-medium">
-                      {clip.title}
-                    </h3>
+                    <div className="p-3">
+                      <h3 className="line-clamp-2 text-sm font-medium">
+                        {clip.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
+              {/* Tablet/Desktop Grid */}
+              <div className="hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+
+                {userProfile.clips.map((clip, index) => (
+                  <div
+                    key={index}
+                    className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                  >
+                    <a
+                      href={clip.clipUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={clip.thumbnailUrl}
+                        alt={clip.title}
+                        className="h-48 w-full object-cover"
+                      />
+                    </a>
+
+                    <div className="p-3">
+                      <h3 className="line-clamp-2 text-sm font-medium">
+                        {clip.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+
           )}
         </div>
 
         {/* ACHIEVEMENTS */}
-        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+        <div className="mt-8 rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
           <div className="mb-4 flex items-center gap-2">
             <Trophy className="text-cyan-400" />
 
-            <h2 className="text-xl font-semibold">
+            <h2 className="text-lg font-semibold sm:text-xl">
               Achievements
             </h2>
           </div>
 
-          {userProfile?.achievements[0].title == "" || userProfile?.achievements[0].title == undefined ? (
+          {userProfile?.achievements[0].title == "" ||
+            userProfile?.achievements[0].title == undefined ? (
+
             <div className="flex h-52 flex-col items-center justify-center rounded-xl border border-dashed border-zinc-700 bg-[#09111f] text-center">
 
               <Trophy
@@ -483,29 +520,55 @@ const Profile = () => {
               </p>
             </div>
 
-
           ) : (
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
-              {userProfile?.achievements.map((ach, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
-                >
-                  <img
-                    src={ach.image}
-                    alt={ach.title}
-                    className="h-48 w-full object-cover"
-                  />
+            <>
+              {/* Mobile Horizontal Scroll */}
+              <div className="flex gap-4 overflow-x-auto pb-2 md:hidden scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
 
-                  <div className="p-3">
-                    <h3 className="text-sm font-medium">
-                      {ach.title}
-                    </h3>
+                {userProfile?.achievements.map((ach, index) => (
+                  <div
+                    key={index}
+                    className="min-w-[280px] max-w-[280px] shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                  >
+                    <img
+                      src={ach.image}
+                      alt={ach.title}
+                      className="h-44 w-full object-cover"
+                    />
+
+                    <div className="p-3">
+                      <h3 className="line-clamp-2 text-sm font-medium">
+                        {ach.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
+              {/* Tablet/Desktop Grid */}
+              <div className="hidden gap-5 md:grid md:grid-cols-2 lg:grid-cols-3">
+
+                {userProfile?.achievements.map((ach, index) => (
+                  <div
+                    key={index}
+                    className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
+                  >
+                    <img
+                      src={ach.image}
+                      alt={ach.title}
+                      className="h-48 w-full object-cover"
+                    />
+
+                    <div className="p-3">
+                      <h3 className="line-clamp-2 text-sm font-medium">
+                        {ach.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
 
           )}
         </div>

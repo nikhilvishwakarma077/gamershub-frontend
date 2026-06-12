@@ -9,7 +9,6 @@ const NoFindPlayer = () => {
         className="
           mx-auto flex min-h-[80vh] max-w-2xl
           flex-col items-center justify-center
-          rounded-3xl
           border border-cyan-400/10
           bg-[#0b1120]
           p-8 text-center"
@@ -46,7 +45,6 @@ const NoFindPlayer = () => {
           to="/create-request"
           className="
             mt-8 flex items-center gap-2
-            rounded-2xl
             bg-cyan-400
             px-6 py-3
             text-sm font-semibold

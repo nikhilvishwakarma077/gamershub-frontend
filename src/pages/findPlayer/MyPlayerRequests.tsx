@@ -157,7 +157,7 @@ const MyPlayerRequests = () => {
                                 }}
                                 className="
       flex items-center justify-center gap-2
-      rounded-lg bg-cyan-400
+       bg-cyan-400
       px-5 py-3
       font-medium text-black
       transition hover:opacity-90

@@ -166,68 +166,68 @@ const CreateProfile = () => {
         }));
     };
 
-   const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-) => {
-    e.preventDefault();
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>
+    ) => {
+        e.preventDefault();
 
-    if (isSubmitting) return;
+        if (isSubmitting) return;
 
-    setIsSubmitting(true);
+        setIsSubmitting(true);
 
-    try {
-        const finalData: CreateProfilePayload = {
-            ...formData,
+        try {
+            const finalData: CreateProfilePayload = {
+                ...formData,
 
-            uid: Number(formData.uid),
+                uid: Number(formData.uid),
 
-            age: Number(formData.age),
+                age: Number(formData.age),
 
-            stats: {
-                ...formData.stats,
+                stats: {
+                    ...formData.stats,
 
-                kdRatio: Number(formData.stats.kdRatio),
+                    kdRatio: Number(formData.stats.kdRatio),
 
-                headshotPercentage: Number(
-                    formData.stats.headshotPercentage
-                ),
-            },
+                    headshotPercentage: Number(
+                        formData.stats.headshotPercentage
+                    ),
+                },
 
-            experience: {
-                ...formData.experience,
+                experience: {
+                    ...formData.experience,
 
-                level: Number(formData.experience.level),
+                    level: Number(formData.experience.level),
 
-                yearsPlaying: Number(
-                    formData.experience.yearsPlaying
-                ),
+                    yearsPlaying: Number(
+                        formData.experience.yearsPlaying
+                    ),
 
-                esportsExperience: Number(
-                    formData.experience.esportsExperience
-                ),
-            },
-        };
+                    esportsExperience: Number(
+                        formData.experience.esportsExperience
+                    ),
+                },
+            };
 
-        const res = await createProfile(finalData);
+            const res = await createProfile(finalData);
 
-        toast.success(
-            res?.message || "Profile created successfully"
-        );
+            toast.success(
+                res?.message || "Profile created successfully"
+            );
 
-        // Agar profile page pe bhejna hai:
-        navigate("/my-profile");
+            // Agar profile page pe bhejna hai:
+            navigate("/my-profile");
 
-    } catch (error: any) {
-        toast.error(
-            error?.response?.data?.message ||
-            "Failed to create profile"
-        );
+        } catch (error: any) {
+            toast.error(
+                error?.response?.data?.message ||
+                "Failed to create profile"
+            );
 
-        console.error(error);
-    } finally {
-        setIsSubmitting(false);
-    }
-};
+            console.error(error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <section className="min-h-screen bg-[#050816] px-4 py-20 text-white">
@@ -704,12 +704,12 @@ const CreateProfile = () => {
                     </div>
 
                     {/* STATS */}
-                    <div>
-                        <h2 className="mb-5 text-xl font-semibold text-cyan-400">
+                    <div className="w-full">
+                        <h2 className="mb-4 text-lg font-semibold text-cyan-400 sm:mb-5 sm:text-xl">
                             Current BR Stats
                         </h2>
 
-                        <div className="grid gap-5 md:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
 
                             <input
                                 type="text"
@@ -720,12 +720,11 @@ const CreateProfile = () => {
                                         ...formData,
                                         stats: {
                                             ...formData.stats,
-                                            currentRank:
-                                                e.target.value,
+                                            currentRank: e.target.value,
                                         },
                                     })
                                 }
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
 
                             <input
@@ -734,20 +733,11 @@ const CreateProfile = () => {
                                 placeholder="KD Ratio"
                                 value={formData.stats.kdRatio}
                                 onChange={(e) => {
-
                                     const value = e.target.value;
-
-                                    // allowed:
-                                    // 1
-                                    // 1.1
-                                    // 11.1
-                                    // 1.11
-                                    // 11.11
 
                                     if (/^\d{0,2}(\.\d{0,2})?$/.test(value)) {
                                         setFormData({
                                             ...formData,
-
                                             stats: {
                                                 ...formData.stats,
                                                 kdRatio: value,
@@ -755,32 +745,20 @@ const CreateProfile = () => {
                                         });
                                     }
                                 }}
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
 
                             <input
                                 type="text"
                                 inputMode="decimal"
                                 placeholder="Headshot Percentage"
-                                value={
-                                    formData.stats.headshotPercentage
-                                }
+                                value={formData.stats.headshotPercentage}
                                 onChange={(e) => {
-
                                     const value = e.target.value;
-
-                                    // allowed:
-                                    // 1
-                                    // 11
-                                    // 1.1
-                                    // 11.1
-                                    // 1.11
-                                    // 11.11
 
                                     if (/^\d{0,2}(\.\d{0,2})?$/.test(value)) {
                                         setFormData({
                                             ...formData,
-
                                             stats: {
                                                 ...formData.stats,
                                                 headshotPercentage: value,
@@ -788,18 +766,19 @@ const CreateProfile = () => {
                                         });
                                     }
                                 }}
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
                         </div>
                     </div>
 
                     {/* EXPERIENCE */}
-                    <div>
-                        <h2 className="mb-5 text-xl font-semibold text-cyan-400">
-                            Experience<span className="ml-1 text-red-400">*</span>
+                    <div className="w-full">
+                        <h2 className="mb-4 text-lg font-semibold text-cyan-400 sm:mb-5 sm:text-xl">
+                            Experience
+                            <span className="ml-1 text-red-400">*</span>
                         </h2>
 
-                        <div className="grid gap-5 md:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
 
                             {/* Level */}
                             <input
@@ -812,7 +791,6 @@ const CreateProfile = () => {
 
                                     const value = e.target.value;
 
-                                    // 0 - 99
                                     if (/^\d{0,2}$/.test(value)) {
                                         setFormData({
                                             ...formData,
@@ -824,7 +802,7 @@ const CreateProfile = () => {
                                         });
                                     }
                                 }}
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
 
                             {/* Years Playing */}
@@ -833,14 +811,11 @@ const CreateProfile = () => {
                                 required
                                 inputMode="numeric"
                                 placeholder="Years Playing"
-                                value={
-                                    formData.experience.yearsPlaying
-                                }
+                                value={formData.experience.yearsPlaying}
                                 onChange={(e) => {
 
                                     const value = e.target.value;
 
-                                    // 0 - 99
                                     if (/^\d{0,2}$/.test(value)) {
                                         setFormData({
                                             ...formData,
@@ -852,7 +827,7 @@ const CreateProfile = () => {
                                         });
                                     }
                                 }}
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
 
                             {/* Esports Experience */}
@@ -861,15 +836,11 @@ const CreateProfile = () => {
                                 required
                                 inputMode="numeric"
                                 placeholder="Esports Experience"
-                                value={
-                                    formData.experience
-                                        .esportsExperience
-                                }
+                                value={formData.experience.esportsExperience}
                                 onChange={(e) => {
 
                                     const value = e.target.value;
 
-                                    // 0 - 99
                                     if (/^\d{0,2}$/.test(value)) {
                                         setFormData({
                                             ...formData,
@@ -881,7 +852,7 @@ const CreateProfile = () => {
                                         });
                                     }
                                 }}
-                                className="rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
+                                className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                             />
                         </div>
                     </div>
@@ -921,13 +892,16 @@ const CreateProfile = () => {
                     </div>
 
                     {/* Previous Team */}
-                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-                        <div className="mb-5 flex items-center justify-between">
-                            <h2 className="text-xl font-semibold">
-                                Team History <span className="text-sm text-zinc-400">
-                                            (Optional)
-                                        </span>
+                        {/* HEADER */}
+                        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                            <h2 className="text-lg font-semibold sm:text-xl">
+                                Team History{" "}
+                                <span className="text-xs text-zinc-400 sm:text-sm">
+                                    (Optional)
+                                </span>
                             </h2>
 
                             <button
@@ -939,7 +913,7 @@ const CreateProfile = () => {
                                         duration: "",
                                     })
                                 }
-                                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                                className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
                             >
                                 Add Team
                             </button>
@@ -955,20 +929,19 @@ const CreateProfile = () => {
                                 >
 
                                     {/* TOP */}
-                                    <div className="mb-4 flex items-center justify-between">
+                                    <div className="mb-4 flex items-center justify-between gap-3">
 
                                         <h3 className="text-sm text-zinc-400">
                                             Team #{index + 1}
                                         </h3>
 
-                                        {/* REMOVE BUTTON */}
                                         {formData.teamHistory.length > 1 && (
                                             <button
                                                 type="button"
                                                 onClick={() =>
                                                     removeItem("teamHistory", index)
                                                 }
-                                                className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400"
                                             >
                                                 ✕
                                             </button>
@@ -976,7 +949,7 @@ const CreateProfile = () => {
                                     </div>
 
                                     {/* INPUTS */}
-                                    <div className="grid gap-4 md:grid-cols-3">
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 
                                         <input
                                             type="text"
@@ -990,7 +963,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
 
                                         <input
@@ -1005,7 +978,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
 
                                         <input
@@ -1020,7 +993,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
                                     </div>
                                 </div>
@@ -1029,10 +1002,12 @@ const CreateProfile = () => {
                     </div>
 
                     {/* Clips */}
-                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-                        <div className="mb-5 flex items-center justify-between">
-                            <h2 className="text-xl font-semibold">
+                        {/* Header */}
+                        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                            <h2 className="text-lg font-semibold sm:text-xl">
                                 Clips
                             </h2>
 
@@ -1045,7 +1020,7 @@ const CreateProfile = () => {
                                         thumbnailUrl: "",
                                     })
                                 }
-                                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                                className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
                             >
                                 Add Clip
                             </button>
@@ -1060,29 +1035,28 @@ const CreateProfile = () => {
                                     className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
                                 >
 
-                                    {/* TOP */}
-                                    <div className="mb-4 flex items-center justify-between">
+                                    {/* Top Row */}
+                                    <div className="mb-4 flex items-center justify-between gap-3">
 
                                         <h3 className="text-sm text-zinc-400">
                                             Clip #{index + 1}
                                         </h3>
 
-                                        {/* REMOVE BUTTON */}
                                         {formData.clips.length > 1 && (
                                             <button
                                                 type="button"
                                                 onClick={() =>
                                                     removeItem("clips", index)
                                                 }
-                                                className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                                             >
                                                 ✕
                                             </button>
                                         )}
                                     </div>
 
-                                    {/* INPUTS */}
-                                    <div className="grid gap-4 md:grid-cols-2">
+                                    {/* Inputs */}
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
                                         <input
                                             type="text"
@@ -1096,7 +1070,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                                         />
 
                                         <input
@@ -1111,7 +1085,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                                         />
 
                                         <input
@@ -1126,8 +1100,9 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none md:col-span-2"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base md:col-span-2"
                                         />
+
                                     </div>
                                 </div>
                             ))}
@@ -1136,10 +1111,12 @@ const CreateProfile = () => {
 
 
                     {/* ACHIEVEMENTS */}
-                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+                    <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-                        <div className="mb-5 flex items-center justify-between">
-                            <h2 className="text-xl font-semibold">
+                        {/* HEADER */}
+                        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+                            <h2 className="text-lg font-semibold sm:text-xl">
                                 Achievements
                             </h2>
 
@@ -1151,7 +1128,7 @@ const CreateProfile = () => {
                                         image: "",
                                     })
                                 }
-                                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                                className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
                             >
                                 Add Achievement
                             </button>
@@ -1167,20 +1144,19 @@ const CreateProfile = () => {
                                 >
 
                                     {/* TOP */}
-                                    <div className="mb-4 flex items-center justify-between">
+                                    <div className="mb-4 flex items-center justify-between gap-3">
 
-                                        <h3 className="text-sm text-zinc-400">
+                                        <h3 className="text-xs text-zinc-400 sm:text-sm">
                                             Achievement #{index + 1}
                                         </h3>
 
-                                        {/* REMOVE BUTTON */}
                                         {formData.achievements.length > 1 && (
                                             <button
                                                 type="button"
                                                 onClick={() =>
                                                     removeItem("achievements", index)
                                                 }
-                                                className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                                             >
                                                 ✕
                                             </button>
@@ -1188,7 +1164,7 @@ const CreateProfile = () => {
                                     </div>
 
                                     {/* INPUTS */}
-                                    <div className="grid gap-4 md:grid-cols-2">
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
                                         <input
                                             type="text"
@@ -1202,7 +1178,7 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
 
                                         <input
@@ -1217,9 +1193,10 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
-                                            className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
                                     </div>
+
                                 </div>
                             ))}
                         </div>
@@ -1229,7 +1206,7 @@ const CreateProfile = () => {
                     {/* Submit */}
                     <button
                         type="submit"
-                        className="w-full rounded-lg bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
+                        className="w-full bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
                     >
                         Create Profile
                     </button>

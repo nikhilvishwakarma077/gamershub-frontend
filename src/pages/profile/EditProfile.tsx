@@ -190,8 +190,6 @@ const EditProfile = () => {
         const res = await getProfileById(profileId);
 
         const data = res.profile;
-        console.log(data.role)
-
 
         setFormData({
           banner: data.banner || "",
@@ -338,7 +336,6 @@ const EditProfile = () => {
         "Profile updated successfully"
       );
 
-      console.log(res);
 
       // Optional:
       navigate("/my-profile");
@@ -775,14 +772,14 @@ const EditProfile = () => {
           </div>
 
           {/* STATS */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
-
-            <h2 className="mb-5 text-xl font-semibold">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-5 lg:p-6">
+            <h2 className="mb-4 text-lg font-semibold text-cyan-400 sm:mb-5 sm:text-xl">
               Current BR Stats
             </h2>
 
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
 
+              {/* Current Rank */}
               <input
                 type="text"
                 placeholder="Current Rank"
@@ -794,22 +791,34 @@ const EditProfile = () => {
                     e.target.value
                   )
                 }
-                className="rounded-lg border border-zinc-700 bg-[#09111f] p-3 outline-none"
+                className="
+        w-full
+        rounded-lg
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-colors
+        focus:border-cyan-500
+        sm:text-base
+      "
               />
 
+              {/* KD Ratio */}
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder="KD Ratio"
                 value={formData.stats.kdRatio}
                 onChange={(e) => {
-
                   const value = e.target.value;
 
                   if (/^\d{0,2}(\.\d{0,2})?$/.test(value)) {
                     setFormData({
                       ...formData,
-
                       stats: {
                         ...formData.stats,
                         kdRatio: value,
@@ -817,32 +826,34 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
+                className="
+        w-full
+        rounded-lg
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-colors
+        focus:border-cyan-500
+        sm:text-base
+      "
               />
 
+              {/* Headshot Percentage */}
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder="Headshot Percentage"
-                value={
-                  formData.stats.headshotPercentage
-                }
+                value={formData.stats.headshotPercentage}
                 onChange={(e) => {
-
                   const value = e.target.value;
-
-                  // allowed:
-                  // 1
-                  // 11
-                  // 1.1
-                  // 11.1
-                  // 1.11
-                  // 11.11
 
                   if (/^\d{0,2}(\.\d{0,2})?$/.test(value)) {
                     setFormData({
                       ...formData,
-
                       stats: {
                         ...formData.stats,
                         headshotPercentage: value,
@@ -850,20 +861,35 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
+                className="
+        w-full
+        rounded-lg
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-colors
+        focus:border-cyan-500
+        sm:text-base
+      "
               />
             </div>
           </div>
 
           {/* EXPERIENCE */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-            <h2 className="mb-5 text-xl font-semibold">
-              Experience<span className="ml-1 text-red-400">*</span>
+            <h2 className="mb-4 text-lg font-semibold sm:mb-5 sm:text-xl">
+              Experience
+              <span className="ml-1 text-red-400">*</span>
             </h2>
 
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
 
+              {/* ID Level */}
               <input
                 type="text"
                 required
@@ -871,14 +897,12 @@ const EditProfile = () => {
                 placeholder="ID Level"
                 value={formData.experience.level}
                 onChange={(e) => {
-
                   const value = e.target.value;
 
                   // 0 - 99
                   if (/^\d{0,2}$/.test(value)) {
                     setFormData({
                       ...formData,
-
                       experience: {
                         ...formData.experience,
                         level: value,
@@ -886,26 +910,39 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
+                className="
+        w-full
+        rounded-md
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-all
+        duration-200
+        focus:border-cyan-500
+        focus:ring-2
+        focus:ring-cyan-500/20
+        sm:text-base
+      "
               />
 
+              {/* Years Playing */}
               <input
                 type="text"
                 required
                 inputMode="numeric"
                 placeholder="Years Playing"
-                value={
-                  formData.experience.yearsPlaying
-                }
+                value={formData.experience.yearsPlaying}
                 onChange={(e) => {
-
                   const value = e.target.value;
 
                   // 0 - 99
                   if (/^\d{0,2}$/.test(value)) {
                     setFormData({
                       ...formData,
-
                       experience: {
                         ...formData.experience,
                         yearsPlaying: value,
@@ -913,27 +950,39 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
+                className="
+        w-full
+        rounded-md
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-all
+        duration-200
+        focus:border-cyan-500
+        focus:ring-2
+        focus:ring-cyan-500/20
+        sm:text-base
+      "
               />
 
+              {/* Esports Experience */}
               <input
                 type="text"
                 required
                 inputMode="numeric"
                 placeholder="Esports Experience"
-                value={
-                  formData.experience
-                    .esportsExperience
-                }
+                value={formData.experience.esportsExperience}
                 onChange={(e) => {
-
                   const value = e.target.value;
 
                   // 0 - 99
                   if (/^\d{0,2}$/.test(value)) {
                     setFormData({
                       ...formData,
-
                       experience: {
                         ...formData.experience,
                         esportsExperience: value,
@@ -941,16 +990,35 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
+                className="
+        w-full
+        rounded-md
+        border
+        border-zinc-700
+        bg-[#09111f]
+        px-4
+        py-3
+        text-sm
+        outline-none
+        transition-all
+        duration-200
+        focus:border-cyan-500
+        focus:ring-2
+        focus:ring-cyan-500/20
+        sm:text-base
+      "
               />
+
             </div>
           </div>
 
           {/* TEAM HISTORY */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-xl font-semibold">
+            {/* HEADER */}
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+              <h2 className="text-lg font-semibold sm:text-xl">
                 Team History
               </h2>
 
@@ -963,12 +1031,14 @@ const EditProfile = () => {
                     duration: "",
                   })
                 }
-                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
               >
                 Add Team
               </button>
+
             </div>
 
+            {/* TEAM LIST */}
             <div className="space-y-5">
 
               {formData.teamHistory.map((team, index) => (
@@ -985,14 +1055,13 @@ const EditProfile = () => {
                       Team #{index + 1}
                     </h3>
 
-                    {/* REMOVE BUTTON */}
                     {formData.teamHistory.length > 1 && (
                       <button
                         type="button"
                         onClick={() =>
                           removeItem("teamHistory", index)
                         }
-                        className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                        className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                       >
                         ✕
                       </button>
@@ -1000,7 +1069,7 @@ const EditProfile = () => {
                   </div>
 
                   {/* INPUTS */}
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
 
                     <input
                       type="text"
@@ -1014,7 +1083,7 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                     />
 
                     <input
@@ -1029,7 +1098,7 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                     />
 
                     <input
@@ -1044,19 +1113,24 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                     />
+
                   </div>
+
                 </div>
               ))}
             </div>
+
           </div>
 
           {/* CLIPS */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-xl font-semibold">
+            {/* Header */}
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+              <h2 className="text-lg font-semibold sm:text-xl">
                 Clips
               </h2>
 
@@ -1069,7 +1143,7 @@ const EditProfile = () => {
                     thumbnailUrl: "",
                   })
                 }
-                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
               >
                 Add Clip
               </button>
@@ -1084,29 +1158,28 @@ const EditProfile = () => {
                   className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
                 >
 
-                  {/* TOP */}
-                  <div className="mb-4 flex items-center justify-between">
+                  {/* Top */}
+                  <div className="mb-4 flex items-center justify-between gap-3">
 
                     <h3 className="text-sm text-zinc-400">
                       Clip #{index + 1}
                     </h3>
 
-                    {/* REMOVE BUTTON */}
                     {formData.clips.length > 1 && (
                       <button
                         type="button"
                         onClick={() =>
                           removeItem("clips", index)
                         }
-                        className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                       >
                         ✕
                       </button>
                     )}
                   </div>
 
-                  {/* INPUTS */}
-                  <div className="grid gap-4 md:grid-cols-2">
+                  {/* Inputs */}
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
                     <input
                       type="text"
@@ -1120,7 +1193,7 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                     />
 
                     <input
@@ -1135,7 +1208,7 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                     />
 
                     <input
@@ -1150,8 +1223,9 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none md:col-span-2"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base md:col-span-2"
                     />
+
                   </div>
                 </div>
               ))}
@@ -1159,10 +1233,12 @@ const EditProfile = () => {
           </div>
 
           {/* ACHIEVEMENTS */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-xl font-semibold">
+            {/* HEADER */}
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+              <h2 className="text-lg font-semibold sm:text-xl">
                 Achievements
               </h2>
 
@@ -1174,7 +1250,7 @@ const EditProfile = () => {
                     image: "",
                   })
                 }
-                className="rounded-lg bg-cyan-500 px-4 py-2 text-black"
+                className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
               >
                 Add Achievement
               </button>
@@ -1190,20 +1266,19 @@ const EditProfile = () => {
                 >
 
                   {/* TOP */}
-                  <div className="mb-4 flex items-center justify-between">
+                  <div className="mb-4 flex items-center justify-between gap-3">
 
-                    <h3 className="text-sm text-zinc-400">
+                    <h3 className="text-xs text-zinc-400 sm:text-sm">
                       Achievement #{index + 1}
                     </h3>
 
-                    {/* REMOVE BUTTON */}
                     {formData.achievements.length > 1 && (
                       <button
                         type="button"
                         onClick={() =>
                           removeItem("achievements", index)
                         }
-                        className="flex h-8 w-8 items-center justify-center rounded-md border border-red-500 text-red-400"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                       >
                         ✕
                       </button>
@@ -1211,7 +1286,7 @@ const EditProfile = () => {
                   </div>
 
                   {/* INPUTS */}
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
                     <input
                       type="text"
@@ -1225,7 +1300,7 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                     />
 
                     <input
@@ -1240,9 +1315,10 @@ const EditProfile = () => {
                           e.target.value
                         )
                       }
-                      className="rounded-lg border border-zinc-700 bg-[#0b1120] p-3 outline-none"
+                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                     />
                   </div>
+
                 </div>
               ))}
             </div>
@@ -1251,7 +1327,7 @@ const EditProfile = () => {
           {/* SUBMIT */}
           <button
             type="submit"
-            className="w-full rounded-xl bg-cyan-500 py-4 text-lg font-semibold text-black"
+            className="w-full  bg-cyan-500 py-4 text-lg font-semibold text-black"
           >
             Save Profile
           </button>
