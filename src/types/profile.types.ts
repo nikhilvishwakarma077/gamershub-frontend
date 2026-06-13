@@ -29,7 +29,6 @@ export type ProfileType  = {
   clips: {
     title: string;
     clipUrl:string;
-    thumbnailUrl: string;
   }[];
 
   achievements: {
@@ -96,7 +95,6 @@ export type MyProfileType = {
     clips: {
         title: string;
         clipUrl:string;
-        thumbnailUrl: string;
     }[];
 
     achievements: {
@@ -151,7 +149,6 @@ export type UpdateProfileData = {
     clips: {
         title: string;
         clipUrl: string;
-        thumbnailUrl: string;
     }[];
 
     achievements: {
@@ -212,7 +209,6 @@ export type UpdateProfilePayload = {
   clips: {
     title: string;
     clipUrl: string;
-    thumbnailUrl: string;
   }[];
 
   achievements: {
@@ -262,7 +258,6 @@ export type CreateProfileData = {
     clips: {
         title: string;
         clipUrl: string;
-        thumbnailUrl: string;
     }[];
 
     achievements: {
@@ -312,7 +307,6 @@ export type CreateProfilePayload = {
     clips: {
         title: string;
         clipUrl: string;
-        thumbnailUrl: string;
     }[];
 
     achievements: {

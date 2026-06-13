@@ -35,6 +35,42 @@ const MyProfile = () => {
         (state) => state.setProfile
     );
 
+    const detectPlatform = (url: string): "youtube" | "instagram" | "unknown" => {
+        if (url.includes("youtu.be") || url.includes("youtube.com")) return "youtube";
+        if (url.includes("instagram.com") || url.includes("instagr.am")) return "instagram";
+        return "unknown";
+    };
+
+    const getYouTubeThumbnail = (url: string): string => {
+        const match = url.match(
+            /(?:youtu\.be\/|youtube\.com.*(?:v=|\/shorts\/|\/embed\/))([^&?/]+)/
+        );
+
+        const videoId = match?.[1];
+        if (!videoId) return "/images/default-clip.jpg";
+
+        return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    };
+
+    const getInstagramThumbnail = (): string => {
+        return "https://images.macrumors.com/t/jkfoi-AlDh8DC2jET480Y5aS0ow=/1600x0/article-new/2021/03/Instagram-Feature-2.jpg";
+    };
+
+    const getClipThumbnail = (url: string): string => {
+        const platform = detectPlatform(url);
+
+        switch (platform) {
+            case "youtube":
+                return getYouTubeThumbnail(url);
+
+            case "instagram":
+                return getInstagramThumbnail();
+
+            default:
+                return "/thumbnails/thumbnail1.webp";
+        }
+    };
+
     const fetchProfile = useCallback(async () => {
         try {
             setLoading(true);
@@ -422,9 +458,13 @@ const MyProfile = () => {
                                             rel="noopener noreferrer"
                                         >
                                             <img
-                                                src={clip.thumbnailUrl}
+                                                src={getClipThumbnail(clip.clipUrl)}
                                                 alt={clip.title}
                                                 className="h-44 w-full object-cover"
+                                                onError={(e) => {
+                                                    e.currentTarget.src =
+                                                        "/thumbnails/thumbnail1.webp";
+                                                }}
                                             />
                                         </a>
 
@@ -451,9 +491,13 @@ const MyProfile = () => {
                                             rel="noopener noreferrer"
                                         >
                                             <img
-                                                src={clip.thumbnailUrl}
+                                                src={getClipThumbnail(clip.clipUrl)}
                                                 alt={clip.title}
                                                 className="h-48 w-full object-cover"
+                                                onError={(e) => {
+                                                    e.currentTarget.src =
+                                                        "/thumbnails/thumbnail1.webp";
+                                                }}
                                             />
                                         </a>
 

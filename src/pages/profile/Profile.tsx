@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getProfileById } from "../../services/profileService"
 import { useParams } from "react-router-dom";
-import {Trophy,Globe,Languages,Gamepad2,Shield, Users,Video,Clock3} from "lucide-react";
+import { Trophy, Globe, Languages, Gamepad2, Shield, Users, Video, Clock3 } from "lucide-react";
 import MyProfileSkeleton from "../../components/profile/skeletons/MyProfileSkeleton";
 import type { ProfileType } from "../../types/profile.types";
 import NoProfile from "../../components/profile/notFound/NoProfile";
@@ -17,6 +17,42 @@ const Profile = () => {
 
   const [loading, setLoading] =
     useState(true);
+
+  const detectPlatform = (url: string): "youtube" | "instagram" | "unknown" => {
+    if (url.includes("youtu.be") || url.includes("youtube.com")) return "youtube";
+    if (url.includes("instagram.com") || url.includes("instagr.am")) return "instagram";
+    return "unknown";
+  };
+
+  const getYouTubeThumbnail = (url: string): string => {
+    const match = url.match(
+      /(?:youtu\.be\/|youtube\.com.*(?:v=|\/shorts\/|\/embed\/))([^&?/]+)/
+    );
+
+    const videoId = match?.[1];
+    if (!videoId) return "/images/default-clip.jpg";
+
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  };
+
+  const getInstagramThumbnail = (): string => {
+    return "https://images.macrumors.com/t/jkfoi-AlDh8DC2jET480Y5aS0ow=/1600x0/article-new/2021/03/Instagram-Feature-2.jpg";
+  };
+
+  const getClipThumbnail = (url: string): string => {
+    const platform = detectPlatform(url);
+
+    switch (platform) {
+      case "youtube":
+        return getYouTubeThumbnail(url);
+
+      case "instagram":
+        return getInstagramThumbnail();
+
+      default:
+        return "/thumbnails/thumbnail1.webp";
+    }
+  };
 
   const fetchProfile = async (
     profileId: string
@@ -420,7 +456,7 @@ const Profile = () => {
 
             <>
               {/* Mobile Horizontal Scroll */}
-              <div className="flex gap-4 overflow-x-auto pb-2 md:hidden scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+              <div className="flex gap-4 overflow-x-auto pb-2 md:hidden">
 
                 {userProfile.clips.map((clip, index) => (
                   <div
@@ -433,9 +469,13 @@ const Profile = () => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        src={clip.thumbnailUrl}
+                        src={getClipThumbnail(clip.clipUrl)}
                         alt={clip.title}
                         className="h-44 w-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "/thumbnails/thumbnail1.webp";
+                        }}
                       />
                     </a>
 
@@ -462,9 +502,14 @@ const Profile = () => {
                       rel="noopener noreferrer"
                     >
                       <img
-                        src={clip.thumbnailUrl}
+                        src={getClipThumbnail(clip.clipUrl)}
                         alt={clip.title}
                         className="h-48 w-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            "/thumbnails/thumbnail1.webp";
+                        }}
+
                       />
                     </a>
 

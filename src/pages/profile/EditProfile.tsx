@@ -67,7 +67,6 @@ const EditProfile = () => {
       {
         title: "",
         clipUrl: "",
-        thumbnailUrl: "",
       },
     ],
 
@@ -1140,7 +1139,6 @@ const EditProfile = () => {
                   addItem("clips", {
                     title: "",
                     clipUrl: "",
-                    thumbnailUrl: "",
                   })
                 }
                 className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
@@ -1211,20 +1209,7 @@ const EditProfile = () => {
                       className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                     />
 
-                    <input
-                      type="text"
-                      placeholder="Thumbnail URL"
-                      value={clip.thumbnailUrl}
-                      onChange={(e) =>
-                        handleArrayChange(
-                          "clips",
-                          index,
-                          "thumbnailUrl",
-                          e.target.value
-                        )
-                      }
-                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base md:col-span-2"
-                    />
+                   
 
                   </div>
                 </div>

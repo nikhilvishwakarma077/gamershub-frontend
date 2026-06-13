@@ -46,6 +46,8 @@ const Profiles = () => {
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#050816] px-4 pt-20 pb-16">
 
+            {/* GRID BG */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
 
             {/* Large Orbit Square */}
             <div className="pointer-events-none absolute left-[5%] top-[30%] h-24 w-24 border border-cyan-500/35 animate-orbit-slow" />
