@@ -137,41 +137,34 @@ const FindPlayer = () => {
     return (
         <section className="relative min-h-screen overflow-hidden bg-[#050816] px-4 pt-28 pb-16 text-white">
 
-            {/* GRID BG */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
+            {/* FLOATING WORLD LAYER */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-            {/* Large Orbit Square */}
-            <div className="pointer-events-none absolute left-[5%] top-[30%] h-24 w-24 border border-cyan-500/35 animate-orbit-slow" />
+                {/* GRID BG */} <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
 
-            {/* Rotating Diamond */}
-            <div className="pointer-events-none absolute right-[10%] top-[18%] h-12 w-12 border border-cyan-400/30 animate-spin-slow" />
+                {/* Glow Effects */}
+                <div className="absolute left-0 top-20 h-100 w-100 rounded-full bg-cyan-500/10 blur-3xl" />
+                <div className="absolute right-0 top-40 h-100 w-100 rounded-full bg-purple-500/10 blur-3xl " />
 
-            {/* Floating Glass Square */}
-            <div className="pointer-events-none absolute left-[15%] top-[55%] h-20 w-20 border border-cyan-500/20 bg-cyan-500/5 backdrop-blur-md animate-float-y" />
+                {/* Moving Grid Glow Sweep */}
+                <div className="absolute h-[200%] w-[200%] animate-sweep opacity-20 bg-[radial-gradient(circle,#22d3ee10_1px,transparent_1px)] bg-size-[40px_40px]" />
 
-            {/* Diagonal Moving Square */}
-            <div className="pointer-events-none absolute right-[20%] top-[65%] h-14 w-14 border border-cyan-500/20 bg-cyan-500/10 animate-drift-diagonal" />
+                {/* SHAPE 1 - DIAGONAL TRAVEL */}
+                <div className="absolute h-16 w-16 border border-cyan-500/30 animate-path-1" />
 
-            {/* Circle Glow */}
-            <div className="pointer-events-none absolute left-[45%] top-[15%] h-12 w-12 rounded-full border border-cyan-500/20 animate-pulse-glow" />
+                {/* SHAPE 2 - LEFT TO RIGHT LOOP */}
+                <div className="absolute h-12 w-12 rotate-45 border border-cyan-400/30 animate-path-2" />
 
-            {/* Rotating Diamond */}
-            <div className="pointer-events-none absolute right-[35%] bottom-[15%] h-16 w-16 rotate-45 border border-cyan-500/20 animate-spin-reverse" />
+                {/* SHAPE 3 - BOUNCING ACROSS SCREEN */}
+                <div className="absolute h-20 w-20 rounded-full border border-cyan-500/20 animate-path-3" />
 
-            {/* Large Outline Box */}
-            <div className="pointer-events-none absolute left-[70%] top-[35%] h-32 w-32 border border-cyan-500/10 animate-float-slow" />
+                {/* SHAPE 4 - FAST SMALL PARTICLE */}
+                <div className="absolute h-3 w-3 rounded-full bg-cyan-400/60 animate-path-4" />
 
-            {/* Small Particle */}
-            <div className="pointer-events-none absolute left-[30%] bottom-[20%] h-3 w-3 rounded-full bg-cyan-400/40 animate-particle-1" />
+                {/* SHAPE 5 - BIG ORBIT BOX */}
+                <div className="absolute h-28 w-28 border border-purple-500/20 animate-path-5" />
 
-            {/* Small Particle */}
-            <div className="pointer-events-none absolute right-[25%] top-[45%] h-2 w-2 rounded-full bg-cyan-300/40 animate-particle-2" />
-
-
-            {/* Glow Effects */}
-            <div className="absolute left-0 top-20 h-100 w-100 rounded-full bg-cyan-500/10 blur-3xl" />
-            <div className="absolute right-0 top-40 h-100 w-100 rounded-full bg-purple-500/10 blur-3xl" />
-
+            </div>
 
             <div className="relative z-10 mx-auto max-w-7xl">
 
