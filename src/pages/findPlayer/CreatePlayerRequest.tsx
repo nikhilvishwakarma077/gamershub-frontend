@@ -420,8 +420,8 @@ const CreatePlayerRequest = () => {
                         type="submit"
                         disabled={isSubmitting}
                         className="
-                            disabled:opacity-60
-                            disabled:cursor-not-allowed
+                                disabled:opacity-60
+                                disabled:cursor-not-allowed
                             w-full 
                             bg-cyan-400
                             px-6 py-4

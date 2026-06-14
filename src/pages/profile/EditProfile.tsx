@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProfileById, updateProfile } from "../../services/profileService";
-import type { UpdateProfileData, UpdateProfilePayload } from "../../types/profile.types";
+import type { UpdateProfileData } from "../../types/profile.types";
 import {
   avatarOptions,
   bannerOptions,
@@ -20,10 +20,9 @@ const EditProfile = () => {
 
   const [showAvatars, setShowAvatars] = useState(false);
   const [showBanners, setShowBanners] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] =
-    useState(false);
-
+ 
   const [formData, setFormData] = useState<UpdateProfileData>({
     banner: "",
     avatar: "",
@@ -73,8 +72,8 @@ const EditProfile = () => {
     achievements: [
       {
         title: "",
-        image: "",
-      },
+        image: null,
+      }
     ],
   });
 
@@ -153,6 +152,27 @@ const EditProfile = () => {
       ...prev,
       [section]: updatedArray,
     }));
+  };
+
+  const handleAchievementImageChange = (
+    index: number,
+    file: File | null
+  ) => {
+    setFormData((prev) => {
+      const updatedAchievements = [
+        ...prev.achievements,
+      ];
+
+      updatedAchievements[index] = {
+        ...updatedAchievements[index],
+        image: file,
+      };
+
+      return {
+        ...prev,
+        achievements: updatedAchievements,
+      };
+    });
   };
 
   const removeItem = (
@@ -248,11 +268,14 @@ const EditProfile = () => {
 
           achievements:
             data.achievements?.length > 0
-              ? data.achievements
+              ? data.achievements.map((achievement: any) => ({
+                title: achievement.title || "",
+                image: achievement.image || "",
+              }))
               : [
                 {
                   title: "",
-                  image: "",
+                  image: null,
                 },
               ],
         });
@@ -278,72 +301,201 @@ const EditProfile = () => {
 
     if (isSubmitting) return;
 
-    const finalData: UpdateProfilePayload = {
-      ...formData,
-
-      uid: Number(formData.uid),
-      age: Number(formData.age),
-
-      languages: formData.languages,
-
-      socialLinks: {
-        instagram:
-          formData.socialLinks.instagram,
-        discord:
-          formData.socialLinks.discord,
-      },
-
-      stats: {
-        currentRank:
-          formData.stats.currentRank,
-
-        kdRatio: Number(
-          formData.stats.kdRatio
-        ),
-
-        headshotPercentage: Number(
-          formData.stats
-            .headshotPercentage
-        ),
-      },
-
-      experience: {
-        level: Number(
-          formData.experience.level
-        ),
-
-        yearsPlaying: Number(
-          formData.experience
-            .yearsPlaying
-        ),
-
-        esportsExperience: Number(
-          formData.experience
-            .esportsExperience
-        ),
-      },
-    };
+    setIsSubmitting(true);
 
     try {
-      setIsSubmitting(true);
+      const multipartData = new FormData();
+
+      multipartData.append(
+        "username",
+        formData.username
+      );
+
+      multipartData.append(
+        "uid",
+        String(formData.uid)
+      );
+
+      multipartData.append(
+        "age",
+        String(formData.age)
+      );
+
+      multipartData.append(
+        "avatar",
+        formData.avatar
+      );
+
+      multipartData.append(
+        "banner",
+        formData.banner
+      );
+
+      multipartData.append(
+        "bio",
+        formData.bio
+      );
+
+      multipartData.append(
+        "country",
+        formData.country
+      );
+
+      multipartData.append(
+        "role",
+        formData.role
+      );
+
+      multipartData.append(
+        "languages",
+        JSON.stringify(
+          formData.languages
+        )
+      );
+
+      multipartData.append(
+        "socialLinks",
+        JSON.stringify(
+          formData.socialLinks
+        )
+      );
+
+      multipartData.append(
+        "stats",
+        JSON.stringify({
+          ...formData.stats,
+
+          kdRatio:
+            formData.stats.kdRatio === ""
+              ? 0
+              : Number(
+                formData.stats
+                  .kdRatio
+              ),
+
+          headshotPercentage:
+            formData.stats
+              .headshotPercentage ===
+              ""
+              ? 0
+              : Number(
+                formData.stats
+                  .headshotPercentage
+              ),
+        })
+      );
+
+      multipartData.append(
+        "experience",
+        JSON.stringify({
+          ...formData.experience,
+
+          level:
+            formData.experience
+              .level === ""
+              ? 1
+              : Number(
+                formData
+                  .experience
+                  .level
+              ),
+
+          yearsPlaying:
+            formData.experience
+              .yearsPlaying ===
+              ""
+              ? 0
+              : Number(
+                formData
+                  .experience
+                  .yearsPlaying
+              ),
+
+          esportsExperience:
+            formData.experience
+              .esportsExperience ===
+              ""
+              ? 0
+              : Number(
+                formData
+                  .experience
+                  .esportsExperience
+              ),
+        })
+      );
+
+      multipartData.append(
+        "availability",
+        JSON.stringify(
+          formData.availability
+        )
+      );
+
+      multipartData.append(
+        "clips",
+        JSON.stringify(
+          formData.clips
+        )
+      );
+
+      multipartData.append(
+        "teamHistory",
+        JSON.stringify(
+          formData.teamHistory
+        )
+      );
+
+      multipartData.append(
+        "achievements",
+        JSON.stringify(
+          formData.achievements.map(
+            (achievement) => ({
+              title: achievement.title,
+
+              image:
+                typeof achievement.image === "string"
+                  ? achievement.image
+                  : "",
+
+              hasNewImage:
+                achievement.image instanceof File,
+            })
+          )
+        )
+      );
+
+      formData.achievements.forEach(
+        (achievement) => {
+          if (
+            achievement.image &&
+            achievement.image instanceof
+            File
+          ) {
+            multipartData.append(
+              "achievementImages",
+              achievement.image
+            );
+          }
+        }
+      );
 
       const res =
-        await updateProfile(finalData);
+        await updateProfile(
+          multipartData
+        );
 
       toast.success(
-        res.message ||
+        res?.message ||
         "Profile updated successfully"
       );
 
-
-      // Optional:
       navigate("/my-profile");
-
     } catch (error: any) {
       console.error(error);
 
       toast.error(
-        error?.response?.data?.message ||
+        error?.response?.data
+          ?.message ||
         "Failed to update profile"
       );
     } finally {
@@ -1209,7 +1361,7 @@ const EditProfile = () => {
                       className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                     />
 
-                   
+
 
                   </div>
                 </div>
@@ -1219,10 +1371,7 @@ const EditProfile = () => {
 
           {/* ACHIEVEMENTS */}
           <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
-
-            {/* HEADER */}
             <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
               <h2 className="text-lg font-semibold sm:text-xl">
                 Achievements
               </h2>
@@ -1232,7 +1381,7 @@ const EditProfile = () => {
                 onClick={() =>
                   addItem("achievements", {
                     title: "",
-                    image: "",
+                    image: null,
                   })
                 }
                 className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
@@ -1242,79 +1391,95 @@ const EditProfile = () => {
             </div>
 
             <div className="space-y-5">
+              {formData.achievements.map(
+                (ach, index) => (
+                  <div
+                    key={index}
+                    className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
+                  >
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <h3 className="text-xs text-zinc-400 sm:text-sm">
+                        Achievement #
+                        {index + 1}
+                      </h3>
 
-              {formData.achievements.map((ach, index) => (
+                      {formData.achievements
+                        .length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              removeItem(
+                                "achievements",
+                                index
+                              )
+                            }
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
+                          >
+                            ✕
+                          </button>
+                        )}
+                    </div>
 
-                <div
-                  key={index}
-                  className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
-                >
-
-                  {/* TOP */}
-                  <div className="mb-4 flex items-center justify-between gap-3">
-
-                    <h3 className="text-xs text-zinc-400 sm:text-sm">
-                      Achievement #{index + 1}
-                    </h3>
-
-                    {formData.achievements.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() =>
-                          removeItem("achievements", index)
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <input
+                        type="text"
+                        placeholder="Achievement Title"
+                        value={ach.title}
+                        onChange={(e) =>
+                          handleArrayChange(
+                            "achievements",
+                            index,
+                            "title",
+                            e.target.value
+                          )
                         }
-                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
-                      >
-                        ✕
-                      </button>
-                    )}
+                        className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
+                      />
+
+                      <div>
+                        <input
+                          type="file"
+                          accept="image/png,image/jpeg,image/webp"
+                          onChange={(e) =>
+                            handleAchievementImageChange(
+                              index,
+                              e.target
+                                .files?.[0] ||
+                              null
+                            )
+                          }
+                          className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm"
+                        />
+
+                        {
+                          ach.image && (
+                            <img
+                              src={
+                                typeof ach.image === "string"
+                                  ? ach.image
+                                  : URL.createObjectURL(ach.image)
+                              }
+                              alt="Achievement"
+                              className="mt-3 h-24 w-24 rounded-lg object-cover"
+                            />
+                          )
+                        }
+                      </div>
+                    </div>
                   </div>
-
-                  {/* INPUTS */}
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                    <input
-                      type="text"
-                      placeholder="Achievement Title"
-                      value={ach.title}
-                      onChange={(e) =>
-                        handleArrayChange(
-                          "achievements",
-                          index,
-                          "title",
-                          e.target.value
-                        )
-                      }
-                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                    />
-
-                    <input
-                      type="text"
-                      placeholder="Image URL"
-                      value={ach.image}
-                      onChange={(e) =>
-                        handleArrayChange(
-                          "achievements",
-                          index,
-                          "image",
-                          e.target.value
-                        )
-                      }
-                      className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                    />
-                  </div>
-
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
 
           {/* SUBMIT */}
           <button
             type="submit"
-            className="w-full  bg-cyan-500 py-4 text-lg font-semibold text-black"
+            disabled={isSubmitting}
+            className="w-full  disabled:opacity-60
+                            disabled:cursor-not-allowed  bg-cyan-500 py-4 text-lg font-semibold text-black"
           >
-            Save Profile
+            {isSubmitting ? "Saving..." : "Save Profile"}
           </button>
         </form>
       </div>

@@ -1,55 +1,55 @@
 
 
 
-export type ProfileType  = {
-  banner: string;
-  avatar: string;
-  username: string;
-  uid: string;
-  bio: string;
-  country: string;
-  languages: string[];
-  role: string;
-  age: number;
-
-  socialLinks: {
-    instagram: string;
-    discord: string;
-  };
-  availability: {
-    status: string;
-  };
-
-  stats: {
-    currentRank: string;
-    kdRatio: string;
-    headshotPercentage: string;
-  };
-
-  clips: {
-    title: string;
-    clipUrl:string;
-  }[];
-
-  achievements: {
-    title: string;
-    image: string;
-  }[];
-
-  experience: {
-    level: number;
-    yearsPlaying: string;
-    esportsExperience: string;
-  };
-
-  teamHistory: {
-    teamName: string;
+export type ProfileType = {
+    banner: string;
+    avatar: string;
+    username: string;
+    uid: string;
+    bio: string;
+    country: string;
+    languages: string[];
     role: string;
-    duration: string;
-  }[];
+    age: number;
+
+    socialLinks: {
+        instagram: string;
+        discord: string;
+    };
+    availability: {
+        status: string;
+    };
+
+    stats: {
+        currentRank: string;
+        kdRatio: string;
+        headshotPercentage: string;
+    };
+
+    clips: {
+        title: string;
+        clipUrl: string;
+    }[];
+
+    achievements: {
+        title: string;
+        image: string;
+    }[];
+
+    experience: {
+        level: number;
+        yearsPlaying: string;
+        esportsExperience: string;
+    };
+
+    teamHistory: {
+        teamName: string;
+        role: string;
+        duration: string;
+    }[];
 };
 
-export type ProfileCards  = {
+export type ProfileCards = {
     _id: string;
     username: string;
     uid: number;
@@ -94,7 +94,7 @@ export type MyProfileType = {
 
     clips: {
         title: string;
-        clipUrl:string;
+        clipUrl: string;
     }[];
 
     achievements: {
@@ -113,9 +113,9 @@ export type MyProfileType = {
         role: string;
         duration: string;
     }[];
-}; 
+};
 
-export type UpdateProfileData = { 
+export type UpdateProfileData = {
     username: string;
     uid: number | string;
     age: number | string;
@@ -125,21 +125,21 @@ export type UpdateProfileData = {
     banner: string;
     role: string;
     languages: string[];
-     socialLinks: {
+    socialLinks: {
         instagram: string;
         discord: string;
     };
 
     stats: {
         currentRank: string;
-        kdRatio: number |  string;
+        kdRatio: number | string;
         headshotPercentage: number | string;
     };
 
     experience: {
         level: number | string;
-        yearsPlaying: number |string;
-        esportsExperience: number |string;
+        yearsPlaying: number | string;
+        esportsExperience: number | string;
     };
 
     availability: {
@@ -153,7 +153,7 @@ export type UpdateProfileData = {
 
     achievements: {
         title: string;
-        image: string;
+        image: string | File | null;
     }[];
 
     teamHistory: {
@@ -164,63 +164,63 @@ export type UpdateProfileData = {
 };
 
 export type UpdateProfilePayload = {
-  username: string;
+    username: string;
 
-  uid: number;
+    uid: number;
 
-  age: number;
+    age: number;
 
-  bio: string;
+    bio: string;
 
-  country: string;
+    country: string;
 
-  avatar: string;
+    avatar: string;
 
-  banner: string;
+    banner: string;
 
-  role: string;
-
-  languages: string[];
-  socialLinks: {
-    instagram: string;
-    discord: string;
-  };
-
-  stats: {
-    currentRank: string;
-
-    kdRatio: number;
-
-    headshotPercentage: number;
-  };
-
-  experience: {
-    level: number;
-
-    yearsPlaying: number;
-
-    esportsExperience: number;
-  };
-
-  availability: {
-    status: string;
-  };
-
-  clips: {
-    title: string;
-    clipUrl: string;
-  }[];
-
-  achievements: {
-    title: string;
-    image: string;
-  }[];
-
-  teamHistory: {
-    teamName: string;
     role: string;
-    duration: string;
-  }[];
+
+    languages: string[];
+    socialLinks: {
+        instagram: string;
+        discord: string;
+    };
+
+    stats: {
+        currentRank: string;
+
+        kdRatio: number;
+
+        headshotPercentage: number;
+    };
+
+    experience: {
+        level: number;
+
+        yearsPlaying: number;
+
+        esportsExperience: number;
+    };
+
+    availability: {
+        status: string;
+    };
+
+    clips: {
+        title: string;
+        clipUrl: string;
+    }[];
+
+    achievements: {
+        title: string;
+        image: string | File | null;
+    }[];
+
+    teamHistory: {
+        teamName: string;
+        role: string;
+        duration: string;
+    }[];
 };
 
 export type CreateProfileData = {
@@ -233,7 +233,7 @@ export type CreateProfileData = {
     banner: string;
     role: string;
     languages: string[];
-    
+
     socialLinks: {
         instagram: string;
         discord: string;
@@ -262,7 +262,7 @@ export type CreateProfileData = {
 
     achievements: {
         title: string;
-        image: string;
+        image: File | null;
     }[];
 
     teamHistory: {
@@ -272,7 +272,7 @@ export type CreateProfileData = {
     }[];
 };
 
-export type CreateProfilePayload = { 
+export type CreateProfilePayload = {
     username: string;
     uid: number;
     age: number;
@@ -282,7 +282,7 @@ export type CreateProfilePayload = {
     banner: string;
     role: string;
     languages: string[];
-    
+
     socialLinks: {
         instagram: string;
         discord: string;
@@ -311,7 +311,7 @@ export type CreateProfilePayload = {
 
     achievements: {
         title: string;
-        image: string;
+        image: File | null;
     }[];
 
     teamHistory: {

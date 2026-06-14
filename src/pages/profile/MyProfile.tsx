@@ -553,16 +553,22 @@ const MyProfile = () => {
                                         key={index}
                                         className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
                                     >
-                                        <img
-                                            src={ach.image}
-                                            alt={ach.title}
-                                            className="h-44 w-full object-cover"
-                                        />
+                                      
+                                            <img
+                                                src={ach.image}
+                                                alt={ach.title}
+                                                className="h-44 w-full object-cover"
+                                            />
+                                  
 
-                                        <div className="p-3">
+                                        <div className="p-3 flex items-center justify-between">
                                             <h3 className="line-clamp-2 text-sm font-medium">
                                                 {ach.title}
                                             </h3>
+                                            <a href={ach.image}
+                                                target="_blank"
+                                                className="rounded-lg border text-black font-semibold border-zinc-700 bg-cyan-500 px-3 py-1"
+                                            >view</a>
                                         </div>
                                     </div>
                                 ))}
@@ -576,16 +582,23 @@ const MyProfile = () => {
                                         key={index}
                                         className="overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
                                     >
+
+
                                         <img
                                             src={ach.image}
                                             alt={ach.title}
-                                            className="h-48 w-full object-cover"
+                                            className="h-44 w-full object-cover"
                                         />
 
-                                        <div className="p-3">
+
+                                        <div className="p-3 flex items-center justify-between">
                                             <h3 className="line-clamp-2 text-sm font-medium">
                                                 {ach.title}
                                             </h3>
+                                            <a href={ach.image}
+                                                target="_blank"
+                                                className="rounded-lg border text-black font-semibold border-zinc-700 bg-cyan-500 px-3 py-1"
+                                            >view</a>
                                         </div>
                                     </div>
                                 ))}

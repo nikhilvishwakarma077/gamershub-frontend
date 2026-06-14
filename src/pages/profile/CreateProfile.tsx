@@ -2,12 +2,9 @@ import { useState } from "react";
 import { createProfile } from "../../services/profileService";
 import { useNavigate } from "react-router-dom";
 import type { CreateProfileData, CreateProfilePayload } from "../../types/profile.types";
-
-import {
-    avatarOptions,
-    bannerOptions,
-} from "../../common/utils/profileImages";
+import { avatarOptions, bannerOptions } from "../../common/utils/profileImages";
 import { toast } from "react-toastify";
+
 
 const languagesList = [
     "English",
@@ -28,72 +25,49 @@ const CreateProfile = () => {
 
     const [formData, setFormData] =
         useState<CreateProfileData>({
-            username: "",
-
-            uid: "",
-
-            age: "",
-
+            username: "random",
+            uid: "2342345235",
+            age: "20",
             avatar: "avatar1.webp",
-
             banner: "banner1.webp",
-
-            bio: "",
-
-            country: "",
-
-            languages: [],
-
-            role: "",
+            bio: "T1 Player",
+            country: "India",
+            languages: ["Hindi"],
+            role: "Sniper",
             socialLinks: {
-                instagram: "",
+                instagram: "Instagram",
                 discord: "",
             },
             stats: {
-                currentRank: "",
-
-                kdRatio: "",
-
-                headshotPercentage: "",
+                currentRank: "Heroic",
+                kdRatio: "22",
+                headshotPercentage: "32",
             },
-
             experience: {
-                level: "",
-
-                yearsPlaying: "",
-
-                esportsExperience: "",
+                level: "99",
+                yearsPlaying: "7",
+                esportsExperience: "7",
             },
-
             availability: {
-                status: "Looking for a Team",
+                status: "looking for a Team",
             },
-
             clips: [
                 {
                     title: "",
-
-                    clipUrl:
-                        "",
-
+                    clipUrl: "",
                 },
             ],
-
             teamHistory: [
                 {
                     teamName: "",
-
                     role: "",
-
                     duration: "",
                 },
             ],
-
             achievements: [
                 {
                     title: "",
-
-                    image: "",
+                    image: null,
                 },
             ],
         });
@@ -141,6 +115,22 @@ const CreateProfile = () => {
         }));
     };
 
+    const handleAchievementImageChange = (
+        index: number,
+        file: File | null
+    ) => {
+        const updatedAchievements = [
+            ...formData.achievements,
+        ];
+
+        updatedAchievements[index].image = file;
+
+        setFormData((prev) => ({
+            ...prev,
+            achievements: updatedAchievements,
+        }));
+    };
+
     const removeItem = (
         section: string,
         index: number
@@ -164,6 +154,8 @@ const CreateProfile = () => {
         }));
     };
 
+
+
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ) => {
@@ -174,39 +166,101 @@ const CreateProfile = () => {
         setIsSubmitting(true);
 
         try {
-            const finalData: CreateProfilePayload = {
-                ...formData,
 
-                uid: Number(formData.uid),
+            const multipartData = new FormData();
 
-                age: Number(formData.age),
+            multipartData.append("username", formData.username);
+            multipartData.append("uid", String(formData.uid));
+            multipartData.append("age", String(formData.age));
 
-                stats: {
+            multipartData.append("avatar", formData.avatar);
+            multipartData.append("banner", formData.banner);
+
+            multipartData.append("bio", formData.bio);
+            multipartData.append("country", formData.country);
+            multipartData.append("role", formData.role);
+
+            multipartData.append("languages", JSON.stringify(formData.languages));
+            multipartData.append("socialLinks", JSON.stringify(formData.socialLinks));
+
+            multipartData.append(
+                "stats",
+                JSON.stringify({
                     ...formData.stats,
+                    kdRatio:
+                        formData.stats.kdRatio === ""
+                            ? 0
+                            : Number(formData.stats.kdRatio),
 
-                    kdRatio: Number(formData.stats.kdRatio),
+                    headshotPercentage:
+                        formData.stats
+                            .headshotPercentage === ""
+                            ? 0
+                            : Number(
+                                formData.stats
+                                    .headshotPercentage
+                            ),
+                })
+            );
 
-                    headshotPercentage: Number(
-                        formData.stats.headshotPercentage
-                    ),
-                },
-
-                experience: {
+            multipartData.append(
+                "experience",
+                JSON.stringify({
                     ...formData.experience,
 
-                    level: Number(formData.experience.level),
+                    level:
+                        formData.experience.level === ""
+                            ? 1
+                            : Number(
+                                formData.experience.level
+                            ),
 
-                    yearsPlaying: Number(
-                        formData.experience.yearsPlaying
-                    ),
+                    yearsPlaying:
+                        formData.experience
+                            .yearsPlaying === ""
+                            ? 0
+                            : Number(
+                                formData.experience
+                                    .yearsPlaying
+                            ),
 
-                    esportsExperience: Number(
-                        formData.experience.esportsExperience
-                    ),
-                },
-            };
+                    esportsExperience:
+                        formData.experience
+                            .esportsExperience === ""
+                            ? 0
+                            : Number(
+                                formData.experience
+                                    .esportsExperience
+                            ),
+                })
+            );
+            multipartData.append("availability", JSON.stringify(formData.availability));
+            multipartData.append("clips", JSON.stringify(formData.clips));
+            multipartData.append("teamHistory", JSON.stringify(formData.teamHistory));
 
-            const res = await createProfile(finalData);
+            multipartData.append(
+                "achievements",
+                JSON.stringify(
+                    formData.achievements.map((achievement) => ({
+                        title: achievement.title,
+                    }))
+                )
+            );
+
+            formData.achievements.forEach((achievement) => {
+                if (achievement.image) {
+                    multipartData.append(
+                        "achievementImages",
+                        achievement.image
+                    );
+                }
+            });
+            // for (const [key, value] of multipartData.entries()) {
+            //     console.log(key, value);
+            // }
+
+            const res = await createProfile(multipartData);
+            console.log(res)
 
             toast.success(
                 res?.message || "Profile created successfully"
@@ -215,6 +269,7 @@ const CreateProfile = () => {
             navigate("/my-profile");
 
         } catch (error: any) {
+            console.log(error.response?.data);
             toast.error(
                 error?.response?.data?.message ||
                 "Failed to create profile"
@@ -1084,7 +1139,7 @@ const CreateProfile = () => {
                                             className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                                         />
 
-                                    
+
                                     </div>
                                 </div>
                             ))}
@@ -1095,7 +1150,7 @@ const CreateProfile = () => {
                     {/* ACHIEVEMENTS */}
                     <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
 
-                        {/* HEADER */}
+
                         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
                             <h2 className="text-lg font-semibold sm:text-xl">
@@ -1107,7 +1162,7 @@ const CreateProfile = () => {
                                 onClick={() =>
                                     addItem("achievements", {
                                         title: "",
-                                        image: "",
+                                        image: null,
                                     })
                                 }
                                 className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
@@ -1145,7 +1200,7 @@ const CreateProfile = () => {
                                         )}
                                     </div>
 
-                                    {/* INPUTS */}
+
                                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
                                         <input
@@ -1163,7 +1218,7 @@ const CreateProfile = () => {
                                             className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
                                         />
 
-                                        <input
+                                        {/* <input
                                             type="text"
                                             placeholder="Image URL"
                                             value={ach.image}
@@ -1176,7 +1231,31 @@ const CreateProfile = () => {
                                                 )
                                             }
                                             className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                                        />
+                                        /> */}
+
+                                        <div>
+                                            <input
+                                                type="file"
+                                                accept="image/png,image/jpeg,image/webp"
+                                                onChange={(e) =>
+                                                    handleAchievementImageChange(
+                                                        index,
+                                                        e.target.files?.[0] || null
+                                                    )
+                                                }
+                                                className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm"
+                                            />
+
+                                            {
+                                                ach.image && (
+                                                    <img
+                                                        src={URL.createObjectURL(ach.image)}
+                                                        alt="achievement"
+                                                        className="mt-3 h-24 w-24 rounded-lg object-cover"
+                                                    />
+                                                )
+                                            }
+                                        </div>
                                     </div>
 
                                 </div>
@@ -1188,9 +1267,11 @@ const CreateProfile = () => {
                     {/* Submit */}
                     <button
                         type="submit"
-                        className="w-full bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
+                        disabled={isSubmitting}
+                        className="w-full  disabled:opacity-60
+                            disabled:cursor-not-allowed bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
                     >
-                        Create Profile
+                        {isSubmitting ? "Creating..." : "Create Profile"}
                     </button>
                 </form>
             </div>
