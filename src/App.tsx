@@ -50,17 +50,17 @@ const App = () => {
   return (
     <>
       <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        pauseOnHover
-        draggable
-        theme="dark"
-        toastClassName="custom-toast"
-        className="custom-toast-body"
-      />
+  position="top-center"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop
+  closeOnClick
+  pauseOnHover
+  draggable
+  theme="dark"
+  toastClassName="custom-toast"
+  className="custom-toast-body"
+/>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

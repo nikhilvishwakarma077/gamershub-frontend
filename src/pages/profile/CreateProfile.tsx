@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createProfile } from "../../services/profileService";
 import { useNavigate } from "react-router-dom";
-import type { CreateProfileData, CreateProfilePayload } from "../../types/profile.types";
+import type { CreateProfileData } from "../../types/profile.types";
 import { avatarOptions, bannerOptions } from "../../common/utils/profileImages";
 import { toast } from "react-toastify";
 
@@ -1149,10 +1149,7 @@ const CreateProfile = () => {
 
                     {/* ACHIEVEMENTS */}
                     <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
-
-
                         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-
                             <h2 className="text-lg font-semibold sm:text-xl">
                                 Achievements
                             </h2>
@@ -1172,17 +1169,13 @@ const CreateProfile = () => {
                         </div>
 
                         <div className="space-y-5">
-
                             {formData.achievements.map((ach, index) => (
-
                                 <div
                                     key={index}
-                                    className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
+                                    className="rounded-xl border border-zinc-700 bg-[#09111f] p-4 sm:p-5"
                                 >
-
                                     {/* TOP */}
                                     <div className="mb-4 flex items-center justify-between gap-3">
-
                                         <h3 className="text-xs text-zinc-400 sm:text-sm">
                                             Achievement #{index + 1}
                                         </h3>
@@ -1191,7 +1184,10 @@ const CreateProfile = () => {
                                             <button
                                                 type="button"
                                                 onClick={() =>
-                                                    removeItem("achievements", index)
+                                                    removeItem(
+                                                        "achievements",
+                                                        index
+                                                    )
                                                 }
                                                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
                                             >
@@ -1200,64 +1196,62 @@ const CreateProfile = () => {
                                         )}
                                     </div>
 
+                                    {/* CONTENT */}
+                                    <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+                                        {/* TITLE */}
+                                        <div className="space-y-2">
+                                            <label className="text-xs text-zinc-400">
+                                                Achievement Title
+                                            </label>
 
-                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                            <input
+                                                type="text"
+                                                placeholder="Achievement Title"
+                                                value={ach.title}
+                                                onChange={(e) =>
+                                                    handleArrayChange(
+                                                        "achievements",
+                                                        index,
+                                                        "title",
+                                                        e.target.value
+                                                    )
+                                                }
+                                                className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
+                                            />
+                                        </div>
 
-                                        <input
-                                            type="text"
-                                            placeholder="Achievement Title"
-                                            value={ach.title}
-                                            onChange={(e) =>
-                                                handleArrayChange(
-                                                    "achievements",
-                                                    index,
-                                                    "title",
-                                                    e.target.value
-                                                )
-                                            }
-                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                                        />
+                                        {/* IMAGE */}
+                                        <div className="space-y-3">
+                                            <label className="text-xs text-zinc-400">
+                                                Achievement Image
+                                            </label>
 
-                                        {/* <input
-                                            type="text"
-                                            placeholder="Image URL"
-                                            value={ach.image}
-                                            onChange={(e) =>
-                                                handleArrayChange(
-                                                    "achievements",
-                                                    index,
-                                                    "image",
-                                                    e.target.value
-                                                )
-                                            }
-                                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                                        /> */}
-
-                                        <div>
                                             <input
                                                 type="file"
                                                 accept="image/png,image/jpeg,image/webp"
                                                 onChange={(e) =>
                                                     handleAchievementImageChange(
                                                         index,
-                                                        e.target.files?.[0] || null
+                                                        e.target.files?.[0] ||
+                                                        null
                                                     )
                                                 }
-                                                className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm"
+                                                className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-cyan-500 file:px-3 file:py-2 file:text-black"
                                             />
 
-                                            {
-                                                ach.image && (
+                                            {ach.image && (
+                                                <div className="flex justify-center sm:justify-start">
                                                     <img
-                                                        src={URL.createObjectURL(ach.image)}
+                                                        src={URL.createObjectURL(
+                                                            ach.image
+                                                        )}
                                                         alt="achievement"
-                                                        className="mt-3 h-24 w-24 rounded-lg object-cover"
+                                                        className="h-24 w-24 rounded-xl border border-zinc-700 object-cover sm:h-28 sm:w-28 md:h-32 md:w-32"
                                                     />
-                                                )
-                                            }
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
-
                                 </div>
                             ))}
                         </div>

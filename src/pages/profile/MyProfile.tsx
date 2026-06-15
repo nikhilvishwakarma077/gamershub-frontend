@@ -553,13 +553,13 @@ const MyProfile = () => {
                                         key={index}
                                         className="min-w-70 max-w-70 shrink-0 overflow-hidden rounded-lg border border-zinc-800 bg-[#09111f]"
                                     >
-                                      
-                                            <img
-                                                src={ach.image}
-                                                alt={ach.title}
-                                                className="h-44 w-full object-cover"
-                                            />
-                                  
+
+                                        <img
+                                            src={ach.image}
+                                            alt={ach.title}
+                                            className="h-44 w-full object-cover"
+                                        />
+
 
                                         <div className="p-3 flex items-center justify-between">
                                             <h3 className="line-clamp-2 text-sm font-medium">
@@ -587,7 +587,7 @@ const MyProfile = () => {
                                         <img
                                             src={ach.image}
                                             alt={ach.title}
-                                            className="h-44 w-full object-cover"
+                                            className="h-44 w-full object-cover object-top"
                                         />
 
 

@@ -2,6 +2,10 @@
 @import "tailwindcss";
 
 
+html {
+  scroll-behavior: smooth;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -10,9 +14,7 @@ body {
   font-family: 'GFF Latin', sans-serif;
 }
 
-/* =========================
-   FREE FIRE FONT CLASSES
-   ========================= */
+/* FREE FIRE FONT CLASSES */
 
 .ff-hero {
   font-family: 'GFF Latin', sans-serif;
@@ -46,9 +48,7 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* =========================
-   NORMAL TEXT CLASSES
-   ========================= */
+/* NORMAL TEXT CLASSES */
 
 .body-text {
   font-family: 'Inter', sans-serif;
@@ -65,9 +65,7 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   GAMING EFFECT CLASSES
-   ========================= */
+/* GAMING EFFECT CLASSES */
 
 .ff-glow-yellow {
   text-shadow:
@@ -90,67 +88,87 @@ body {
     -webkit-appearance: none;
     margin: 0;
   }
-
-  /* Firefox */
-  .no-spinner {
-    -moz-appearance: textfield;
-  }
 }
 
+/* Container */
+.Toastify__toast-container {
+  width: auto !important;
+  max-width: 420px;
+  padding: 12px;
+}
+
+/* Base Toast */
 .custom-toast {
-  background: #18181b !important;
-  border: 1px solid #27272a;
-  border-radius: 12px;
+  background: #0b1120 !important;
   color: white;
-  box-shadow:
-    0 0 12px rgba(168, 85, 247, 0.25),
-    0 0 24px rgba(6, 182, 212, 0.15);
+  border: 1px solid #27272a;
+  border-radius: 0 !important;
+  min-height: auto;
+  backdrop-filter: blur(10px);
 }
 
+/* Text */
 .custom-toast-body {
   font-size: 14px;
   font-weight: 500;
 }
 
+/* Success Theme */
+.Toastify__toast--success {
+  background: #0b1120 !important;
+  border: 1px solid rgba(34, 211, 238, 0.4) !important;
 
-/*
-Source - https://stackoverflow.com/q/66559852
-Posted by aceraven777, modified by community. See post 'Timeline' for change history
-Retrieved 2026-06-10, License - CC BY-SA 4.0
-*/
-
-
-
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  align-items: center;
+  box-shadow:
+    0 0 12px rgba(34, 211, 238, 0.25),
+    0 0 30px rgba(34, 211, 238, 0.12);
 }
 
-.btn-black {
-  clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0% 50%);
-  background: black;
-  border: none;
-  color: #fff;
-  padding: 2rem 5rem;
-
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #22d3ee;
 }
 
-.btn-white-wrapper {
-  display: inline-block;
-  filter: drop-shadow(0px 2px 0px #111) drop-shadow(2px 0px 0px #111) drop-shadow(-2px 0px 0px #111) drop-shadow(0px -2px 0px #111);
+.Toastify__progress-bar--success {
+  background: #22d3ee !important;
 }
 
-.btn-white {
-  display: inline-block;
-  clip-path: polygon(25% 0%, 100% 0, 100% 50%, 75% 100%, 0 100%, 0% 50%);
-  background: white;
-  border: 0;
-  color: #111;
-  padding: 2rem 5rem;
+/* Error Theme */
+.Toastify__toast--error {
+  background: #18181b !important;
+  border: 1px solid rgba(239, 68, 68, 0.4) !important;
 
+  box-shadow:
+    0 0 12px rgba(239, 68, 68, 0.25);
 }
+
+.Toastify__progress-bar--error {
+  background: #ef4444 !important;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+
+  .Toastify__toast-container--top-center {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    width: calc(100vw - 24px) !important;
+    max-width: 360px !important;
+
+    top: 12px !important;
+    padding: 0 !important;
+  }
+
+  .custom-toast {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .custom-toast-body {
+    font-size: 13px;
+  }
+}
+
+
 
 
 
@@ -184,9 +202,11 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
   0% {
     transform: translateY(0px) rotate(12deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(20deg);
   }
+
   100% {
     transform: translateY(0px) rotate(12deg);
   }
@@ -196,9 +216,11 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
   0% {
     transform: translateY(0px) rotate(45deg);
   }
+
   50% {
     transform: translateY(15px) rotate(90deg);
   }
+
   100% {
     transform: translateY(0px) rotate(45deg);
   }
@@ -209,10 +231,12 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
     opacity: 0.4;
     transform: scale(1);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.15);
   }
+
   100% {
     opacity: 0.4;
     transform: scale(1);
@@ -223,6 +247,7 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
   0% {
     transform: rotate(0deg) translateX(10px) rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg) translateX(10px) rotate(-360deg);
   }
@@ -244,6 +269,9 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 .animate-orbit {
   animation: orbit 6s linear infinite;
 }
+
+
+
 
 
 @keyframes rotate360Slow {
@@ -296,8 +324,13 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* sweeping background grid */
 @keyframes sweep {
-  0% { transform: translate(-10%, -10%) rotate(0deg); }
-  100% { transform: translate(10%, 10%) rotate(360deg); }
+  0% {
+    transform: translate(-10%, -10%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(10%, 10%) rotate(360deg);
+  }
 }
 
 .animate-sweep {
@@ -306,9 +339,17 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* full screen diagonal movement */
 @keyframes path1 {
-  0% { transform: translate(-10vw, 20vh) rotate(0deg); }
-  50% { transform: translate(110vw, 60vh) rotate(180deg); }
-  100% { transform: translate(-10vw, 20vh) rotate(360deg); }
+  0% {
+    transform: translate(-10vw, 20vh) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(110vw, 60vh) rotate(180deg);
+  }
+
+  100% {
+    transform: translate(-10vw, 20vh) rotate(360deg);
+  }
 }
 
 .animate-path-1 {
@@ -317,9 +358,17 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* horizontal travel */
 @keyframes path2 {
-  0% { transform: translate(-20vw, 10vh); }
-  50% { transform: translate(120vw, 30vh); }
-  100% { transform: translate(-20vw, 10vh); }
+  0% {
+    transform: translate(-20vw, 10vh);
+  }
+
+  50% {
+    transform: translate(120vw, 30vh);
+  }
+
+  100% {
+    transform: translate(-20vw, 10vh);
+  }
 }
 
 .animate-path-2 {
@@ -328,9 +377,17 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* vertical bounce across screen */
 @keyframes path3 {
-  0% { transform: translate(30vw, -10vh); }
-  50% { transform: translate(40vw, 110vh); }
-  100% { transform: translate(30vw, -10vh); }
+  0% {
+    transform: translate(30vw, -10vh);
+  }
+
+  50% {
+    transform: translate(40vw, 110vh);
+  }
+
+  100% {
+    transform: translate(30vw, -10vh);
+  }
 }
 
 .animate-path-3 {
@@ -339,9 +396,20 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* fast particle drift */
 @keyframes path4 {
-  0% { transform: translate(0vw, 0vh); opacity: 0.2; }
-  50% { transform: translate(100vw, 80vh); opacity: 1; }
-  100% { transform: translate(0vw, 0vh); opacity: 0.2; }
+  0% {
+    transform: translate(0vw, 0vh);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translate(100vw, 80vh);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0vw, 0vh);
+    opacity: 0.2;
+  }
 }
 
 .animate-path-4 {
@@ -350,9 +418,17 @@ Retrieved 2026-06-10, License - CC BY-SA 4.0
 
 /* big orbit box */
 @keyframes path5 {
-  0% { transform: translate(80vw, 20vh) rotate(0deg); }
-  50% { transform: translate(10vw, 70vh) rotate(180deg); }
-  100% { transform: translate(80vw, 20vh) rotate(360deg); }
+  0% {
+    transform: translate(80vw, 20vh) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(10vw, 70vh) rotate(180deg);
+  }
+
+  100% {
+    transform: translate(80vw, 20vh) rotate(360deg);
+  }
 }
 
 .animate-path-5 {

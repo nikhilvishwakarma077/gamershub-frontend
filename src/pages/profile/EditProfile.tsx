@@ -1370,107 +1370,118 @@ const EditProfile = () => {
           </div>
 
           {/* ACHIEVEMENTS */}
-          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
-            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <h2 className="text-lg font-semibold sm:text-xl">
-                Achievements
-              </h2>
+<div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
+    <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h2 className="text-lg font-semibold sm:text-xl">
+            Achievements
+        </h2>
 
-              <button
-                type="button"
-                onClick={() =>
-                  addItem("achievements", {
+        <button
+            type="button"
+            onClick={() =>
+                addItem("achievements", {
                     title: "",
                     image: null,
-                  })
-                }
-                className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
-              >
-                Add Achievement
-              </button>
-            </div>
+                })
+            }
+            className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
+        >
+            Add Achievement
+        </button>
+    </div>
 
-            <div className="space-y-5">
-              {formData.achievements.map(
-                (ach, index) => (
-                  <div
-                    key={index}
-                    className="rounded-lg border border-zinc-700 bg-[#09111f] p-4"
-                  >
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <h3 className="text-xs text-zinc-400 sm:text-sm">
-                        Achievement #
-                        {index + 1}
-                      </h3>
+    <div className="space-y-5">
+        {formData.achievements.map((ach, index) => (
+            <div
+                key={index}
+                className="rounded-xl border border-zinc-700 bg-[#09111f] p-4 sm:p-5"
+            >
+                {/* TOP */}
+                <div className="mb-4 flex items-center justify-between gap-3">
+                    <h3 className="text-xs text-zinc-400 sm:text-sm">
+                        Achievement #{index + 1}
+                    </h3>
 
-                      {formData.achievements
-                        .length > 1 && (
-                          <button
+                    {formData.achievements.length > 1 && (
+                        <button
                             type="button"
                             onClick={() =>
-                              removeItem(
-                                "achievements",
-                                index
-                              )
+                                removeItem(
+                                    "achievements",
+                                    index
+                                )
                             }
                             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
-                          >
+                        >
                             ✕
-                          </button>
-                        )}
+                        </button>
+                    )}
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                    {/* TITLE */}
+                    <div>
+                        <label className="mb-2 block text-xs font-medium text-zinc-400">
+                            Achievement Title
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Enter achievement title"
+                            value={ach.title}
+                            onChange={(e) =>
+                                handleArrayChange(
+                                    "achievements",
+                                    index,
+                                    "title",
+                                    e.target.value
+                                )
+                            }
+                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
+                        />
                     </div>
 
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      <input
-                        type="text"
-                        placeholder="Achievement Title"
-                        value={ach.title}
-                        onChange={(e) =>
-                          handleArrayChange(
-                            "achievements",
-                            index,
-                            "title",
-                            e.target.value
-                          )
-                        }
-                        className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                      />
+                    {/* IMAGE */}
+                    <div>
+                        <label className="mb-2 block text-xs font-medium text-zinc-400">
+                            Achievement Image
+                        </label>
 
-                      <div>
                         <input
-                          type="file"
-                          accept="image/png,image/jpeg,image/webp"
-                          onChange={(e) =>
-                            handleAchievementImageChange(
-                              index,
-                              e.target
-                                .files?.[0] ||
-                              null
-                            )
-                          }
-                          className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm"
+                            type="file"
+                            accept="image/png,image/jpeg,image/webp"
+                            onChange={(e) =>
+                                handleAchievementImageChange(
+                                    index,
+                                    e.target.files?.[0] ||
+                                        null
+                                )
+                            }
+                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-cyan-500 file:px-3 file:py-2 file:text-black file:cursor-pointer"
                         />
 
-                        {
-                          ach.image && (
-                            <img
-                              src={
-                                typeof ach.image === "string"
-                                  ? ach.image
-                                  : URL.createObjectURL(ach.image)
-                              }
-                              alt="Achievement"
-                              className="mt-3 h-24 w-24 rounded-lg object-cover"
-                            />
-                          )
-                        }
-                      </div>
+                        {ach.image && (
+                            <div className="mt-4 flex justify-center sm:justify-start">
+                                <img
+                                    src={
+                                        typeof ach.image ===
+                                        "string"
+                                            ? ach.image
+                                            : URL.createObjectURL(
+                                                  ach.image
+                                              )
+                                    }
+                                    alt="Achievement"
+                                    className="h-28 w-28 rounded-xl border border-zinc-700 object-cover sm:h-32 sm:w-32 md:h-36 md:w-36"
+                                />
+                            </div>
+                        )}
                     </div>
-                  </div>
-                )
-              )}
+                </div>
             </div>
-          </div>
+        ))}
+    </div>
+</div>
 
           {/* SUBMIT */}
           <button
