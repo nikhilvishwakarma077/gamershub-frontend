@@ -418,7 +418,7 @@ const CreateProfile = () => {
                                         </p>
 
                                         <p className="text-white">
-                                            Choose an avatar that represents your gaming identity.
+                                            Tip - Choose an avatar that represents your gaming role.
                                         </p>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-import { CalendarDays, Clock3, Languages, TimerReset } from "lucide-react";
+import { Clock3, Languages, TimerReset } from "lucide-react";
 
 type PlayerRequestCardProps = {
     requests: any;
@@ -70,12 +70,10 @@ const MyPlayerRequestCard = ({
 
                     <div className="text-right">
 
-                        <div className="flex items-center justify-end gap-2 text-zinc-500">
-
-                            <CalendarDays size={13} />
+                        <div className=" text-zinc-500">
 
                             <p className="text-[10px] uppercase tracking-wider">
-                                Type
+                                Joining Type
                             </p>
 
                         </div>

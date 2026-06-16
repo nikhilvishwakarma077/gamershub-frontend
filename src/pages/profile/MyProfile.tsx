@@ -17,6 +17,14 @@ const MyProfile = () => {
 
     const setProfile = useProfileStore((state) => state.setProfile);
     const [myProfileData, setMyProfileData] = useState<MyProfileType | null>(null);
+    const [showAvatarPreview, setShowAvatarPreview] = useState(false);
+    const [selectedAchievement, setSelectedAchievement] = useState<{
+        image: string;
+        title: string;
+    } | null>(null);
+    const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+
     const [loading, setLoading] = useState(false);
 
 
@@ -52,6 +60,24 @@ const MyProfile = () => {
 
             default: return "/thumbnails/thumbnail1.webp";
         }
+    };
+
+    const isYoutubeUrl = (url: string) => {
+        return (
+            url.includes("youtube.com") ||
+            url.includes("youtu.be")
+        );
+    };
+
+    const getYoutubeEmbedUrl = (url: string) => {
+
+        const match = url.match(
+            /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^?&/]+)/
+        );
+
+        return match
+            ? `https://www.youtube.com/embed/${match[1]}`
+            : "";
     };
 
     const fetchProfile = useCallback(async () => {
@@ -108,7 +134,10 @@ const MyProfile = () => {
                         {/* AVATAR */}
                         <div className="flex justify-center lg:justify-start">
 
-                            <div className="relative">
+                            <div
+                                className="relative cursor-pointer group"
+                                onClick={() => setShowAvatarPreview(true)}
+                            >
 
                                 <div className="absolute inset-0 bg-cyan-500/20 blur-3xl" />
 
@@ -119,8 +148,17 @@ const MyProfile = () => {
                                         e.currentTarget.src =
                                             "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                                     }}
-                                    className="relative rounded-full h-28 w-28 sm:h-36 sm:w-36 lg:h-60 lg:w-60 border-2 border-cyan-500/40 object-cover"
+                                    className="relative rounded-full h-28 w-28 sm:h-36 sm:w-36 lg:h-60 lg:w-60 border-2 border-cyan-500/40 object-cover transition-all duration-300 group-hover:scale-105"
                                 />
+
+                                {/* View Overlay */}
+                                <div
+                                    className="absolute inset-0 scale-105  flex items-center justify-center rounded-full bg-black/50 opacity-0 transition-all duration-300 group-hover:opacity-100"
+                                >
+                                    <span className="text-xs font-semibold tracking-wider text-white">
+                                        VIEW
+                                    </span>
+                                </div>
 
                             </div>
 
@@ -564,11 +602,22 @@ const MyProfile = () => {
                                             className=" min-w-70 max-w-70 shrink-0 border border-zinc-800 bg-[#09111f]"
                                         >
 
-                                            <a
-                                                href={clip.clipUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group block overflow-hidden"
+                                            <div
+                                                onClick={() => {
+
+                                                    if (isYoutubeUrl(clip.clipUrl)) {
+                                                        setSelectedVideo(
+                                                            getYoutubeEmbedUrl(clip.clipUrl)
+                                                        );
+                                                    } else {
+                                                        window.open(
+                                                            clip.clipUrl,
+                                                            "_blank"
+                                                        );
+                                                    }
+
+                                                }}
+                                                className="group cursor-pointer overflow-hidden"
                                             >
 
                                                 <img
@@ -582,7 +631,7 @@ const MyProfile = () => {
                                                     }}
                                                 />
 
-                                            </a>
+                                            </div>
 
                                             <div className="border-t border-zinc-800 p-3">
 
@@ -607,11 +656,22 @@ const MyProfile = () => {
                                             key={index}
                                             className=" border border-zinc-800 bg-[#09111f] transition-all duration-300 hover:border-cyan-500/30"
                                         >
-                                            <a
-                                                href={clip.clipUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group block overflow-hidden"
+                                            <div
+                                                onClick={() => {
+
+                                                    if (isYoutubeUrl(clip.clipUrl)) {
+                                                        setSelectedVideo(
+                                                            getYoutubeEmbedUrl(clip.clipUrl)
+                                                        );
+                                                    } else {
+                                                        window.open(
+                                                            clip.clipUrl,
+                                                            "_blank"
+                                                        );
+                                                    }
+
+                                                }}
+                                                className="group cursor-pointer overflow-hidden"
                                             >
 
                                                 <img
@@ -624,7 +684,7 @@ const MyProfile = () => {
                                                     }}
                                                 />
 
-                                            </a>
+                                            </div>
 
                                             <div className="border-t border-zinc-800 p-3">
 
@@ -699,19 +759,21 @@ const MyProfile = () => {
                                             key={index}
                                             className="min-w-70 max-w-70 shrink-0 border border-zinc-800 bg-[#09111f"
                                         >
-                                            <a
-                                                href={ach.image}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group block overflow-hidden"
+                                            <div
+                                                onClick={() =>
+                                                    setSelectedAchievement({
+                                                        image: ach.image,
+                                                        title: ach.title,
+                                                    })
+                                                }
+                                                className="group cursor-pointer overflow-hidden"
                                             >
-
                                                 <img
                                                     src={ach.image}
                                                     alt={ach.title}
                                                     className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
-                                            </a>
+                                            </div>
 
                                             <div className="flex items-center justify-between border-t border-zinc-800 p-3">
 
@@ -719,14 +781,17 @@ const MyProfile = () => {
                                                     {ach.title}
                                                 </h3>
 
-                                                <a
-                                                    href={ach.image}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                <button
+                                                    onClick={() =>
+                                                        setSelectedAchievement({
+                                                            image: ach.image,
+                                                            title: ach.title,
+                                                        })
+                                                    }
                                                     className="border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300"
                                                 >
                                                     View
-                                                </a>
+                                                </button>
 
                                             </div>
 
@@ -745,11 +810,14 @@ const MyProfile = () => {
                                             key={index}
                                             className=" border border-zinc-800 bg-[#09111f] transition-all duration-300 hover:border-cyan-500/30"
                                         >
-                                            <a
-                                                href={ach.image}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="group block overflow-hidden"
+                                            <div
+                                                onClick={() =>
+                                                    setSelectedAchievement({
+                                                        image: ach.image,
+                                                        title: ach.title,
+                                                    })
+                                                }
+                                                className="group block cursor-pointer overflow-hidden"
                                             >
 
                                                 <img
@@ -758,7 +826,7 @@ const MyProfile = () => {
                                                     className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
 
-                                            </a>
+                                            </div>
 
                                             <div className="flex items-center justify-between border-t border-zinc-800 p-3">
 
@@ -766,14 +834,17 @@ const MyProfile = () => {
                                                     {ach.title}
                                                 </h3>
 
-                                                <a
-                                                    href={ach.image}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
+                                                <button
+                                                    onClick={() =>
+                                                        setSelectedAchievement({
+                                                            image: ach.image,
+                                                            title: ach.title,
+                                                        })
+                                                    }
                                                     className="border border-cyan-500/30   bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-500 hover:text-black"
                                                 >
                                                     View
-                                                </a>
+                                                </button>
 
                                             </div>
 
@@ -789,8 +860,122 @@ const MyProfile = () => {
                     </div>
 
                 </div>
+                {/* ACHIEVEMENTS */}
+                {selectedAchievement && (
+                    <div
+                        className="fixed inset-0 z-9999 flex items-center justify-center bg-black/90
+                        p-4"
+                        onClick={() => setSelectedAchievement(null)}
+                    >
+                        <div
+                            className="relative w-full max-w-5xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close */}
+                            <button
+                                onClick={() => setSelectedAchievement(null)}
+                                className="absolute -right-1 -top-12 z-20 text-3xl font-bold text-white cursor-pointer"
+                            >
+                                ×
+                            </button>
+
+                            {/* Image */}
+                            <img
+                                src={selectedAchievement.image}
+                                alt={selectedAchievement.title}
+                                className="max-h-[80vh] w-full object-contain border border-cyan-500/30 bg-[#09111f]"
+                            />
+
+                            {/* Title */}
+                            <div
+                                className="border border-t-0 border-cyan-500/30 bg-[#09111f] p-4"
+                            >
+                                <h3 className="text-center text-lg font-semibold text-white">
+                                    {selectedAchievement.title}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
             </div>
+
+            {/* AVATAR PREVIEW  */}
+            {showAvatarPreview && (
+
+                <div
+                    className=" fixed inset-0 z-999 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+                    onClick={() => setShowAvatarPreview(false)}
+                >
+
+                    {/* Close Button */}
+                    <button
+                        onClick={() => setShowAvatarPreview(false)}
+                        className=" absolute right-5 top-5 text-3xl font-light text-white cursor-pointer"
+                    >
+                        ×
+                    </button>
+
+                    {/* Image */}
+                    <img
+                        src={`/avatars/${myProfileData.avatar}`}
+                        alt="avatar-preview"
+                        onClick={(e) => e.stopPropagation()}
+                        onError={(e) => {
+                            e.currentTarget.src =
+                                "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                        }}
+                        className=" max-h-[90vh] max-w-[90vw] object-contain border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.25)]"
+                    />
+
+                </div>
+
+            )}
+
+            {/* YT VIDEO PREVIEW */}
+            {selectedVideo && (
+
+                <div
+                    className="fixed inset-0 z-9999 flex items-center justify-center bg-black/90 p-4"
+                    onClick={() => setSelectedVideo(null)}
+                >
+
+                    <div
+                        className="relative w-full max-w-5xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+
+                        <button
+                            onClick={() =>
+                                setSelectedVideo(null)
+                            }
+                            className="absolute -top-12 right-0 text-4xl  text-white cursor-pointer"
+                        >
+                            ×
+                        </button>
+
+                        <div className="aspect-video w-full border border-cyan-500/30 bg-black">
+
+                            <iframe
+                                src={selectedVideo}
+                                className="h-full w-full"
+                                allow="accelerometer;
+                                        autoplay;
+                                        clipboard-write;
+                                        encrypted-media;
+                                        gyroscope;
+                                        picture-in-picture;
+                                        web-share"
+                                allowFullScreen
+                            />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            )}
         </div>
     );
 };

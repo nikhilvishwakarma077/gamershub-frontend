@@ -153,128 +153,124 @@ const FindPlayer = () => {
 
             <div className="relative z-10 mx-auto max-w-7xl">
 
-                {playerRequests.length >= 1 && (
-                    <>
-                        {/* HERO */}
-                        <div className="mb-10 border border-zinc-800 bg-[#0b1120]/80 p-6 backdrop-blur-md sm:p-8 lg:p-10">
+                    {/* HERO */}
+                    <div className="mb-10 border border-zinc-800 bg-[#0b1120]/80 p-6 backdrop-blur-md sm:p-8 lg:p-10">
 
-                            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
 
-                                {/* LEFT */}
-                                <div className="max-w-3xl">
+                            {/* LEFT */}
+                            <div className="max-w-3xl">
 
-                                    <div className="mb-4 inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-xs font-semibold tracking-[0.25em] text-cyan-300">
-                                        RECRUIT • CONNECT • DOMINATE
-                                    </div>
-
-                                    <h1 className="text-4xl font-black uppercase tracking-tight sm:text-5xl lg:text-6xl">
-                                        Find{" "}
-                                        <span className="bg-linear-to-r from-cyan-300 to-cyan-500 bg-clip-text text-transparent">
-                                            Players
-                                        </span>
-                                    </h1>
-
-                                    <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
-                                        Discover skilled teammates for ranked,
-                                        scrims and esports tournaments.
-                                        Build your dream roster and dominate
-                                        the battlefield.
-                                    </p>
-
+                                <div className="mb-4 inline-flex rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-xs font-semibold tracking-[0.25em] text-cyan-300">
+                                    RECRUIT • CONNECT • DOMINATE
                                 </div>
 
-                                {/* FILTERS */}
-                                <div className="flex w-full flex-col gap-3 lg:w-auto">
+                                <h1 className="text-4xl font-black uppercase tracking-tight sm:text-5xl lg:text-6xl">
+                                    Find{" "}
+                                    <span className="bg-linear-to-r from-cyan-300 to-cyan-500 bg-clip-text text-transparent">
+                                        Players
+                                    </span>
+                                </h1>
 
-                                    {/* ROLE */}
-                                    <select
-                                        value={selectedRole}
-                                        onChange={(e) =>
-                                            setSelectedRole(e.target.value)
-                                        }
-                                        className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500 lg:min-w-70"
-                                    >
-                                        <option value="">
-                                            All Roles
-                                        </option>
-
-                                        <option value="Primary Rusher">
-                                            Primary Rusher
-                                        </option>
-
-                                        <option value="Secondary Rusher">
-                                            Secondary Rusher
-                                        </option>
-
-                                        <option value="Nader">
-                                            Nader
-                                        </option>
-
-                                        <option value="Sniper">
-                                            Sniper
-                                        </option>
-
-                                        <option value="Primary Rusher + IGL">
-                                            Primary Rusher + IGL
-                                        </option>
-
-                                        <option value="Secondary Rusher + IGL">
-                                            Secondary Rusher + IGL
-                                        </option>
-
-                                        <option value="Nader + IGL">
-                                            Nader + IGL
-                                        </option>
-
-                                        <option value="Sniper + IGL">
-                                            Sniper + IGL
-                                        </option>
-                                    </select>
-
-                                    {/* JOINING TYPE */}
-                                    <select
-                                        value={selectedJoiningType}
-                                        onChange={(e) =>
-                                            setSelectedJoiningType(e.target.value)
-                                        }
-                                        className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500"
-                                    >
-                                        <option value="">
-                                            Joining Type
-                                        </option>
-
-                                        <option value="permanent">
-                                            Permanent
-                                        </option>
-
-                                        <option value="temporary">
-                                            Temporary
-                                        </option>
-
-                                        <option value="scrims only">
-                                            Scrims Only
-                                        </option>
-                                    </select>
-
-                                    {/* RESET */}
-                                    <button
-                                        onClick={() => {
-                                            setSelectedRole("");
-                                            setSelectedJoiningType("");
-                                        }}
-                                        className="border border-cyan-500  px-5 py-4 font-semibold text-black transition-all bg-green-500 hover:text-black"
-                                    >
-                                        Reset Filters
-                                    </button>
-
-                                </div>
+                                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+                                    Discover skilled teammates for ranked,
+                                    scrims and esports tournaments.
+                                    Build your dream roster and dominate
+                                    the battlefield.
+                                </p>
 
                             </div>
+
+                            {/* FILTERS */}
+                            <div className="flex w-full flex-col gap-3 lg:w-auto">
+
+                                {/* ROLE */}
+                                <select
+                                    value={selectedRole}
+                                    onChange={(e) =>
+                                        setSelectedRole(e.target.value)
+                                    }
+                                    className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500 lg:min-w-70"
+                                >
+                                    <option value="">
+                                        All Roles
+                                    </option>
+
+                                    <option value="Primary Rusher">
+                                        Primary Rusher
+                                    </option>
+
+                                    <option value="Secondary Rusher">
+                                        Secondary Rusher
+                                    </option>
+
+                                    <option value="Nader">
+                                        Nader
+                                    </option>
+
+                                    <option value="Sniper">
+                                        Sniper
+                                    </option>
+
+                                    <option value="Primary Rusher + IGL">
+                                        Primary Rusher + IGL
+                                    </option>
+
+                                    <option value="Secondary Rusher + IGL">
+                                        Secondary Rusher + IGL
+                                    </option>
+
+                                    <option value="Nader + IGL">
+                                        Nader + IGL
+                                    </option>
+
+                                    <option value="Sniper + IGL">
+                                        Sniper + IGL
+                                    </option>
+                                </select>
+
+                                {/* JOINING TYPE */}
+                                <select
+                                    value={selectedJoiningType}
+                                    onChange={(e) =>
+                                        setSelectedJoiningType(e.target.value)
+                                    }
+                                    className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500"
+                                >
+                                    <option value="">
+                                        Joining Type
+                                    </option>
+
+                                    <option value="permanent">
+                                        Permanent
+                                    </option>
+
+                                    <option value="temporary">
+                                        Temporary
+                                    </option>
+
+                                    <option value="scrims only">
+                                        Scrims Only
+                                    </option>
+                                </select>
+
+                                {/* RESET */}
+                                <button
+                                    onClick={() => {
+                                        setSelectedRole("");
+                                        setSelectedJoiningType("");
+                                    }}
+                                    className="border border-cyan-500  px-5 py-4 font-semibold text-black transition-all bg-green-500 hover:text-black"
+                                >
+                                    Reset Filters
+                                </button>
+
+                            </div>
+
                         </div>
+                    </div>
 
 
-                    </>
-                )}
 
                 {/* CONTENT */}
                 {loading ? (

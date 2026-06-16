@@ -51,40 +51,52 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
 
                 </div>
 
+                {/* ROLE + JOIN TYPE */}
+                <div className="mt-5 flex items-start justify-between gap-4">
+
+                    <div>
+
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                            Looking For
+                        </p>
+
+                        <h3 className="mt-2 text-lg font-black uppercase text-cyan-300">
+                            {requests.role}
+                        </h3>
+
+                    </div>
+
+                    <div className="text-right">
+
+                        <div className=" text-zinc-500">
+
+                            <p className="text-[10px] uppercase tracking-wider">
+                                Joining Type
+                            </p>
+
+                        </div>
+
+                        <span
+                            className={`mt-2 inline-flex border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider
+                            ${requests.joiningType === "permanent"
+                                    ? "border-green-500/30 bg-green-500/10 text-green-300"
+                                    : requests.joiningType === "temporary"
+                                        ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-300"
+                                        : "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
+                                }
+                        `}
+                        >
+                            {requests.joiningType}
+                        </span>
+
+                    </div>
+
+                </div>
+
             </div>
 
             {/* BODY */}
             <div className="p-4">
-
-                {/* ROLE */}
-                <div className="mb-4">
-
-                    <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                        Looking For
-                    </p>
-
-                    <h3 className="text-xl font-black uppercase text-cyan-300">
-                        {requests.role}
-                    </h3>
-
-                </div>
-
-                {/* JOINING TYPE */}
-                <div className="mb-4">
-
-                    <span
-                        className={`inline-flex items-center border px-3 py-2 text-xs font-semibold uppercase tracking-wider
-                        ${requests.joiningType === "permanent"
-                                ? "border-green-500/30 bg-green-500/10 text-green-300"
-                                : requests.joiningType === "temporary"
-                                    ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-300"
-                                    : "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
-                            }`}
-                    >
-                        {requests.joiningType}
-                    </span>
-
-                </div>
 
                 {/* ACTIVE TIME */}
                 <div className="mb-3 border border-zinc-800 bg-[#09111f] p-3">
