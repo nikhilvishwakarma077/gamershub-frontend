@@ -61,17 +61,39 @@ const ConnectWithGamers = () => {
 
                         {/* CTA */}
                         <button
-                         onClick={()=>{navigate("/profiles")}}
-                        className="mt-10 inline-flex items-center gap-3 bg-cyan-500 px-8 py-4 font-bold text-black transition-all duration-300 hover:scale-105 hover:bg-cyan-400">
-                            Find Players
+                            onClick={() => { navigate("/find-player") }}
 
-                            <span className="flex h-5 w-5 items-center justify-center">
+                            className="
+                                relative z-50
+                                group
+                                mt-10
+                                inline-flex
+                                w-full
+                                items-center
+                                justify-center
+                                gap-3
+                                border
+                                border-cyan-500/30
+                                bg-cyan-500
+                                px-6
+                                py-3
+                                font-semibold
+                                text-black
+                                transition-all
+                                duration-300
+                                hover:scale-[1.02]
+                                sm:w-auto
+                            "
+                        >
+                            Find Player
+
+                            <span className="transition-transform duration-300 group-hover:translate-x-1">
                                 →
                             </span>
                         </button>
                     </div>
 
-                  
+
                     {/* Illustration */}
                     <div className="relative">
                         {/* Cyan Glow */}
@@ -95,7 +117,7 @@ const ConnectWithGamers = () => {
                         {/* Decorative Shape 3 */}
                         <div className="absolute right-12 top-0 h-10 w-10 rounded-full border border-cyan-400/30 bg-cyan-400/10 animate-pulse-glow" />
 
-                      
+
                     </div>
                 </div>
             </div>

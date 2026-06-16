@@ -53,16 +53,7 @@ const ProfileContent = () => {
             </div>
 
             <button
-                className="
-      bg-cyan-500
-      px-6
-      py-3
-      font-semibold
-      text-black
-      transition-all
-      hover:scale-105
-      hover:bg-cyan-400
-    "
+                className=" bg-cyan-500 px-6 py-3 font-semibold text-black transition-all hover:scale-105 hover:bg-cyan-400"
             >
                 View Profiles
             </button>

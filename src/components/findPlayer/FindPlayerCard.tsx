@@ -1,4 +1,5 @@
-import {Clock3,Languages,TimerReset,
+import {
+    Clock3, Languages, TimerReset,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -8,25 +9,11 @@ type FindPlayerCardProps = {
     getTimeLeft: (date: string) => string;
 };
 
-const FindPlayerCard = ({
-    requests,
-    getTimeAgo,
-    getTimeLeft,
-}: FindPlayerCardProps) => {
+const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardProps) => {
 
     return (
         <div
-            className="
-            group
-            overflow-hidden
-            border
-            border-zinc-800
-            bg-[#0b1120]
-            transition-all
-            duration-300
-            hover:border-cyan-500/40
-            hover:shadow-[0_0_25px_rgba(6,182,212,0.08)]
-        "
+            className="group overflow-hidden border border-zinc-800 bg-[#0b1120] transition-all duration-300 hover:border-cyan-500/40 hover:shadow-[0_0_25px_rgba(6,182,212,0.08)]"
         >
             {/* TOP BAR */}
             <div className="h-1 bg-linear-to-r from-transparent via-cyan-400 to-transparent opacity-80" />
@@ -39,20 +26,7 @@ const FindPlayerCard = ({
                     <div className="flex min-w-0 items-center gap-3">
 
                         <div
-                            className="
-                            flex
-                            h-11
-                            w-11
-                            shrink-0
-                            items-center
-                            justify-center
-                            border
-                            border-cyan-500/30
-                            bg-cyan-500/10
-                            text-sm
-                            font-bold
-                            text-cyan-300
-                        "
+                            className="flex h-11 w-11 shrink-0 items-center justify-center border border-cyan-500/30 bg-cyan-500/10 text-sm font-bold text-cyan-300"
                         >
                             {requests.userId.username.slice(0, 2)}
                         </div>
@@ -99,23 +73,13 @@ const FindPlayerCard = ({
                 <div className="mb-4">
 
                     <span
-                        className={`
-                        inline-flex
-                        items-center
-                        border
-                        px-3
-                        py-2
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-wider
+                        className={`inline-flex items-center border px-3 py-2 text-xs font-semibold uppercase tracking-wider
                         ${requests.joiningType === "permanent"
                                 ? "border-green-500/30 bg-green-500/10 text-green-300"
                                 : requests.joiningType === "temporary"
                                     ? "border-yellow-500/30 bg-yellow-500/10 text-yellow-300"
                                     : "border-cyan-500/30 bg-cyan-500/10 text-cyan-300"
-                            }
-                    `}
+                            }`}
                     >
                         {requests.joiningType}
                     </span>
@@ -160,15 +124,7 @@ const FindPlayerCard = ({
                             (lang: string, index: number) => (
                                 <span
                                     key={index}
-                                    className="
-                                    border
-                                    border-cyan-500/20
-                                    bg-cyan-500/10
-                                    px-2
-                                    py-1
-                                    text-[11px]
-                                    text-cyan-300
-                                "
+                                    className="border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 text-[11px] text-cyan-300"
                                 >
                                     {lang}
                                 </span>
@@ -200,44 +156,14 @@ const FindPlayerCard = ({
                         href={`https://www.instagram.com/${requests.instagram}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="
-                        flex
-                        w-full
-                        items-center
-                        justify-center
-                        border
-                        border-cyan-500
-                        text-black
-                        px-4
-                        py-3
-                        text-sm
-                        font-semibold
-                        transition-all
-                        bg-cyan-500
-                        hover:text-black
-                    "
+                        className="flex w-full items-center justify-center border border-cyan-500 text-black px-4 py-3 text-sm font-semibold transition-all bg-cyan-500 hover:text-black"
                     >
                         DM Player
                     </a>
 
                     <Link
                         to={`/profile/${requests.profileId}`}
-                        className="
-                        flex
-                        w-full
-                        items-center
-                        justify-center
-                        border
-                        border-zinc-700
-                        bg-[#09111f]
-                        px-4
-                        py-3
-                        text-sm
-                        font-semibold
-                        text-white
-                        transition-all
-                        hover:border-cyan-500/40
-                    "
+                        className="flex w-full items-center justify-center border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm font-semibold text-white transition-all hover:border-cyan-500/40"
                     >
                         View Profile
                     </Link>

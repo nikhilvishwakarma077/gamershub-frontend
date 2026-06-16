@@ -48,7 +48,8 @@ const Profiles = () => {
 
             {/* FLOATING WORLD LAYER */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {/* GRID BG */} <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
+                {/* GRID BG */} 
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
 
                 {/* Glow Effects */}
                 <div className="absolute left-0 top-20 h-100 w-100 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -73,6 +74,8 @@ const Profiles = () => {
                 <div className="absolute h-28 w-28 border border-purple-500/20 animate-path-5" />
 
             </div>
+
+
             {/* page content */}
             <div className="relative z-10 mx-auto max-w-7xl">
 
@@ -109,17 +112,7 @@ const Profiles = () => {
                                 onChange={(e) =>
                                     setSelectedRole(e.target.value)
                                 }
-                                className="
-                            w-full
-                            border border-zinc-700
-                            bg-[#09111f]
-                            px-5 py-4
-                            text-zinc-300
-                            outline-none
-                            transition-all
-                            focus:border-cyan-500
-                            lg:min-w-[320px]
-                        "
+                                className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none  transition-all  focus:border-cyan-500  lg:min-w-[320px]"
                             >
                                 <option value="">
                                     All Roles
@@ -165,7 +158,6 @@ const Profiles = () => {
                 </div>
 
 
-
                 {/* PROFILE GRID */}
                 <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
 
@@ -178,22 +170,8 @@ const Profiles = () => {
                     ) : filteredProfiles.length < 1 ? (
 
                         <div
-                            className="
-                        col-span-full
-                        flex
-                        min-h-80
-                        flex-col
-                        items-center
-                        justify-center
-                        rounded-3xl
-                        border
-                        border-zinc-800
-                        bg-[#0b1120]
-                        p-8
-                        text-center
-                    "
+                            className="col-span-full flex min-h-80 flex-col items-center justify-center rounded-3xl border border-zinc-800 bg-[#0b1120] p-8 text-center"
                         >
-
                             <div className="mb-4 text-5xl">
                                 🎮
                             </div>

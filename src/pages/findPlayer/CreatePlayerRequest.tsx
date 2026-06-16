@@ -52,9 +52,8 @@ const CreatePlayerRequest = () => {
         });
     };
 
-    const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
 
         if (isSubmitting) return;
@@ -75,21 +74,12 @@ const CreatePlayerRequest = () => {
             };
 
             const res = await createPlayerRequest(finalFormData);
-
-            toast.success(
-                res?.message ||
-                "Player request created successfully"
-            );
-
+            toast.success(res?.message || "Player request created successfully");
             navigate("/my-requests");
 
         } catch (error: any) {
 
-            toast.error(
-                error?.response?.data?.message ||
-                "Failed to create player request"
-            );
-
+            toast.error(error?.response?.data?.message || "Failed to create player request");
             console.error(error);
 
         } finally {
@@ -102,14 +92,7 @@ const CreatePlayerRequest = () => {
         <section className="min-h-screen bg-[#050816] px-4 py-20 text-white">
 
             <div
-                className="
-                    mx-auto
-                    max-w-3xl
-                    rounded-xl
-                    border border-cyan-400/10
-                    bg-[#0b1120]
-                    p-6 sm:p-8
-                "
+                className="mx-auto max-w-3xl rounded-xl border border-cyan-400/10 bg-[#0b1120] p-6 sm:p-8"
             >
 
                 {/* HEADER */}
@@ -125,8 +108,7 @@ const CreatePlayerRequest = () => {
                 </div>
 
                 {/* FORM */}
-                <form
-                    onSubmit={handleSubmit}
+                <form onSubmit={handleSubmit}
                     className="space-y-8"
                 >
 
@@ -134,10 +116,7 @@ const CreatePlayerRequest = () => {
                     <div>
 
                         <label
-                            className="
-            mb-3 flex items-center gap-2
-            text-sm font-medium text-cyan-300
-        "
+                            className="mb-3 flex items-center gap-2 text-sm font-medium text-cyan-300"
                         >
                             <Crosshair size={18} />
 
@@ -153,16 +132,8 @@ const CreatePlayerRequest = () => {
                                     role: e.target.value,
                                 })
                             }
-                            className="
-            w-full rounded-md
-            border border-cyan-400/10
-            bg-[#09111f]
-            px-4 py-3
-            outline-none
-            focus:border-cyan-400
-        "
+                            className="w-full rounded-md border border-cyan-400/10 bg-[#09111f] px-4 py-3 outline-none focus:border-cyan-400"
                         >
-
                             <option value="">
                                 Select Role
                             </option>
@@ -225,14 +196,11 @@ const CreatePlayerRequest = () => {
                                             joiningType: type,
                                         })
                                     }
-                                    className={`
-                                        rounded-md border px-4 py-3 text-sm capitalize transition-all
-
-                                        ${formData.joiningType === type
+                                    className={`rounded-md border px-4 py-3 text-sm capitalize transition-all
+                                     ${formData.joiningType === type
                                             ? "border-cyan-400 bg-cyan-400/10 text-cyan-300"
                                             : "border-cyan-400/10 bg-[#09111f] text-zinc-400"
-                                        }
-                                    `}
+                                        }`}
                                 >
                                     {type}
                                 </button>
@@ -244,13 +212,9 @@ const CreatePlayerRequest = () => {
                     <div>
 
                         <label
-                            className="
-                                mb-3 flex items-center gap-2
-                                text-sm font-medium text-cyan-300
-                            "
+                            className=" mb-3 flex items-center gap-2 text-sm font-medium text-cyan-300"
                         >
                             <Clock3 size={18} />
-
                             Active Time
                         </label>
 
@@ -265,28 +229,16 @@ const CreatePlayerRequest = () => {
                                     activeTime: e.target.value,
                                 })
                             }
-                            className="
-                                w-full rounded-md
-                                border border-cyan-400/10
-                                bg-[#09111f]
-                                px-4 py-3
-                                outline-none
-                                placeholder:text-zinc-500
-                                focus:border-cyan-400
-                            "
+                            className="w-full rounded-md border border-cyan-400/10 bg-[#09111f] px-4 py-3 outline-none placeholder:text-zinc-500 focus:border-cyan-400"
                         />
                     </div>
 
                     {/* LANGUAGES */}
                     <div>
                         <label
-                            className="
-                                mb-4 flex items-center gap-2
-                                text-sm font-medium text-cyan-300
-                            "
+                            className=" mb-4 flex items-center gap-2text-sm font-medium text-cyan-300"
                         >
                             <Languages size={18} />
-
                             Preferred Languages
                         </label>
 
@@ -295,8 +247,7 @@ const CreatePlayerRequest = () => {
                             required
                             value={formData.languagesComfortable.join(",")}
                             onChange={() => { }}
-                            className="absolute opacity-0
-                            h-px w-px"
+                            className="absolute opacity-0 h-px w-px"
                         />
 
                         <div className="flex flex-wrap gap-3">
@@ -308,12 +259,10 @@ const CreatePlayerRequest = () => {
                                         toggleLanguage(language)
                                     }
                                     className={`rounded-md border px-4 py-2 text-sm transition
-
                 ${formData.languagesComfortable.includes(language)
                                             ? "border-cyan-400 bg-cyan-400/10 text-cyan-300"
                                             : "border-zinc-700 bg-[#111827] text-zinc-300"
-                                        }
-                `}
+                                        } `}
                                 >
                                     {language}
                                 </button>
@@ -328,13 +277,8 @@ const CreatePlayerRequest = () => {
                         <div>
 
                             <label
-                                className="
-                                    mb-3 flex items-center gap-2
-                                    text-sm font-medium text-cyan-300
-                                "
+                                className="mb-3 flex items-center gap-2 text-sm font-medium text-cyan-300"
                             >
-                                {/* <Instagram size={18} /> */}
-
                                 Instagram ID
                             </label>
 
@@ -349,33 +293,18 @@ const CreatePlayerRequest = () => {
                                         instagram: e.target.value,
                                     })
                                 }
-                                className="
-                                    w-full rounded-md
-                                    border border-cyan-400/10
-                                    bg-[#09111f]
-                                    px-4 py-3
-                                    outline-none
-                                    placeholder:text-zinc-500
-                                    focus:border-cyan-400
-                                "
+                                className="w-full rounded-md border border-cyan-400/10 bg-[#09111f] px-4 py-3 outline-none placeholder:text-zinc-500 focus:border-cyan-400"
                             />
                         </div>
-
-
-
                     </div>
 
                     {/* EXPIRY */}
                     <div>
 
                         <label
-                            className="
-                                mb-3 flex items-center gap-2
-                                text-sm font-medium text-cyan-300
-                            "
+                            className="mb-3 flex items-center gap-2 text-sm font-medium text-cyan-300"
                         >
                             <TimerReset size={18} />
-
                             Auto Delete After
                         </label>
 
@@ -388,14 +317,7 @@ const CreatePlayerRequest = () => {
                                     expiresAt: e.target.value,
                                 })
                             }
-                            className="
-                                w-full rounded-md
-                                border border-cyan-400/10
-                                bg-[#09111f]
-                                px-4 py-3
-                                outline-none
-                                focus:border-cyan-400
-                            "
+                            className="w-full rounded-md border border-cyan-400/10 bg-[#09111f] px-4 py-3 outline-none focus:border-cyan-400"
                         >
                             <option value="6">
                                 6 Hours
@@ -419,16 +341,7 @@ const CreatePlayerRequest = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="
-                                disabled:opacity-60
-                                disabled:cursor-not-allowed
-                            w-full 
-                            bg-cyan-400
-                            px-6 py-4
-                            text-sm font-semibold uppercase tracking-wide
-                            text-black
-                            transition-all hover:bg-cyan-300
-                        "
+                        className=" disabled:opacity-60 disabled:cursor-not-allowed w-full  bg-cyan-400 px-6 py-4 text-sm font-semibold uppercase tracking-wide text-black transition-all hover:bg-cyan-300"
                     >
                         {isSubmitting ? "Creating..." : "Create Request"}
                     </button>

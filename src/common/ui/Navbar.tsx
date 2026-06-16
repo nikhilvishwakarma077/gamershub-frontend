@@ -14,12 +14,12 @@ const Navbar = () => {
     const logout = useAuthStore((state) => state.logout)
     const clearProfile = useProfileStore((state) => state.clearProfile)
 
-
     const [mobileMenu, setMobileMenu] = useState(false);
     const [profileMenu, setProfileMenu] = useState(false);
 
     const logoutHandler = async () => {
         try {
+            setProfileMenu(false)
             const response = await logoutUser();
             toast.success(response.message || "Logged out successfully");
 
@@ -106,7 +106,6 @@ const Navbar = () => {
                                 {user?.avatarUrl ? (
                                     <img
                                         src={`/avatars/${user.avatarUrl}`}
-                                        // src={avatar1}
                                         onError={(e) => {
                                             e.currentTarget.src =
                                                 "https://cdn-icons-png.flaticon.com/512/149/149071.png";
@@ -284,6 +283,9 @@ const Navbar = () => {
 
                         <NavLink
                             to="/profiles"
+                            onClick={() =>
+                                setMobileMenu(false)
+                            }
                             className={({ isActive }) =>
                                 `py-3 
                             ${isActive ? "text-cyan-400"
@@ -293,6 +295,9 @@ const Navbar = () => {
                         </NavLink>
 
                         <NavLink
+                            onClick={() =>
+                                setMobileMenu(false)
+                            }
                             to="/find-player"
                             className={({ isActive }) =>
                                 ` py-3 

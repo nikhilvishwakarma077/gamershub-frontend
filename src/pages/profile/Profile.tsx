@@ -107,7 +107,7 @@ const Profile = () => {
 
       <div className="mx-auto max-w-7xl px-4 pb-10">
 
-        {/* PROFILE HEADER */}
+        {/* PROFILE CARD */}
         <div className="mt-6 border border-zinc-800 bg-[#0b1120] p-5 sm:p-6 lg:p-8">
 
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
@@ -126,19 +126,7 @@ const Profile = () => {
                     e.currentTarget.src =
                       "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                   }}
-                  className="
-                        relative
-                        rounded-full
-                        h-28
-                        w-28
-                        sm:h-36
-                        sm:w-36
-                        lg:h-60
-                        lg:w-60
-                        border-2
-                        border-cyan-500/40
-                        object-cover
-                    "
+                  className="relative rounded-full h-28 w-28 sm:h-36 sm:w-36 lg:h-60 lg:w-60 border-2 border-cyan-500/40 object-cover"
                 />
 
               </div>
@@ -168,8 +156,7 @@ const Profile = () => {
                 <div className="flex flex-col items-end gap-4">
 
                   <div
-                    className={`
-     border px-5 py-3 font-medium capitalize 
+                    className={` border px-5 py-3 font-medium capitalize 
     ${userProfile.availability.status === "open for scrims"
                         ? "border-orange-400 bg-orange-400/10 text-orange-300"
 
@@ -193,20 +180,7 @@ const Profile = () => {
                         href={`https://instagram.com/${userProfile?.socialLinks.instagram}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="
-                                    flex
-                                    h-11
-                                    w-11
-                                    items-center
-                                    justify-center
-                                    border
-                                    border-zinc-700
-                                    bg-[#09111f]
-                                    transition-all
-                                    duration-300
-                                    hover:border-cyan-500/40
-                                    hover:bg-cyan-500/10
-                                "
+                        className="flex h-11 w-11 items-center justify-center border border-zinc-700 bg-[#09111f] transition-all duration-300 hover:border-cyan-500/40 hover:bg-cyan-500/10"
                       >
                         <img
                           src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
@@ -221,20 +195,7 @@ const Profile = () => {
                         href={`https://discord.com/${userProfile?.socialLinks.discord}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="
-                                    flex
-                                    h-11
-                                    w-11
-                                    items-center
-                                    justify-center
-                                    border
-                                    border-zinc-700
-                                    bg-[#09111f]
-                                    transition-all
-                                    duration-300
-                                    hover:border-cyan-500/40
-                                    hover:bg-cyan-500/10
-                                "
+                        className="flex h-11 w-11 items-center justify-center border border-zinc-700  bg-[#09111f] transition-all duration-300 hover:border-cyan-500/40 hover:bg-cyan-500/10"
                       >
                         <img
                           src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"
@@ -295,15 +256,7 @@ const Profile = () => {
                   {userProfile?.languages?.map((language, index) => (
                     <div
                       key={index}
-                      className="
-                border
-                border-cyan-500/20
-                bg-cyan-500/10
-                px-3
-                py-2
-                text-sm
-                text-cyan-300
-            "
+                      className="border border-cyan-500/20 bg-cyan-500/10 px-3 py-2 text-sm text-cyan-300"
                     >
                       {language}
                     </div>
@@ -317,13 +270,7 @@ const Profile = () => {
               <div className="mt-5">
 
                 <p
-                  className="
-                        text-center
-                        text-sm
-                        leading-relaxed
-                        text-zinc-300
-                        lg:text-left
-                    "
+                  className=" text-center text-sm leading-relaxed text-zinc-300 lg:text-left"
                 >
                   {userProfile?.bio}
                 </p>
@@ -334,19 +281,7 @@ const Profile = () => {
               <div className="mt-6 lg:hidden">
 
                 <div
-                  className="
-                        border
-                        border-cyan-500/40
-                        bg-cyan-500/10
-                        px-4
-                        py-3
-                        text-center
-                        text-xs
-                        font-semibold
-                        uppercase
-                        tracking-[0.2em]
-                        text-cyan-300
-                    "
+                  className=" border border-cyan-500/40   bg-cyan-500/10 px-4 py-3 text-center  text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300 "
                 >
                   Looking For Team
                 </div>
@@ -358,16 +293,7 @@ const Profile = () => {
                       href={`https://instagram.com/${userProfile?.socialLinks.instagram}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="
-                                flex
-                                h-12
-                                w-12
-                                items-center
-                                justify-center
-                                border
-                                border-zinc-700
-                                bg-[#09111f]
-                            "
+                      className="flex h-12 w-12 items-center justify-center border border-zinc-700 bg-[#09111f]"
                     >
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
@@ -382,16 +308,7 @@ const Profile = () => {
                       href={`https://discord.com/${userProfile?.socialLinks.discord}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="
-                                flex
-                                h-12
-                                w-12
-                                items-center
-                                justify-center
-                                border
-                                border-zinc-700
-                                bg-[#09111f]
-                            "
+                      className="flex h-12 w-12 items-center justify-center border border-zinc-700   bg-[#09111f]"
                     >
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"
@@ -410,8 +327,6 @@ const Profile = () => {
           </div>
 
         </div>
-
-
 
         {/* 3 CARDS GRID */}
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
@@ -619,15 +534,7 @@ const Profile = () => {
 
                     <div
                       key={index}
-                      className="
-                border
-                border-zinc-800
-                bg-[#09111f]
-                p-4
-                transition-all
-                duration-300
-                hover:border-cyan-500/30
-              "
+                      className="border border-zinc-800 bg-[#09111f] p-4 transition-all duration-300 hover:border-cyan-500/30"
                     >
 
                       <h3 className="wrap-break-word text-sm font-semibold text-white">
@@ -710,14 +617,7 @@ const Profile = () => {
 
                     <div
                       key={index}
-                      className="
-                min-w-70
-                max-w-70
-                shrink-0
-                border
-                border-zinc-800
-                bg-[#09111f]
-              "
+                      className="min-w-70 max-w-70 shrink-0 border border-zinc-800 bg-[#09111f]"
                     >
 
                       <a
@@ -730,14 +630,8 @@ const Profile = () => {
                         <img
                           src={getClipThumbnail(clip.clipUrl)}
                           alt={clip.title}
-                          className="
-                    h-44
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                  "
+                          className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+
                           onError={(e) => {
                             e.currentTarget.src =
                               "/thumbnails/thumbnail1.webp";
@@ -767,16 +661,8 @@ const Profile = () => {
 
                     <div
                       key={index}
-                      className="
-                border
-                border-zinc-800
-                bg-[#09111f]
-                transition-all
-                duration-300
-                hover:border-cyan-500/30
-              "
+                      className="border border-zinc-800 bg-[#09111f] transition-all duration-300 hover:border-cyan-500/30"
                     >
-
                       <a
                         href={clip.clipUrl}
                         target="_blank"
@@ -787,14 +673,8 @@ const Profile = () => {
                         <img
                           src={getClipThumbnail(clip.clipUrl)}
                           alt={clip.title}
-                          className="
-                    h-48
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                  "
+                          className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+
                           onError={(e) => {
                             e.currentTarget.src =
                               "/thumbnails/thumbnail1.webp";
@@ -874,16 +754,8 @@ const Profile = () => {
 
                     <div
                       key={index}
-                      className="
-                min-w-70
-                max-w-70
-                shrink-0
-                border
-                border-zinc-800
-                bg-[#09111f]
-              "
+                      className="min-w-70 max-w-70 shrink-0 border border-zinc-800 bg-[#09111f]"
                     >
-
                       <a
                         href={ach.image}
                         target="_blank"
@@ -894,14 +766,7 @@ const Profile = () => {
                         <img
                           src={ach.image}
                           alt={ach.title}
-                          className="
-                    h-44
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                  "
+                          className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
 
                       </a>
@@ -916,16 +781,7 @@ const Profile = () => {
                           href={ach.image}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="
-                    border
-                    border-cyan-500/30
-                    bg-cyan-500/10
-                    px-3
-                    py-1
-                    text-xs
-                    font-semibold
-                    text-cyan-300
-                  "
+                          className="border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300"
                         >
                           View
                         </a>
@@ -945,34 +801,18 @@ const Profile = () => {
 
                     <div
                       key={index}
-                      className="
-                border
-                border-zinc-800
-                bg-[#09111f]
-                transition-all
-                duration-300
-                hover:border-cyan-500/30
-              "
+                      className="border border-zinc-800 bg-[#09111f] transition-all duration-300 hover:border-cyan-500/30"
                     >
-
                       <a
                         href={ach.image}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group block overflow-hidden"
                       >
-
                         <img
                           src={ach.image}
                           alt={ach.title}
-                          className="
-                    h-48
-                    w-full
-                    object-cover
-                    transition-transform
-                    duration-500
-                    group-hover:scale-105
-                  "
+                          className=" h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
 
                       </a>
@@ -987,20 +827,7 @@ const Profile = () => {
                           href={ach.image}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="
-                    border
-                    border-cyan-500/30
-                    bg-cyan-500/10
-                    px-3
-                    py-1
-                    text-xs
-                    font-semibold
-                    text-cyan-300
-                    transition-all
-                    duration-300
-                    hover:bg-cyan-500
-                    hover:text-black
-                  "
+                          className="border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-500 hover:text-black"
                         >
                           View
                         </a>

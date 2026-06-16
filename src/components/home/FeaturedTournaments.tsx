@@ -174,7 +174,6 @@ export default function FeaturedTournaments() {
             <button
               className="
                 mt-6 w-full
-                
                 border border-cyan-500
                 bg-cyan-500
                 px-4 py-3

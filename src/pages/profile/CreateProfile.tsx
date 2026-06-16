@@ -23,33 +23,39 @@ const availabilityOptions = [
 
 const CreateProfile = () => {
 
+    const navigate = useNavigate()
+
+    const [showAvatars, setShowAvatars] = useState(false);
+    const [showBanners, setShowBanners] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [formData, setFormData] =
         useState<CreateProfileData>({
-            username: "random",
-            uid: "2342345235",
-            age: "20",
+            username: "",
+            uid: "",
+            age: "",
             avatar: "avatar1.webp",
             banner: "banner1.webp",
-            bio: "T1 Player",
-            country: "India",
-            languages: ["Hindi"],
-            role: "Sniper",
+            bio: "",
+            country: "",
+            languages: [],
+            role: "",
             socialLinks: {
-                instagram: "Instagram",
+                instagram: "",
                 discord: "",
             },
             stats: {
-                currentRank: "Heroic",
-                kdRatio: "22",
-                headshotPercentage: "32",
+                currentRank: "",
+                kdRatio: "",
+                headshotPercentage: "",
             },
             experience: {
-                level: "99",
-                yearsPlaying: "7",
-                esportsExperience: "7",
+                level: "",
+                yearsPlaying: "",
+                esportsExperience: "",
             },
             availability: {
-                status: "looking for a Team",
+                status: "",
             },
             clips: [
                 {
@@ -72,13 +78,6 @@ const CreateProfile = () => {
             ],
         });
 
-    const [showAvatars, setShowAvatars] = useState(false);
-    const [showBanners, setShowBanners] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-
-
-    const navigate = useNavigate()
 
     const toggleLanguage = (language: string) => {
 
@@ -95,8 +94,6 @@ const CreateProfile = () => {
                 : [...formData.languages, language],
         });
     };
-
-
 
     // ARRAY CHANGE
     const handleArrayChange = (
@@ -156,9 +153,7 @@ const CreateProfile = () => {
 
 
 
-    const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>
-    ) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (isSubmitting) return;
@@ -188,18 +183,10 @@ const CreateProfile = () => {
                 JSON.stringify({
                     ...formData.stats,
                     kdRatio:
-                        formData.stats.kdRatio === ""
-                            ? 0
-                            : Number(formData.stats.kdRatio),
+                        formData.stats.kdRatio === "" ? 0 : Number(formData.stats.kdRatio),
 
                     headshotPercentage:
-                        formData.stats
-                            .headshotPercentage === ""
-                            ? 0
-                            : Number(
-                                formData.stats
-                                    .headshotPercentage
-                            ),
+                        formData.stats.headshotPercentage === "" ? 0 : Number(formData.stats.headshotPercentage),
                 })
             );
 
@@ -209,31 +196,16 @@ const CreateProfile = () => {
                     ...formData.experience,
 
                     level:
-                        formData.experience.level === ""
-                            ? 1
-                            : Number(
-                                formData.experience.level
-                            ),
+                        formData.experience.level === "" ? 1 : Number(formData.experience.level),
 
                     yearsPlaying:
-                        formData.experience
-                            .yearsPlaying === ""
-                            ? 0
-                            : Number(
-                                formData.experience
-                                    .yearsPlaying
-                            ),
+                        formData.experience.yearsPlaying === "" ? 0 : Number(formData.experience.yearsPlaying),
 
                     esportsExperience:
-                        formData.experience
-                            .esportsExperience === ""
-                            ? 0
-                            : Number(
-                                formData.experience
-                                    .esportsExperience
-                            ),
+                        formData.experience.esportsExperience === "" ? 0 : Number(formData.experience.esportsExperience),
                 })
             );
+
             multipartData.append("availability", JSON.stringify(formData.availability));
             multipartData.append("clips", JSON.stringify(formData.clips));
             multipartData.append("teamHistory", JSON.stringify(formData.teamHistory));
@@ -255,27 +227,19 @@ const CreateProfile = () => {
                     );
                 }
             });
+
             // for (const [key, value] of multipartData.entries()) {
             //     console.log(key, value);
             // }
 
             const res = await createProfile(multipartData);
-            console.log(res)
-
-            toast.success(
-                res?.message || "Profile created successfully"
-            );
-
+            toast.success(res?.message || "Profile created successfully");
             navigate("/my-profile");
 
         } catch (error: any) {
             console.log(error.response?.data);
-            toast.error(
-                error?.response?.data?.message ||
-                "Failed to create profile"
-            );
+            toast.error(error?.response?.data?.message || "Failed to create profile");
 
-            console.error(error);
         } finally {
             setIsSubmitting(false);
         }
@@ -283,7 +247,9 @@ const CreateProfile = () => {
 
     return (
         <section className="min-h-screen bg-[#050816] px-4 py-20 text-white">
+
             <div className="mx-auto max-w-6xl rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
+
                 <div className="mb-8 flex items-center justify-between">
                     <div>
 
@@ -478,15 +444,10 @@ const CreateProfile = () => {
                                                 <img
                                                     src={`/avatars/${avatar}`}
                                                     alt={avatar}
-                                                    className={`
-                            h-24 w-24 rounded-xl border-2 object-cover
-                            transition-all duration-200
-
-                            ${formData.avatar === avatar
+                                                    className={`h-24 w-24 rounded-xl border-2 object-cover transition-all duration-200
+                                                    ${formData.avatar === avatar
                                                             ? "scale-105 border-cyan-400"
-                                                            : "border-zinc-700 opacity-80 hover:opacity-100"
-                                                        }
-                        `}
+                                                            : "border-zinc-700 opacity-80 hover:opacity-100"}`}
                                                 />
                                             </button>
                                         ))}
@@ -498,8 +459,7 @@ const CreateProfile = () => {
                             {/* Banner */}
                             <div className="mt-6 rounded-xl border border-zinc-800 bg-[#0b1120] p-6">
 
-                                <div
-                                    onClick={() => setShowBanners(!showBanners)}
+                                <div onClick={() => setShowBanners(!showBanners)}
                                     className="flex cursor-pointer items-center justify-between"
                                 >
                                     <h2 className="text-xl font-semibold text-cyan-400">
@@ -516,7 +476,6 @@ const CreateProfile = () => {
 
                                 {/* CURRENT BANNER */}
                                 <div className="mt-5">
-
                                     <img
                                         src={`/banners/${formData.banner}`}
                                         alt="selected-banner"
@@ -550,15 +509,10 @@ const CreateProfile = () => {
                                                 <img
                                                     src={`/banners/${banner}`}
                                                     alt={banner}
-                                                    className={`
-                            h-32 w-full rounded-xl border-2 object-cover
-                            transition-all duration-200
-
-                            ${formData.banner === banner
+                                                    className={`h-32 w-full rounded-xl border-2 object-cover transition-all duration-200
+                                                    ${formData.banner === banner
                                                             ? "border-cyan-400"
-                                                            : "border-zinc-700 opacity-80 hover:opacity-100"
-                                                        }
-                        `}
+                                                            : "border-zinc-700 opacity-80 hover:opacity-100"}`}
                                                 />
                                             </button>
                                         ))}
@@ -588,13 +542,7 @@ const CreateProfile = () => {
                                             },
                                         })
                                     }
-                                    className="
-            w-full rounded-md
-            border border-zinc-700
-            bg-[#111827]
-            px-4 py-3
-            outline-none
-        "
+                                    className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
                                 />
                             </div>
 
@@ -618,13 +566,7 @@ const CreateProfile = () => {
                                             },
                                         })
                                     }
-                                    className="
-            w-full rounded-md
-            border border-zinc-700
-            bg-[#111827]
-            px-4 py-3
-            outline-none
-        "
+                                    className=" w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
                                 />
                             </div>
 
@@ -646,14 +588,7 @@ const CreateProfile = () => {
                                                 role: e.target.value,
                                             })
                                         }
-                                        className="
-            w-full rounded-lg 
-            border border-zinc-700
-            bg-[#111827]
-           p-3
-            outline-none
-            
-        "
+                                        className="w-full rounded-lg  border border-zinc-700 bg-[#111827] p-3 outline-none"
                                     >
 
                                         <option value="">
@@ -728,9 +663,7 @@ const CreateProfile = () => {
                             required
                             value={formData.languages.join(",")}
                             onChange={() => { }}
-                            className="absolute opacity-0
-                            h-px w-px
-"
+                            className="absolute opacity-0 h-px w-px"
                         />
 
                         <div className="flex flex-wrap gap-3">
@@ -742,12 +675,10 @@ const CreateProfile = () => {
                                         toggleLanguage(language)
                                     }
                                     className={`rounded-md border px-4 py-2 text-sm transition
-
-                ${formData.languages.includes(language)
+                                        ${formData.languages.includes(language)
                                             ? "border-cyan-400 bg-cyan-400/10 text-cyan-300"
                                             : "border-zinc-700 bg-[#111827] text-zinc-300"
-                                        }
-                `}
+                                        }`}
                                 >
                                     {language}
                                 </button>
@@ -1262,8 +1193,7 @@ const CreateProfile = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full  disabled:opacity-60
-                            disabled:cursor-not-allowed bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
+                        className="w-full  disabled:opacity-60 disabled:cursor-not-allowed bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300"
                     >
                         {isSubmitting ? "Creating..." : "Create Profile"}
                     </button>

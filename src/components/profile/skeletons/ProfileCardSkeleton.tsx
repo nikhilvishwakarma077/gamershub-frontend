@@ -1,14 +1,7 @@
 const ProfileCardSkeleton = () => {
     return (
         <div
-            className="
-                group
-                animate-pulse
-                overflow-hidden
-                border
-                border-zinc-800
-                bg-[#0b1120]
-            "
+            className="group animate-pulse overflow-hidden border border-zinc-800 bg-[#0b1120]"
         >
             {/* TOP ACCENT */}
             <div className="h-1 bg-zinc-800" />
@@ -81,15 +74,7 @@ const ProfileCardSkeleton = () => {
             <div className="p-5 pt-0">
 
                 <div
-                    className="
-                        flex
-                        h-12
-                        items-center
-                        justify-center
-                        border
-                        border-zinc-800
-                        bg-[#09111f]
-                    "
+                    className="flex h-12 items-center justify-center border border-zinc-800 bg-[#09111f]"
                 >
 
                     <div className="h-5 w-32 bg-zinc-700" />

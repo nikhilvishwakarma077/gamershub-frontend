@@ -159,19 +159,7 @@ const WhatIsGamersHub = () => {
                         <img
                             src={gamerCharacter}
                             alt="Gaming Character"
-                            className="
-    relative
-    z-10
-    h-auto
-    max-h-175
-    w-full
-    max-w-125
-    object-contain
-    drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]
-    animate-character-float
-    select-none
-    pointer-events-none
-  "
+                            className="relative z-10 h-auto max-h-175 w-full max-w-125 object-contain drop-shadow-[0_0_40px_rgba(6,182,212,0.35)] animate-character-float select-none pointer-events-none"
                         />
                     </div>
                 </div>

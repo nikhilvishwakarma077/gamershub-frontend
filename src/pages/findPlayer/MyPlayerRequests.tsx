@@ -10,10 +10,11 @@ import { toast } from "react-toastify";
 
 const MyPlayerRequests = () => {
 
+    const navigate = useNavigate()
+
     const [myPlayerRequests, setMyPlayerRequests] = useState<MyPlayerRequestData[]>([])
     const [loading, setLoading] = useState(false)
 
-    const navigate = useNavigate()
 
     const getTimeLeft = (expiresAt: string | Date) => {
 
@@ -89,10 +90,8 @@ const MyPlayerRequests = () => {
 
             setMyPlayerRequests(res.playerRequests);
         } catch (error: any) {
-            toast.error(
-                error?.response?.data?.message ||
-                "Failed to load player requests"
-            );
+            toast.error(error?.response?.data?.message || "Failed to load player requests");
+            console.error(error)
         } finally {
             setLoading(false);
         }
@@ -110,17 +109,11 @@ const MyPlayerRequests = () => {
 
             fetchMyPlayerRequests()
 
-            toast.success(
-                res?.message ||
-                "Request deleted successfully"
-            );
+            toast.success(res?.message || "Request deleted successfully");
 
 
         } catch (error: any) {
-            toast.error(
-                error?.response?.data?.message ||
-                "Failed to delete request"
-            );
+            toast.error(error?.response?.data?.message || "Failed to delete request");
         }
     }
 
@@ -132,45 +125,36 @@ const MyPlayerRequests = () => {
 
                 {/* HEADER */}
 
-                {
-                    myPlayerRequests.length >= 1 && (
-                        <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                {myPlayerRequests.length >= 1 && (
+                    <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
 
-                            {/* LEFT */}
-                            <div>
+                        {/* LEFT */}
+                        <div>
+                            <h1 className="text-3xl font-bold tracking-wide sm:text-4xl">
+                                My <span className="text-cyan-400">Requests</span>
+                            </h1>
 
-                                <h1 className="text-3xl font-bold tracking-wide sm:text-4xl">
-                                    My <span className="text-cyan-400">Requests</span>
-                                </h1>
-
-                                <p className="mt-2 max-w-xl text-sm text-zinc-400">
-                                    Manage your recruitment posts and connect with skilled players.
-                                </p>
-
-                            </div>
-
-
-                            {/* RIGHT */}
-                            <button
-                                onClick={() => {
-                                    navigate("/create-request");
-                                }}
-                                className="
-      flex items-center justify-center gap-2
-       bg-cyan-400
-      px-5 py-3
-      font-medium text-black
-      transition hover:opacity-90
-      sm:w-auto
-    "
-                            >
-                                Create Request
-
-                                <Plus size={16} />
-                            </button>
+                            <p className="mt-2 max-w-xl text-sm text-zinc-400">
+                                Manage your recruitment posts and connect with skilled players.
+                            </p>
 
                         </div>
-                    )}
+
+
+                        {/* RIGHT */}
+                        <button
+                            onClick={() => {
+                                navigate("/create-request");
+                            }}
+                            className="flex items-center justify-center gap-2 bg-cyan-400 px-5 py-3 font-medium text-black transition hover:opacity-90 sm:w-auto"
+                        >
+                            Create Request
+
+                            <Plus size={16} />
+                        </button>
+
+                    </div>
+                )}
 
                 {/* TEAM REQUEST GRID */}
                 {

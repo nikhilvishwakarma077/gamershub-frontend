@@ -25,18 +25,7 @@ const ProfileCard = ({ profile }: ProfileCardProps) => {
 
     return (
         <div
-            className="
-                group
-                relative
-                overflow-hidden
-                border
-                border-zinc-800
-                bg-[#0b1120]
-                transition-all
-                duration-300
-                hover:border-cyan-500/40
-                hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]
-            "
+            className="group relative overflow-hidden border border-zinc-800 bg-[#0b1120] transition-all duration-300 hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]"
         >
 
             {/* TOP GLOW */}
@@ -71,15 +60,7 @@ const ProfileCard = ({ profile }: ProfileCardProps) => {
                         e.currentTarget.src =
                             "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                     }}
-                    className="
-                        relative
-                        z-10
-                        h-24
-                        w-24
-                        border
-                        border-cyan-500/30
-                        object-cover
-                    "
+                    className=" relative rounded-full z-10 h-24 w-24 border border-cyan-500/70 object-cover"
                 />
 
                 <h2 className="mt-5 text-xl font-bold text-white">
@@ -146,7 +127,7 @@ const ProfileCard = ({ profile }: ProfileCardProps) => {
                     className={`
                         border p-3 text-center text-sm font-semibold uppercase tracking-wide
                         ${statusStyles[
-                            profile?.availability.status as keyof typeof statusStyles
+                        profile?.availability.status as keyof typeof statusStyles
                         ] || "border-zinc-700 bg-zinc-800 text-zinc-300"}
                     `}
                 >
@@ -160,24 +141,7 @@ const ProfileCard = ({ profile }: ProfileCardProps) => {
 
                 <Link
                     to={`/profile/${profile?._id}`}
-                    className="
-                        flex
-                        w-full
-                        items-center
-                        justify-center
-                        gap-2
-                        border
-                        border-cyan-500
-                        bg-cyan-500/10
-                        px-4
-                        py-3
-                        font-semibold
-                        text-cyan-300
-                        transition-all
-                        duration-300
-                        hover:bg-cyan-500
-                        hover:text-black
-                    "
+                    className="flex w-full items-center justify-center gap-2 border border-cyan-500   bg-cyan-500/10 px-4 py-3 font-semibold text-cyan-300 transition-all duration-300 hover:bg-cyan-500 hover:text-black"
                 >
                     <Eye size={18} />
 

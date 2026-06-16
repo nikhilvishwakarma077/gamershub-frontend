@@ -16,22 +16,16 @@ const FindPlayer = () => {
     const [selectedJoiningType, setSelectedJoiningType] = useState("");
 
     const filteredRequests = useMemo(() => {
-        return playerRequests.filter((request) => {
-            const roleMatch =
-                !selectedRole ||
-                request.role === selectedRole;
 
-            const joiningTypeMatch =
-                !selectedJoiningType ||
-                request.joiningType === selectedJoiningType;
+        return playerRequests.filter((request) => {
+
+            const roleMatch = !selectedRole || request.role === selectedRole;
+
+            const joiningTypeMatch = !selectedJoiningType || request.joiningType === selectedJoiningType;
 
             return roleMatch && joiningTypeMatch;
         });
-    }, [
-        playerRequests,
-        selectedRole,
-        selectedJoiningType,
-    ]);
+    }, [playerRequests, selectedRole, selectedJoiningType]);
 
 
     const getTimeLeft = (expiresAt: string | Date) => {
@@ -42,9 +36,7 @@ const FindPlayer = () => {
 
         const diff = expiry - now;
 
-        if (diff <= 0) {
-            return "Expired";
-        }
+        if (diff <= 0) { return "Expired"; }
 
         const seconds = Math.floor(diff / 1000);
 
@@ -100,34 +92,26 @@ const FindPlayer = () => {
         return `${seconds} sec ago`;
     }
 
-    const fetchAllPlayerRequests =
-        useCallback(async () => {
+    const fetchAllPlayerRequests = useCallback(async () => {
 
-            try {
-                setLoading(true);
+        try {
+            setLoading(true);
 
-                const res =
-                    await getAllPlayerRequests();
+            const res = await getAllPlayerRequests();
 
-                setPlayerRequests(
-                    res.playerRequests || []
-                );
+            setPlayerRequests(res.playerRequests || []);
 
-            } catch (error: any) {
+        } catch (error: any) {
 
-                toast.error(
-                    error?.response?.data?.message ||
-                    "Failed to fetch player requests"
-                );
+            toast.error(error?.response?.data?.message || "Failed to fetch player requests");
+            console.error(error);
 
-                console.error(error);
+        } finally {
 
-            } finally {
+            setLoading(false);
+        }
 
-                setLoading(false);
-            }
-
-        }, []);
+    }, []);
 
     useEffect(() => {
         fetchAllPlayerRequests();
@@ -140,7 +124,8 @@ const FindPlayer = () => {
             {/* FLOATING WORLD LAYER */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-                {/* GRID BG */} <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
+                {/* GRID BG */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
 
                 {/* Glow Effects */}
                 <div className="absolute left-0 top-20 h-100 w-100 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -207,17 +192,7 @@ const FindPlayer = () => {
                                         onChange={(e) =>
                                             setSelectedRole(e.target.value)
                                         }
-                                        className="
-                                        w-full
-                                        border border-zinc-700
-                                        bg-[#09111f]
-                                        px-5 py-4
-                                        text-zinc-300
-                                        outline-none
-                                        transition-all
-                                        focus:border-cyan-500
-                                        lg:min-w-70
-                                    "
+                                        className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500 lg:min-w-70"
                                     >
                                         <option value="">
                                             All Roles
@@ -260,20 +235,9 @@ const FindPlayer = () => {
                                     <select
                                         value={selectedJoiningType}
                                         onChange={(e) =>
-                                            setSelectedJoiningType(
-                                                e.target.value
-                                            )
+                                            setSelectedJoiningType(e.target.value)
                                         }
-                                        className="
-                                        w-full
-                                        border border-zinc-700
-                                        bg-[#09111f]
-                                        px-5 py-4
-                                        text-zinc-300
-                                        outline-none
-                                        transition-all
-                                        focus:border-cyan-500
-                                    "
+                                        className="w-full border border-zinc-700 bg-[#09111f] px-5 py-4 text-zinc-300 outline-none transition-all focus:border-cyan-500"
                                     >
                                         <option value="">
                                             Joining Type
@@ -298,17 +262,7 @@ const FindPlayer = () => {
                                             setSelectedRole("");
                                             setSelectedJoiningType("");
                                         }}
-                                        className="
-                                        border
-                                        border-cyan-500
-                                        
-                                        px-5 py-4
-                                        font-semibold
-                                        text-black
-                                        transition-all
-                                        bg-green-500
-                                        hover:text-black
-                                    "
+                                        className="border border-cyan-500  px-5 py-4 font-semibold text-black transition-all bg-green-500 hover:text-black"
                                     >
                                         Reset Filters
                                     </button>
@@ -338,18 +292,7 @@ const FindPlayer = () => {
                 ) : filteredRequests.length < 1 ? (
 
                     <div
-                        className="
-                        flex
-                        min-h-80
-                        flex-col
-                        items-center
-                        justify-center
-                        border
-                        border-zinc-800
-                        bg-[#0b1120]
-                        p-8
-                        text-center
-                    "
+                        className="flex min-h-80  flex-col items-center justify-center border border-zinc-800  bg-[#0b1120]  p-8 text-center"
                     >
 
                         <div className="mb-4 text-5xl">

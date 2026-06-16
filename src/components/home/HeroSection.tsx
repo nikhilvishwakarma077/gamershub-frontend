@@ -65,27 +65,13 @@ const HeroSection = () => {
                 <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-6 pt-28 pb-16 lg:px-10">
 
                     <div
-                        className="
-                grid
-                w-full
-                items-center
-                gap-12
-                lg:grid-cols-2
-                lg:gap-20
-            "
+                        className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-20"
                     >
 
                         {/* RIGHT IMAGE - MOBILE FIRST */}
                         <div
-                            className="
-                    relative
-                    order-1
-                    flex
-                    items-center
-                    justify-center
-
-                    lg:order-2
-                "
+                            className="relative order-1 flex items-center justify-center
+                            lg:order-2"
                         >
                             {/* Main Cyan Glow */}
                             <div className="absolute left-1/2 top-1/2 h-180 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/20 blur-3xl" />
@@ -110,9 +96,7 @@ const HeroSection = () => {
 
                             {/* SLIDER */}
                             <div
-                                className="
-                        relative h-125 max-h-150 border border-cyan-500 w-full max-w-100 overflow-hidden rounded-2xl
-                    "
+                                className="relative h-125 max-h-150 border border-cyan-500 w-full max-w-100 overflow-hidden rounded-2xl"
                             >
                                 <div
                                     className="flex h-full transition-transform duration-700 ease-in-out"
@@ -125,12 +109,7 @@ const HeroSection = () => {
                                             key={index}
                                             src={image}
                                             alt={`hero-${index}`}
-                                            className="
-                                    h-full
-                                    w-full
-                                    shrink-0
-                                    object-cover
-                                "
+                                            className="h-full w-full shrink-0 object-cover"
                                         />
                                     ))}
                                 </div>
@@ -152,15 +131,8 @@ const HeroSection = () => {
 
                         {/* LEFT CONTENT */}
                         <div
-                            className="
-                    order-2
-                    mx-auto
-                    max-w-2xl
-                    text-left
-
-                    lg:order-1
-                    lg:mx-0
-                "
+                            className="order-2 mx-auto max-w-2xl text-left
+                            lg:order-1 lg:mx-0"
                         >
                             {/* Badge */}
                             <div className="mb-6 inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-[11px] font-semibold tracking-[0.25em] text-cyan-300 backdrop-blur-md sm:text-xs">

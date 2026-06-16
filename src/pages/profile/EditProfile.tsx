@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getProfileById, updateProfile } from "../../services/profileService";
 import type { UpdateProfileData } from "../../types/profile.types";
-import {
-  avatarOptions,
-  bannerOptions,
-} from "../../common/utils/profileImages";
+import { avatarOptions, bannerOptions } from "../../common/utils/profileImages";
 import { toast } from "react-toastify";
 
 
@@ -22,7 +19,7 @@ const EditProfile = () => {
   const [showBanners, setShowBanners] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
- 
+
   const [formData, setFormData] = useState<UpdateProfileData>({
     banner: "",
     avatar: "",
@@ -79,9 +76,7 @@ const EditProfile = () => {
 
 
   // INPUT CHANGE
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
@@ -100,7 +95,6 @@ const EditProfile = () => {
 
     const { name, value } = e.target;
 
-    // availability.status handle
     if (name === "availability") {
 
       setFormData((prev) => ({
@@ -154,10 +148,7 @@ const EditProfile = () => {
     }));
   };
 
-  const handleAchievementImageChange = (
-    index: number,
-    file: File | null
-  ) => {
+  const handleAchievementImageChange = (index: number, file: File | null) => {
     setFormData((prev) => {
       const updatedAchievements = [
         ...prev.achievements,
@@ -306,82 +297,27 @@ const EditProfile = () => {
     try {
       const multipartData = new FormData();
 
-      multipartData.append(
-        "username",
-        formData.username
-      );
+      multipartData.append("username", formData.username);
+      multipartData.append("uid", String(formData.uid));
+      multipartData.append("age", String(formData.age));
+      multipartData.append("avatar", formData.avatar);
+      multipartData.append("banner", formData.banner);
+      multipartData.append("bio", formData.bio);
+      multipartData.append("country", formData.country);
+      multipartData.append("role", formData.role);
 
-      multipartData.append(
-        "uid",
-        String(formData.uid)
-      );
-
-      multipartData.append(
-        "age",
-        String(formData.age)
-      );
-
-      multipartData.append(
-        "avatar",
-        formData.avatar
-      );
-
-      multipartData.append(
-        "banner",
-        formData.banner
-      );
-
-      multipartData.append(
-        "bio",
-        formData.bio
-      );
-
-      multipartData.append(
-        "country",
-        formData.country
-      );
-
-      multipartData.append(
-        "role",
-        formData.role
-      );
-
-      multipartData.append(
-        "languages",
-        JSON.stringify(
-          formData.languages
-        )
-      );
-
-      multipartData.append(
-        "socialLinks",
-        JSON.stringify(
-          formData.socialLinks
-        )
-      );
+      multipartData.append("languages", JSON.stringify(formData.languages));
+      multipartData.append("socialLinks", JSON.stringify(formData.socialLinks));
 
       multipartData.append(
         "stats",
         JSON.stringify({
           ...formData.stats,
 
-          kdRatio:
-            formData.stats.kdRatio === ""
-              ? 0
-              : Number(
-                formData.stats
-                  .kdRatio
-              ),
+          kdRatio: formData.stats.kdRatio === "" ? 0 : Number(formData.stats.kdRatio),
 
           headshotPercentage:
-            formData.stats
-              .headshotPercentage ===
-              ""
-              ? 0
-              : Number(
-                formData.stats
-                  .headshotPercentage
-              ),
+            formData.stats.headshotPercentage === "" ? 0 : Number(formData.stats.headshotPercentage),
         })
       );
 
@@ -391,59 +327,19 @@ const EditProfile = () => {
           ...formData.experience,
 
           level:
-            formData.experience
-              .level === ""
-              ? 1
-              : Number(
-                formData
-                  .experience
-                  .level
-              ),
+            formData.experience.level === "" ? 1 : Number(formData.experience.level),
 
           yearsPlaying:
-            formData.experience
-              .yearsPlaying ===
-              ""
-              ? 0
-              : Number(
-                formData
-                  .experience
-                  .yearsPlaying
-              ),
+            formData.experience.yearsPlaying === "" ? 0 : Number(formData.experience.yearsPlaying),
 
           esportsExperience:
-            formData.experience
-              .esportsExperience ===
-              ""
-              ? 0
-              : Number(
-                formData
-                  .experience
-                  .esportsExperience
-              ),
+            formData.experience.esportsExperience === "" ? 0 : Number(formData.experience.esportsExperience),
         })
       );
 
-      multipartData.append(
-        "availability",
-        JSON.stringify(
-          formData.availability
-        )
-      );
-
-      multipartData.append(
-        "clips",
-        JSON.stringify(
-          formData.clips
-        )
-      );
-
-      multipartData.append(
-        "teamHistory",
-        JSON.stringify(
-          formData.teamHistory
-        )
-      );
+      multipartData.append("availability", JSON.stringify(formData.availability));
+      multipartData.append("clips", JSON.stringify(formData.clips));
+      multipartData.append("teamHistory", JSON.stringify(formData.teamHistory));
 
       multipartData.append(
         "achievements",
@@ -451,14 +347,8 @@ const EditProfile = () => {
           formData.achievements.map(
             (achievement) => ({
               title: achievement.title,
-
-              image:
-                typeof achievement.image === "string"
-                  ? achievement.image
-                  : "",
-
-              hasNewImage:
-                achievement.image instanceof File,
+              image: typeof achievement.image === "string" ? achievement.image : "",
+              hasNewImage: achievement.image instanceof File,
             })
           )
         )
@@ -466,38 +356,22 @@ const EditProfile = () => {
 
       formData.achievements.forEach(
         (achievement) => {
-          if (
-            achievement.image &&
-            achievement.image instanceof
-            File
+          if (achievement.image && achievement.image instanceof File
           ) {
-            multipartData.append(
-              "achievementImages",
-              achievement.image
-            );
+            multipartData.append("achievementImages", achievement.image);
           }
         }
       );
 
-      const res =
-        await updateProfile(
-          multipartData
-        );
-
-      toast.success(
-        res?.message ||
-        "Profile updated successfully"
-      );
-
+      const res = await updateProfile(multipartData);
+      toast.success(res?.message || "Profile updated successfully");
       navigate("/my-profile");
-    } catch (error: any) {
-      console.error(error);
 
-      toast.error(
-        error?.response?.data
-          ?.message ||
-        "Failed to update profile"
-      );
+    } catch (error: any) {
+
+      console.error(error);
+      toast.error(error?.response?.data?.message || "Failed to update profile");
+
     } finally {
       setIsSubmitting(false);
     }
@@ -528,8 +402,7 @@ const EditProfile = () => {
           </button>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
+        <form onSubmit={handleSubmit}
           className="space-y-8"
         >
 
@@ -692,8 +565,6 @@ const EditProfile = () => {
 
               </div>
 
-
-
               <input
                 type="text"
                 name="username"
@@ -721,8 +592,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="w-full rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none"
-              />
+                className="w-full rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 outline-none" />
 
               <input
                 type="text"
@@ -745,14 +615,7 @@ const EditProfile = () => {
                       role: e.target.value,
                     })
                   }
-                  className="
-            w-full rounded-lg 
-            border border-zinc-700
-            bg-[#09111f]
-           p-3
-            outline-none
-            
-        "
+                  className="w-full rounded-lg border border-zinc-700 bg-[#09111f] p-3 outline-none"
                 >
 
                   <option value="">
@@ -882,13 +745,7 @@ const EditProfile = () => {
                   },
                 })
               }
-              className="
-            w-full rounded-md
-            border border-zinc-700
-            bg-[#111827]
-            px-4 py-3
-            outline-none
-        "
+              className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
             />
           </div>
 
@@ -912,13 +769,7 @@ const EditProfile = () => {
                   },
                 })
               }
-              className="
-            w-full rounded-md
-            border border-zinc-700
-            bg-[#111827]
-            px-4 py-3
-            outline-none
-        "
+              className="w-full rounded-md border border-zinc-700 bg-[#111827] px-4 py-3 outline-none"
             />
           </div>
 
@@ -942,20 +793,7 @@ const EditProfile = () => {
                     e.target.value
                   )
                 }
-                className="
-        w-full
-        rounded-lg
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-colors
-        focus:border-cyan-500
-        sm:text-base
-      "
+                className="w-full rounded-lg border border-zinc-700 bg-[#09111f]   px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
               />
 
               {/* KD Ratio */}
@@ -977,20 +815,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="
-        w-full
-        rounded-lg
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-colors
-        focus:border-cyan-500
-        sm:text-base
-      "
+                className="w-full rounded-lg border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
               />
 
               {/* Headshot Percentage */}
@@ -1012,20 +837,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="
-        w-full
-        rounded-lg
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-colors
-        focus:border-cyan-500
-        sm:text-base
-      "
+                className="w-full rounded-lg border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
               />
             </div>
           </div>
@@ -1061,23 +873,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="
-        w-full
-        rounded-md
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-all
-        duration-200
-        focus:border-cyan-500
-        focus:ring-2
-        focus:ring-cyan-500/20
-        sm:text-base
-      "
+                className="w-full rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 sm:text-base"
               />
 
               {/* Years Playing */}
@@ -1101,23 +897,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="
-        w-full
-        rounded-md
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-all
-        duration-200
-        focus:border-cyan-500
-        focus:ring-2
-        focus:ring-cyan-500/20
-        sm:text-base
-      "
+                className="w-full rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-cyan-500 focus:ring-2  focus:ring-cyan-500/20 sm:text-base"
               />
 
               {/* Esports Experience */}
@@ -1141,23 +921,7 @@ const EditProfile = () => {
                     });
                   }
                 }}
-                className="
-        w-full
-        rounded-md
-        border
-        border-zinc-700
-        bg-[#09111f]
-        px-4
-        py-3
-        text-sm
-        outline-none
-        transition-all
-        duration-200
-        focus:border-cyan-500
-        focus:ring-2
-        focus:ring-cyan-500/20
-        sm:text-base
-      "
+                className="w-full rounded-md border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 sm:text-base"
               />
 
             </div>
@@ -1370,125 +1134,124 @@ const EditProfile = () => {
           </div>
 
           {/* ACHIEVEMENTS */}
-<div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
-    <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h2 className="text-lg font-semibold sm:text-xl">
-            Achievements
-        </h2>
+          <div className="rounded-xl border border-zinc-800 bg-[#0b1120] p-4 sm:p-6">
+            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-lg font-semibold sm:text-xl">
+                Achievements
+              </h2>
 
-        <button
-            type="button"
-            onClick={() =>
-                addItem("achievements", {
+              <button
+                type="button"
+                onClick={() =>
+                  addItem("achievements", {
                     title: "",
                     image: null,
-                })
-            }
-            className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
-        >
-            Add Achievement
-        </button>
-    </div>
+                  })
+                }
+                className="w-full rounded-lg bg-cyan-500 px-4 py-2 text-sm font-medium text-black transition hover:bg-cyan-400 sm:w-auto"
+              >
+                Add Achievement
+              </button>
+            </div>
 
-    <div className="space-y-5">
-        {formData.achievements.map((ach, index) => (
-            <div
-                key={index}
-                className="rounded-xl border border-zinc-700 bg-[#09111f] p-4 sm:p-5"
-            >
-                {/* TOP */}
-                <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="space-y-5">
+              {formData.achievements.map((ach, index) => (
+                <div
+                  key={index}
+                  className="rounded-xl border border-zinc-700 bg-[#09111f] p-4 sm:p-5"
+                >
+                  {/* TOP */}
+                  <div className="mb-4 flex items-center justify-between gap-3">
                     <h3 className="text-xs text-zinc-400 sm:text-sm">
-                        Achievement #{index + 1}
+                      Achievement #{index + 1}
                     </h3>
 
                     {formData.achievements.length > 1 && (
-                        <button
-                            type="button"
-                            onClick={() =>
-                                removeItem(
-                                    "achievements",
-                                    index
-                                )
-                            }
-                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
-                        >
-                            ✕
-                        </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          removeItem(
+                            "achievements",
+                            index
+                          )
+                        }
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-red-500 text-red-400 transition hover:bg-red-500/10"
+                      >
+                        ✕
+                      </button>
                     )}
-                </div>
+                  </div>
 
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     {/* TITLE */}
                     <div>
-                        <label className="mb-2 block text-xs font-medium text-zinc-400">
-                            Achievement Title
-                        </label>
+                      <label className="mb-2 block text-xs font-medium text-zinc-400">
+                        Achievement Title
+                      </label>
 
-                        <input
-                            type="text"
-                            placeholder="Enter achievement title"
-                            value={ach.title}
-                            onChange={(e) =>
-                                handleArrayChange(
-                                    "achievements",
-                                    index,
-                                    "title",
-                                    e.target.value
-                                )
-                            }
-                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
-                        />
+                      <input
+                        type="text"
+                        placeholder="Enter achievement title"
+                        value={ach.title}
+                        onChange={(e) =>
+                          handleArrayChange(
+                            "achievements",
+                            index,
+                            "title",
+                            e.target.value
+                          )
+                        }
+                        className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition-colors focus:border-cyan-500 sm:text-base"
+                      />
                     </div>
 
                     {/* IMAGE */}
                     <div>
-                        <label className="mb-2 block text-xs font-medium text-zinc-400">
-                            Achievement Image
-                        </label>
+                      <label className="mb-2 block text-xs font-medium text-zinc-400">
+                        Achievement Image
+                      </label>
 
-                        <input
-                            type="file"
-                            accept="image/png,image/jpeg,image/webp"
-                            onChange={(e) =>
-                                handleAchievementImageChange(
-                                    index,
-                                    e.target.files?.[0] ||
-                                        null
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        onChange={(e) =>
+                          handleAchievementImageChange(
+                            index,
+                            e.target.files?.[0] ||
+                            null
+                          )
+                        }
+                        className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-cyan-500 file:px-3 file:py-2 file:text-black file:cursor-pointer"
+                      />
+
+                      {ach.image && (
+                        <div className="mt-4 flex justify-center sm:justify-start">
+                          <img
+                            src={
+                              typeof ach.image ===
+                                "string"
+                                ? ach.image
+                                : URL.createObjectURL(
+                                  ach.image
                                 )
                             }
-                            className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-cyan-500 file:px-3 file:py-2 file:text-black file:cursor-pointer"
-                        />
-
-                        {ach.image && (
-                            <div className="mt-4 flex justify-center sm:justify-start">
-                                <img
-                                    src={
-                                        typeof ach.image ===
-                                        "string"
-                                            ? ach.image
-                                            : URL.createObjectURL(
-                                                  ach.image
-                                              )
-                                    }
-                                    alt="Achievement"
-                                    className="h-28 w-28 rounded-xl border border-zinc-700 object-cover sm:h-32 sm:w-32 md:h-36 md:w-36"
-                                />
-                            </div>
-                        )}
+                            alt="Achievement"
+                            className="h-28 w-28 rounded-xl border border-zinc-700 object-cover sm:h-32 sm:w-32 md:h-36 md:w-36"
+                          />
+                        </div>
+                      )}
                     </div>
+                  </div>
                 </div>
+              ))}
             </div>
-        ))}
-    </div>
-</div>
+          </div>
 
           {/* SUBMIT */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full  disabled:opacity-60
-                            disabled:cursor-not-allowed  bg-cyan-500 py-4 text-lg font-semibold text-black"
+            className="w-full  disabled:opacity-60 disabled:cursor-not-allowed bg-cyan-500 py-4 text-lg font-semibold text-black"
           >
             {isSubmitting ? "Saving..." : "Save Profile"}
           </button>
