@@ -13,6 +13,8 @@ export const avatarOptions = [
   "avatar10.webp",
   "avatar11.webp",
   "avatar12.webp",
+  "avatar13.webp",
+  "avatar14.webp",
   
 ];
 
@@ -23,4 +25,6 @@ export const bannerOptions = [
   "banner4.webp",
   "banner5.webp",
   "banner6.webp",
+  "banner7.webp",
+  "banner8.webp",
 ];
