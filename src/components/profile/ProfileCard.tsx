@@ -1,4 +1,5 @@
-import { Globe, ShieldCheck, Eye } from "lucide-react";
+// import { Globe, ShieldCheck, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { ProfileCards } from "../../types/profile.types";
 
