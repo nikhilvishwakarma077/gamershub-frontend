@@ -25,16 +25,19 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
 
                     <div className="flex min-w-0 items-center gap-3">
 
-                        <div
-                            className="flex h-11 w-11 shrink-0 items-center justify-center border border-cyan-500/30 bg-cyan-500/10 text-sm font-bold text-cyan-300"
-                        >
-                            {requests.userId.username.slice(0, 2)}
-                        </div>
+                        <img src={`/public/avatars/${requests.profileId.avatar}`}
+                            onError={(e) => {
+                                e.currentTarget.src =
+                                    "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                            }}
+                            className="flex h-11 w-11 shrink-0 rounded-full items-center justify-center border border-cyan-500 bg-cyan-500/10 text-sm font-bold text-cyan-300"
+                        />
+
 
                         <div className="min-w-0">
 
                             <h2 className="truncate text-base font-bold text-white">
-                                {requests.userId.username}
+                                {requests.profileId.username}
                             </h2>
 
                             <p className="truncate text-xs text-zinc-500">
@@ -57,7 +60,7 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
                     <div>
 
                         <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
-                            Looking For
+                            Need
                         </p>
 
                         <h3 className="mt-2 text-lg font-black uppercase text-cyan-300">
@@ -125,7 +128,7 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
                         <Languages size={14} />
 
                         <span className="text-[10px] uppercase tracking-wider">
-                            Languages
+                            Languages comfortable with
                         </span>
 
                     </div>
@@ -174,7 +177,7 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
                     </a>
 
                     <Link
-                        to={`/profile/${requests.profileId}`}
+                        to={`/profile/${requests.profileId._id}`}
                         className="flex w-full items-center justify-center border border-zinc-700 bg-[#09111f] px-4 py-3 text-sm font-semibold text-white transition-all hover:border-cyan-500/40"
                     >
                         View Profile

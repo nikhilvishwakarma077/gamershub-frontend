@@ -177,28 +177,29 @@ const Navbar = () => {
                 </div>
 
                 {/* MOBILE */}
-                <div className="flex items-center gap-3 md:hidden">
+                <div className="md:hidden flex items-center justify-end gap-3">
 
                     {!user ? (
                         <NavLink
                             to="/login"
                             className={({ isActive }) =>
-                                ` border px-4 py-2 text-sm font-semibold
-                            ${isActive ? "border-cyan-400 bg-cyan-400 text-black"
-                                    : "border-cyan-400 text-cyan-400"}`}>
+                                `flex h-10 items-center justify-center rounded-lg border px-4 text-sm font-semibold transition
+                                ${isActive
+                                    ? "border-cyan-400 bg-cyan-400 text-black"
+                                    : "border-cyan-400 text-cyan-400 hover:bg-cyan-400/10"
+                                }`
+                            }
+                        >
                             Login
                         </NavLink>
                     ) : (
                         <div className="relative">
 
                             <button
-                                onClick={() =>
-                                    setProfileMenu(!profileMenu)
-                                }
+                                onClick={() => setProfileMenu(!profileMenu)}
+                                className="flex h-11 w-11 items-center justify-center rounded-full"
                             >
-
                                 {user?.avatarUrl ? (
-
                                     <img
                                         src={`/avatars/${user.avatarUrl}`}
                                         alt="profile"
@@ -206,51 +207,58 @@ const Navbar = () => {
                                             e.currentTarget.src =
                                                 "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                                         }}
-                                        className="h-9 w-9 rounded-full
-                                        border border-cyan-400/40
-                                        object-cover"
+                                        className="h-10 w-10 rounded-full border border-cyan-400/40 object-cover"
                                     />
                                 ) : (
-
                                     <UserCircle2
-                                        size={34}
+                                        size={38}
                                         className="text-cyan-400"
                                     />
                                 )}
                             </button>
 
                             {profileMenu && (
-                                <div className="absolute right-0 mt-3 w-48 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900">
+                                <div className="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-xl">
+
+                                    <div className="border-b border-zinc-800 px-4 py-3">
+                                        <p className="font-semibold text-white">
+                                            {user.username}
+                                        </p>
+
+                                        <p className="truncate text-sm text-zinc-400">
+                                            {user.email}
+                                        </p>
+                                    </div>
 
                                     <NavLink
                                         to="/my-profile"
-                                        onClick={() =>
-                                            setProfileMenu(false)
-                                        }
+                                        onClick={() => setProfileMenu(false)}
                                         className={({ isActive }) =>
-                                            `block px-4 py-3
-                                        ${isActive ? "bg-zinc-800 text-cyan-400"
+                                            `block px-4 py-3 transition ${isActive
+                                                ? "bg-zinc-800 text-cyan-400"
                                                 : "text-zinc-300 hover:bg-zinc-800"
-                                            }`}>
+                                            }`
+                                        }
+                                    >
                                         My Profile
                                     </NavLink>
 
                                     <NavLink
                                         to="/my-requests"
-                                        onClick={() =>
-                                            setProfileMenu(false)
-                                        }
+                                        onClick={() => setProfileMenu(false)}
                                         className={({ isActive }) =>
-                                            `block px-4 py-3
-                                        ${isActive ? "bg-zinc-800 text-cyan-400"
+                                            `block px-4 py-3 transition ${isActive
+                                                ? "bg-zinc-800 text-cyan-400"
                                                 : "text-zinc-300 hover:bg-zinc-800"
-                                            }`}>
+                                            }`
+                                        }
+                                    >
                                         My Requests
                                     </NavLink>
 
                                     <button
                                         onClick={logoutHandler}
-                                        className="w-full px-4 py-3 text-left text-red-400 hover:bg-red-500/10"
+                                        className="w-full px-4 py-3 text-left text-red-400 transition hover:bg-red-500/10"
                                     >
                                         Logout
                                     </button>
@@ -261,10 +269,8 @@ const Navbar = () => {
 
                     {/* MOBILE MENU BUTTON */}
                     <button
-                        onClick={() =>
-                            setMobileMenu(!mobileMenu)
-                        }
-                        className="text-white"
+                        onClick={() => setMobileMenu(!mobileMenu)}
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition hover:bg-zinc-800"
                     >
                         {mobileMenu ? (
                             <X size={28} />

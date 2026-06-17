@@ -98,6 +98,7 @@ const FindPlayer = () => {
             setLoading(true);
 
             const res = await getAllPlayerRequests();
+            console.log(res.playerRequests)
 
             setPlayerRequests(res.playerRequests || []);
 
