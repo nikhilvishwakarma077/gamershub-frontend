@@ -27,4 +27,5 @@ export const bannerOptions = [
   "banner6.webp",
   "banner7.webp",
   "banner8.webp",
+  "banner9.webp",
 ];

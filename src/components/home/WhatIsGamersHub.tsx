@@ -1,7 +1,7 @@
 import gamerCharacter from "../../assets/gamerCharacter.webp"
 
 const WhatIsGamersHub = () => {
-    return (
+    return ( 
         <section className="relative overflow-hidden bg-black py-20 sm:py-24">
             {/* Decorative Background */}
             <div className="absolute inset-0">

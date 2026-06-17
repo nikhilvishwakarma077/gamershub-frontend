@@ -37,7 +37,7 @@ const Footer = () => {
 
               <li>
                 <a
-                  href="/find-players"
+                  href="/find-player"
                   className="text-sm text-zinc-400 transition-colors duration-300 hover:text-cyan-400"
                 >
                   Find Players

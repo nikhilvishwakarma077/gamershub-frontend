@@ -18,6 +18,7 @@ import MyPlayerRequests from "./pages/findPlayer/MyPlayerRequests";
 import CreatePlayerRequest from "./pages/findPlayer/CreatePlayerRequest";
 import FindPlayer from "./pages/findPlayer/FindPlayer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ScrollToTop from "./common/ui/ScrollToTob";
 
 
 const App = () => {
@@ -50,18 +51,19 @@ const App = () => {
   return (
     <>
       <ToastContainer
-  position="top-center"
-  autoClose={3000}
-  hideProgressBar={false}
-  newestOnTop
-  closeOnClick
-  pauseOnHover
-  draggable
-  theme="dark"
-  toastClassName="custom-toast"
-  className="custom-toast-body"
-/>
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="dark"
+        toastClassName="custom-toast"
+        className="custom-toast-body"
+      />
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

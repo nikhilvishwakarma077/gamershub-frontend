@@ -20,9 +20,9 @@ const ProfileCardSkeleton = () => {
             </div>
 
             {/* AVATAR */}
-            <div className="flex flex-col items-center px-6 pt-6 text-center">
+            <div className="flex flex-col items-center  px-6 pt-6 text-center">
 
-                <div className="h-24 w-24 bg-zinc-800" />
+                <div className="h-24 w-24 bg-zinc-800 rounded-full" />
 
                 <div className="mt-5 h-6 w-36 bg-zinc-700" />
 

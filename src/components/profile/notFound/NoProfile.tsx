@@ -12,8 +12,7 @@ const NoProfile = () => {
                     flex-col items-center justify-center
                     border border-cyan-400/10
                     bg-[#0b1120]
-                    p-8 text-center
-                "
+                    p-8 text-center"
             >
 
                 {/* ICON */}
@@ -22,8 +21,7 @@ const NoProfile = () => {
                         flex h-24 w-24 items-center justify-center
                         rounded-full
                         border border-cyan-400/10
-                        bg-[#09111f]
-                    "
+                        bg-[#09111f]"
                 >
                     <UserCircle2
                         size={52}

@@ -48,7 +48,7 @@ const Profiles = () => {
 
             {/* FLOATING WORLD LAYER */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {/* GRID BG */} 
+                {/* GRID BG */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[32px_32px] opacity-30" />
 
                 {/* Glow Effects */}
@@ -170,10 +170,18 @@ const Profiles = () => {
                     ) : filteredProfiles.length < 1 ? (
 
                         <div
-                            className="col-span-full flex min-h-80 flex-col items-center justify-center rounded-3xl border border-zinc-800 bg-[#0b1120] p-8 text-center"
+                            className="col-span-full flex min-h-80 flex-col items-center justify-center  border border-zinc-800 bg-[#0b1120] p-8 text-center"
                         >
                             <div className="mb-4 text-5xl">
-                                🎮
+                                <img
+                                    src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`}
+                                    onError={(e) => {
+                                        e.currentTarget.src =
+                                            "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                                    }}
+                                    alt="profile"
+                                    className="h-12 w-12 rounded-full border border-cyan-400/40 object-cover transition duration-300 hover:scale-110"
+                                />
                             </div>
 
                             <h2 className="text-2xl font-bold text-white">

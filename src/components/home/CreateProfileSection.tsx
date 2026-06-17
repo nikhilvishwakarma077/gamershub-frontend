@@ -70,7 +70,7 @@ const CreateProfilesSection = () => {
 
                         {/* CTA */}
                         <button
-                        onClick={()=>{navigate("/profiles")}}
+                            onClick={() => { navigate("/profiles") }}
 
                             className="
                                 group
@@ -109,7 +109,7 @@ const CreateProfilesSection = () => {
                         {/* Ring */}
                         <div className="absolute h-62.5 w-62.5 rounded-full border border-cyan-500/10 sm:h-87.5 sm:w-87.5 lg:h-105 lg:w-105" />
 
-                         {/* Decorative Shape 1 */}
+                        {/* Decorative Shape 1 */}
                         <div className="absolute left-0 top-10 h-20 w-20 rotate-12 border border-cyan-500/20 bg-cyan-500/15 backdrop-blur-md animate-rotate-slow" />
 
                         {/* Decorative Shape 2 */}
@@ -126,15 +126,9 @@ const CreateProfilesSection = () => {
                                 animate-character-float
                                 relative
                                 z-10
-                                h-auto
-                                w-full
-                                max-w-65
+                                h-auto max-h-175 w-full max-w-125
                                 object-contain
-                                drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]
-                                sm:max-w-85
-                                md:max-w-105
-                                lg:max-w-125
-                            "
+                                drop-shadow-[0_0_40px_rgba(6,182,212,0.35)]"
                         />
                     </div>
                 </div>
