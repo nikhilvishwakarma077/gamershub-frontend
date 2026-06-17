@@ -109,7 +109,7 @@ const MyProfile = () => {
     }
 
     if (!myProfileData) {
-        return <NoProfile />;
+        return <NoProfile />; 
     }
     return (
         <div className="min-h-screen py-20 bg-[#050816] text-white">

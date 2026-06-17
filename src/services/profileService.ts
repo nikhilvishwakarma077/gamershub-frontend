@@ -24,6 +24,7 @@ export const createProfile = async (data: FormData) => {
 
 export const updateProfile = async (data: FormData) => {
     const res = await API.put(`/profile/`, data)
+    console.log(res.data)
     return res.data
 }
 

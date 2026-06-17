@@ -86,35 +86,31 @@ const EditProfile = () => {
   };
 
   const handleChangeForAvailability = (
-    e: React.ChangeEvent<
-      HTMLInputElement |
-      HTMLTextAreaElement |
-      HTMLSelectElement
-    >
-  ) => {
+  e: React.ChangeEvent<
+    HTMLInputElement |
+    HTMLTextAreaElement |
+    HTMLSelectElement
+  >
+) => {
+  const { name, value } = e.target;
 
-    const { name, value } = e.target;
-
-    if (name === "availability") {
-
-      setFormData((prev) => ({
-        ...prev,
-
-        availability: {
-          ...formData,
-          status: e.target.value
-        },
-      }));
-
-      return;
-    }
-
-    // normal fields
+  if (name === "availability") {
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      availability: {
+        ...prev.availability,
+        status: value,
+      },
     }));
-  };
+
+    return;
+  }
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
 
   // NESTED CHANGE
   const handleNestedChange = (
@@ -341,7 +337,7 @@ const EditProfile = () => {
       multipartData.append("clips", JSON.stringify(formData.clips));
       multipartData.append("teamHistory", JSON.stringify(formData.teamHistory));
 
-      multipartData.append(
+      multipartData.append( 
         "achievements",
         JSON.stringify(
           formData.achievements.map(
@@ -354,7 +350,7 @@ const EditProfile = () => {
         )
       );
 
-      formData.achievements.forEach(
+      formData.achievements.forEach( 
         (achievement) => {
           if (achievement.image && achievement.image instanceof File
           ) {
@@ -362,6 +358,9 @@ const EditProfile = () => {
           }
         }
       );
+      // for (const [key, value] of multipartData.entries()) {
+      //   console.log(key, value);
+      // }
 
       const res = await updateProfile(multipartData);
       toast.success(res?.message || "Profile updated successfully");
