@@ -25,14 +25,14 @@ const FindPlayerCard = ({ requests, getTimeAgo, getTimeLeft }: FindPlayerCardPro
 
                     <div className="flex min-w-0 items-center gap-3">
 
-                        <img src={`/public/avatars/${requests.profileId.avatar}`}
+                        <img src={`/avatars/${requests.profileId.avatar}`}
                             onError={(e) => {
                                 e.currentTarget.src =
                                     "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                             }}
                             className="flex h-11 w-11 shrink-0 rounded-full items-center justify-center border border-cyan-500 bg-cyan-500/10 text-sm font-bold text-cyan-300"
-                        />
-
+                        />  
+ 
 
                         <div className="min-w-0">
 

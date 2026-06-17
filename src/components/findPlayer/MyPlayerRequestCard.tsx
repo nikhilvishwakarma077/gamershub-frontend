@@ -28,7 +28,7 @@ const MyPlayerRequestCard = ({
 
                     <div className="flex min-w-0 items-center gap-3">
 
-                        <img src={`/public/avatars/${requests.profileId.avatar}`}
+                        <img src={`/avatars/${requests.profileId.avatar}`}
                             onError={(e) => {
                                 e.currentTarget.src =
                                     "https://cdn-icons-png.flaticon.com/512/149/149071.png";
