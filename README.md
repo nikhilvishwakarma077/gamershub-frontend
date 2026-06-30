@@ -1,61 +1,157 @@
-# GamersHub Frontend
+# 🎮 GamersHub Frontend
 
-A modern esports networking platform frontend built with React, TypeScript, Tailwind CSS, and Zustand.
+> A modern esports social platform frontend built with React, Vite, Tailwind CSS, and Authentication.
 
-## Features
+> ⚠️ **This repository contains only the frontend application.**
+>
+> Backend Repository:
+> https://github.com/nikhilvishwakarma077/gamershub-backend
 
-* Secure authentication with HTTP-only cookies
-* Create and manage gaming profiles
-* Custom avatar and banner selection
-* Player discovery system
-* Create and manage player requests
-* Protected routes for authenticated users
-* Responsive gaming-inspired UI
-* Global state management using Zustand
+---
 
-## Tech Stack
+# 🚀 Live Demo
 
-* React
-* TypeScript
-* Tailwind CSS
-* React Router DOM
-* Axios
-* Zustand
-* Lucide React
+🔗 https://gamershub-ffm.vercel.app/
 
-## Installation
+---
 
-```bash
-git clone <frontend-repository-url>
-cd gamershub-frontend
+# ✨ Features
 
-npm install
+- Modern gaming-inspired UI
+- Authentication 
+- User Profiles
+- Banner & Avatar selection
+- Cloudinary Image Integration
+- Post(Find player) Feed
+- Auto delete post feature
+- Player Statistics
+- Responsive Design
+- Protected Routes
+- Toast Notifications
+- Loading Skeletons
+- API Integration
+- Optimized Production Build
+
+---
+
+# 🛠 Tech Stack
+
+Frontend
+
+- React
+- Typescript
+- Vite
+- TailwindCSS
+- React Router
+- Axios
+- Cloudinary
+- React Hot Toast
+
+Backend
+
+- Node.js
+- Express
+- MongoDB
+- Typescript
+- JWT
+- Cloudinary
+
+Deployment
+
+- Vercel
+- Render
+
+---
+
+# 🏗 Architecture Overview
+
+```
+Browser
+      │
+      ▼
+React + Vite
+      │
+Axios API
+      │
+      ▼
+Express Backend
+      │
+MongoDB
+      │
+Cloudinary
 ```
 
-## Environment Variables
+---
 
-Create a `.env` file in the root directory.
+# 📸 Screenshots
 
-```env
-VITE_API_URL=http://localhost:5000/api
-```
+## Home
 
-## Run Locally
+![Home page](/frontend/public/readmeImgs/homePage.png)
 
-```bash
-npm run dev
-```
+---
 
-## Build for Production
+## Profile
 
-```bash
-npm run build
-```
+![Player profile](/frontend/public/readmeImgs/playerProfile.png)
 
-## Live Demo
+---
 
-https://gamershub-frontend-two.vercel.app/
+## Feed
 
-## Author
+![Player profiles](/frontend/public/readmeImgs/profileFeed.png)
+
+---
+
+## Find player feed
+
+![Find player post](/frontend/public/readmeImgs/findPlayerFeed.png)
+
+---
+
+# 🔗 API
+
+This frontend communicates with:
+
+GamersHub Backend API
+
+Authentication
+
+Profiles
+
+Find Player Posts
+
+Achievements Uploads
+
+---
+
+# 🚀 Future Improvements
+
+- Friend Requests
+- Notifications
+- Tournament Module
+- Leaderboards
+- Dark/Light Theme
+- Infinite Feed
+
+
+---
+
+# 📄 License
+
+MIT License
+
+---
+
+# 👨‍💻 Author
 
 Nikhil Vishwakarma
+
+[Portfolio](https://portfolio-nikhil077.vercel.app/)
+
+[GitHub](https://github.com/nikhilvishwakarma077)
+
+[LinkedIn](https://www.linkedin.com/in/nikhil-vishwakarma-874776376)
+
+
+
