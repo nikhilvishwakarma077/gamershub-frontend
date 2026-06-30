@@ -87,25 +87,25 @@ Cloudinary
 
 ## Home
 
-![Home page](/frontend/public/readmeImgs/homePage.png)
+![Home page](./public/readmeImgs/homePage.png)
 
 ---
 
 ## Profile
 
-![Player profile](/frontend/public/readmeImgs/playerProfile.png)
+![Player profile](./public/readmeImgs/playerProfile.png)
 
 ---
 
 ## Feed
 
-![Player profiles](/frontend/public/readmeImgs/profileFeed.png)
+![Player profiles](./public/readmeImgs/profileFeed.png)
 
 ---
 
 ## Find player feed
 
-![Find player post](/frontend/public/readmeImgs/findPlayerFeed.png)
+![Find player post](./public/readmeImgs/findPlayerFeed.png)
 
 ---
 
