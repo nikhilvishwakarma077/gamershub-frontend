@@ -82,6 +82,14 @@ const Navbar = () => {
                         Find Player
                     </NavLink>
 
+                    <NavLink
+                        to="/clips"
+                        onClick={() => setProfileMenu(false)}
+                        className={navLinkClass}
+                    >
+                        Clips
+                    </NavLink>
+
                     {!user ? (
 
                         <NavLink
@@ -121,6 +129,8 @@ const Navbar = () => {
 
                                 )}
                             </button>
+
+
 
                             {profileMenu && (
 
@@ -176,14 +186,27 @@ const Navbar = () => {
                     )}
                 </div>
 
+
                 {/* MOBILE */}
                 <div className="md:hidden flex items-center justify-end gap-3">
+
+                    {/* MOBILE MENU BUTTON */}
+                    <button
+                        onClick={() => setMobileMenu(!mobileMenu)}
+                        className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition hover:bg-zinc-800"
+                    >
+                        {mobileMenu ? (
+                            <X size={28} />
+                        ) : (
+                            <Menu size={28} />
+                        )}
+                    </button>
 
                     {!user ? (
                         <NavLink
                             to="/login"
                             className={({ isActive }) =>
-                                `flex h-10 items-center justify-center rounded-lg border px-4 text-sm font-semibold transition
+                                `flex h-10 items-center justify-center  border px-4 text-sm font-semibold transition
                                 ${isActive
                                     ? "border-cyan-400 bg-cyan-400 text-black"
                                     : "border-cyan-400 text-cyan-400 hover:bg-cyan-400/10"
@@ -267,17 +290,6 @@ const Navbar = () => {
                         </div>
                     )}
 
-                    {/* MOBILE MENU BUTTON */}
-                    <button
-                        onClick={() => setMobileMenu(!mobileMenu)}
-                        className="flex h-11 w-11 items-center justify-center rounded-lg text-white transition hover:bg-zinc-800"
-                    >
-                        {mobileMenu ? (
-                            <X size={28} />
-                        ) : (
-                            <Menu size={28} />
-                        )}
-                    </button>
                 </div>
             </div>
 
@@ -310,6 +322,18 @@ const Navbar = () => {
                             ${isActive ? "text-cyan-400" :
                                     "text-zinc-300 hover:text-cyan-400"}`}>
                             Find Player
+                        </NavLink>
+
+                        <NavLink
+                            onClick={() =>
+                                setMobileMenu(false)
+                            }
+                            to="/clips"
+                            className={({ isActive }) =>
+                                ` py-3 
+                            ${isActive ? "text-cyan-400" :
+                                    "text-zinc-300 hover:text-cyan-400"}`}>
+                            Clips
                         </NavLink>
                     </div>
                 </div>

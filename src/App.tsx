@@ -19,6 +19,8 @@ import CreatePlayerRequest from "./pages/findPlayer/CreatePlayerRequest";
 import FindPlayer from "./pages/findPlayer/FindPlayer";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollToTop from "./common/ui/ScrollToTob";
+import Clips from "./pages/clips/Clips";
+import FeaturedTournaments from "./components/home/FeaturedTournaments";
 
 
 const App = () => {
@@ -71,6 +73,8 @@ const App = () => {
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/find-player" element={<FindPlayer />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/clips" element={<Clips />} />
+        <Route path="/clip" element={<FeaturedTournaments />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/my-profile" element={<MyProfile />} />

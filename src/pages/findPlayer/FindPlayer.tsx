@@ -120,7 +120,7 @@ const FindPlayer = () => {
 
 
     return (
-        <section className="relative min-h-screen overflow-hidden bg-[#050816] px-4 pt-28 pb-16 text-white">
+        <section className="relative min-h-screen overflow-hidden bg-[#050816] px-4 pt-20 pb-16 text-white">
 
             {/* FLOATING WORLD LAYER */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
