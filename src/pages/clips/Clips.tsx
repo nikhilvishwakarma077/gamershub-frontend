@@ -51,15 +51,36 @@ const Clips = () => {
         return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//i.test(url);
     };
 
+
     const getYoutubeEmbedUrl = (url: string) => {
+        if (!url) return "";
 
-        const match = url.match(
-            /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^?&/]+)/
-        );
+        // Shorts URL
+        if (url.includes("/shorts/")) {
+            const id = url.split("/shorts/")[1].split("?")[0];
+            return `https://www.youtube.com/embed/${id}`;
+        }
 
-        return match
-            ? `https://www.youtube.com/embed/${match[1]}`
-            : "";
+        // youtu.be URL
+        if (url.includes("youtu.be/")) {
+            const id = url.split("youtu.be/")[1].split("?")[0];
+            return `https://www.youtube.com/embed/${id}`;
+        }
+
+        // watch?v=
+        if (url.includes("watch?v=")) {
+            const id = new URL(url).searchParams.get("v");
+            return id
+                ? `https://www.youtube.com/embed/${id}`
+                : "";
+        }
+
+        // already embed URL
+        if (url.includes("/embed/")) {
+            return url;
+        }
+
+        return "";
     };
 
     const fetchClips = async () => {
@@ -244,19 +265,13 @@ const Clips = () => {
 
                                 {/* Thumbnail */}
                                 <div
+
                                     onClick={() => {
-
                                         if (isYoutubeUrl(clip.clipUrl)) {
-                                            setSelectedVideo(
-                                                getYoutubeEmbedUrl(clip.clipUrl)
-                                            );
+                                            setSelectedVideo(getYoutubeEmbedUrl(clip.clipUrl));
                                         } else {
-                                            window.open(
-                                                clip.clipUrl,
-                                                "_blank"
-                                            );
+                                            window.open(clip.clipUrl, "_blank");
                                         }
-
                                     }}
                                     className="relative overflow-hidden">
 
@@ -344,13 +359,16 @@ const Clips = () => {
                             <iframe
                                 src={selectedVideo}
                                 className="h-full w-full"
-                                allow="accelerometer;
-                                        autoplay;
-                                        clipboard-write;
-                                        encrypted-media;
-                                        gyroscope;
-                                        picture-in-picture;
-                                        web-share"
+                                allow="
+                                accelerometer;
+                                autoplay;
+                                clipboard-write;
+                                encrypted-media;
+                                gyroscope;
+                                picture-in-picture;
+                                web-share"
+
+                                referrerPolicy="strict-origin-when-cross-origin"
                                 allowFullScreen
                             />
 

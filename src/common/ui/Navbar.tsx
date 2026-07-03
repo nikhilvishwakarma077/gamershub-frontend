@@ -119,7 +119,7 @@ const Navbar = () => {
                                                 "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                                         }}
                                         alt="profile"
-                                        className="h-9 w-9 rounded-full border border-cyan-400/40 object-cover transition duration-300 hover:scale-110"
+                                        className="h-9 w-9 rounded-full border border-cyan-400/40 object-cover cursor-pointer transition duration-300 hover:scale-110"
                                     />
                                 ) : (
                                     <UserCircle2
