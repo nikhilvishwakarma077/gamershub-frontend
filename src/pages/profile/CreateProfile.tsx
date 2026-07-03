@@ -151,11 +151,37 @@ const CreateProfile = () => {
         }));
     };
 
+    const isValidClipUrl = (url: string) => {
+        const youtubeRegex =
+            /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=[\w-]{11}([&?].*)?|shorts\/[\w-]+([?].*)?)|youtu\.be\/[\w-]{11}([?].*)?)$/i;
+
+        const instagramRegex =
+            /^(https?:\/\/)?(www\.)?instagram\.com\/reel\/[A-Za-z0-9_-]+\/?(\?.*)?$/i;
+
+        return youtubeRegex.test(url) || instagramRegex.test(url);
+    };
+
+    const validateClips = () => {
+        for (let i = 0; i < formData.clips.length; i++) {
+            const clip = formData.clips[i];
+
+            if (!clip.clipUrl.trim()) continue;
+
+            if (!isValidClipUrl(clip.clipUrl.trim())) {
+                toast.error(`Clip ${i + 1}: Invalid URL.`);
+                return false;
+            }
+        }
+
+        return true;
+    };
+
 
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!validateClips()) return;
         if (isSubmitting) return;
 
         setIsSubmitting(true);
@@ -1067,6 +1093,16 @@ const CreateProfile = () => {
                                                     e.target.value
                                                 )
                                             }
+
+                                            onBlur={(e) => {
+                                                const value = e.target.value.trim();
+
+                                                if (value && !isValidClipUrl(value)) {
+                                                    toast.error(
+                                                        "Please enter a valid YouTube Video, YouTube Shorts or Instagram Reel URL."
+                                                    );
+                                                }
+                                            }}
                                             className="w-full rounded-lg border border-zinc-700 bg-[#0b1120] p-3 text-sm outline-none transition focus:border-cyan-500 sm:text-base"
                                         />
 
