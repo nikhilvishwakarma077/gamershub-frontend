@@ -21,6 +21,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollToTop from "./common/ui/ScrollToTob";
 import Clips from "./pages/clips/Clips";
 import FeaturedTournaments from "./components/home/FeaturedTournaments";
+import NotFoud from "./components/shared/NotFoud";
 
 
 const App = () => {
@@ -64,8 +65,8 @@ const App = () => {
         toastClassName="custom-toast"
         className="custom-toast-body"
       />
-      <Navbar />
       <ScrollToTop />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -75,6 +76,7 @@ const App = () => {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/clips" element={<Clips />} />
         <Route path="/clip" element={<FeaturedTournaments />} />
+        <Route path="*" element={<NotFoud />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/my-profile" element={<MyProfile />} />
