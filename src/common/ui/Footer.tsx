@@ -76,7 +76,7 @@ const Footer = () => {
             </h3>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/nikhil.dev_77"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
